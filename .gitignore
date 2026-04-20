@@ -8,7 +8,7 @@ pnpm-debug.log*
 *.log
 
 # vitepress
-#docs/.vitepress/dist/
+docs/.vitepress/dist/
 docs/.vitepress/cache/
 docs/.vitepress/.temp/
 
@@ -37,3 +37,6 @@ temp/
 *.bak
 *.old
 __*
+
+.playwright-mcp/
+

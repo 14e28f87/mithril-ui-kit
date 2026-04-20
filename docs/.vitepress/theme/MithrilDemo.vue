@@ -37,7 +37,6 @@ const props = defineProps<{
 const hostEl = ref<HTMLElement>();
 const showCode = ref(false);
 const highlightedCode = ref("");
-const STYLE_ID_HINTS = ["mithril-ui-kit", "mithril-ui-kit"];
 let mountPoint: HTMLDivElement | null = null;
 let styleObserver: MutationObserver | null = null;
 
@@ -57,18 +56,14 @@ async function updateHighlight() {
 }
 
 /**
- * Vite dev モードで document.head に注入された mithril-ui-kit 関連の
+ * Vite dev モードで document.head に注入された mithriluikit 関連の
  * <style> タグを Shadow DOM にクローンする
  */
-function isLibraryStyleTag(style: HTMLStyleElement): boolean {
-  const id = style.getAttribute("data-vite-dev-id") || "";
-  return STYLE_ID_HINTS.some((hint) => id.includes(hint));
-}
-
 function cloneComponentStyles(shadow: ShadowRoot): boolean {
   let found = false;
   document.querySelectorAll("style").forEach((style) => {
-    if (style instanceof HTMLStyleElement && isLibraryStyleTag(style)) {
+    const id = style.getAttribute("data-vite-dev-id") || "";
+    if (id.includes("src/components")) {
       shadow.appendChild(style.cloneNode(true));
       found = true;
     }
@@ -84,13 +79,16 @@ function observeNewStyles(shadow: ShadowRoot): MutationObserver {
   const obs = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
       for (const node of mutation.addedNodes) {
-        if (node instanceof HTMLStyleElement && isLibraryStyleTag(node)) {
-          shadow.appendChild(node.cloneNode(true));
+        if (node instanceof HTMLStyleElement) {
+          const id = node.getAttribute("data-vite-dev-id") || "";
+          if (id.includes("src/components")) {
+            shadow.appendChild(node.cloneNode(true));
+          }
         }
       }
     }
   });
-  obs.observe(document.head, { childList: true });
+  obs.observe(document.head, { childList: true, subtree: false });
   return obs;
 }
 
@@ -108,9 +106,19 @@ onMounted(() => {
 
   // コンポーネント固有スタイルを注入
   // Dev: Vite が head に注入した style タグをクローン
-  // Prod: ビルド時にバンドルしたフォールバック CSS を使用
+  // Prod: VitePress がバンドルした <link> タグをクローン（CSS Modules のハッシュ済みクラス名と一致させるため）
   const devStylesFound = cloneComponentStyles(shadow);
   if (!devStylesFound) {
+    // Prod ビルド: VitePress が生成した全 CSS ファイルを Shadow DOM に取り込む
+    // VitePress は rel="preload stylesheet" という複合属性で CSS を注入するため
+    // [rel*="stylesheet"] (部分一致) でマッチさせる。Bootstrap CDN は既に追加済みのため除外。
+    document.querySelectorAll('link[rel*="stylesheet"]').forEach((el) => {
+      const href = (el as HTMLLinkElement).href;
+      if (!href.includes("bootstrap")) {
+        shadow.appendChild(el.cloneNode(true));
+      }
+    });
+    // Classic コンポーネント（非 CSS Modules）用フォールバック
     const style = document.createElement("style");
     style.textContent = componentCSS;
     shadow.appendChild(style);

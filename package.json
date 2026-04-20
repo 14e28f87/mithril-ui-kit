@@ -8,7 +8,7 @@
     "type": "git",
     "url": "git+https://github.com/14e28f87/mithril-ui-kit.git"
   },
-  "homepage": "https://github.com/14e28f87/mithril-ui-kit",
+  "homepage": "https://14e28f87.github.io/mithril-ui-kit/",
   "bugs": {
     "url": "https://github.com/14e28f87/mithril-ui-kit/issues"
   },
@@ -30,12 +30,13 @@
   },
   "scripts": {
     "build": "tsc && npm run copy-styles",
-    "copy-styles": "node ./scripts/copy-styles.mjs",
+    "copy-styles": "powershell -Command \"Get-ChildItem -Path src/components -Filter '*.scss' | ForEach-Object { Copy-Item $_.FullName (Join-Path 'dist/components' $_.Name) }\"",
     "watch": "tsc --watch",
     "dev": "npm run watch",
     "docs:dev": "vitepress dev docs --host --port 6172",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs --host --port 6172"
+    "docs:preview": "vitepress preview docs --host --port 6172",
+    "docs:deploy": "tsx scripts/deploy-docs.ts"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.6.12",
@@ -52,7 +53,9 @@
     "@types/lodash-es": "^4.17.12",
     "@types/mithril": "^2.2.7",
     "mermaid": "^11.13.0",
+    "open": "^11.0.0",
     "sass": "^1.97.2",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "vitepress": "^1.6.4",
     "vitepress-plugin-mermaid": "^2.0.17"

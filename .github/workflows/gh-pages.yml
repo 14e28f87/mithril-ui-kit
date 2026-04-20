@@ -4,7 +4,6 @@ name: VitePress サイトをデプロイ
 on:
   push:
     branches: [main] # main ブランチに push された時に動かす
-  workflow_dispatch: # 必要に応じて手動実行もできるようにする
 
 # GitHub Pages への書き込み権限などを設定
 permissions:
@@ -16,9 +15,6 @@ permissions:
 concurrency:
   group: "pages"
   cancel-in-progress: false
-
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   # ビルドジョブ：ソースコードから HTML を生成する
@@ -33,20 +29,17 @@ jobs:
       - name: Node.js のセットアップ
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 20
           cache: npm # パッケージのキャッシュを有効にして高速化
 
       - name: Pages の初期設定
         uses: actions/configure-pages@v4
 
       - name: 依存ライブラリのインストール
-        run: npm install --include=dev
-
-      - name: ライブラリをビルド
-        run: npm run build
+        run: npm install
 
       - name: VitePress ビルド
-        run: node ./node_modules/vitepress/dist/node/cli.js build docs # docs/.vitepress/dist に HTML が生成される
+        run: npm run docs:build # docs/.vitepress/dist に HTML が生成される
 
       - name: 成果物のアップロード
         uses: actions/upload-pages-artifact@v3
