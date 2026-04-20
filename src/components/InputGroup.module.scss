@@ -1,0 +1,228 @@
+// InputGroup.module.scss — Chakra UI InputGroup 風 compound component
+
+.root {
+	display: flex;
+	align-items: stretch;
+	position: relative;
+	isolation: isolate;
+	width: 100%;
+}
+
+.field {
+	flex: 1;
+	min-width: 0;
+	outline: none;
+	border: 1px solid var(--bs-border-color, var(--muk-border-color, #dee2e6));
+	border-radius: var(--bs-border-radius, var(--muk-border-radius, 0.375rem));
+	background-color: var(--bs-body-bg, var(--muk-body-bg, #fff));
+	color: var(--bs-body-color, var(--muk-body-color, #212529));
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+	&::placeholder {
+		color: var(--bs-secondary-color, var(--muk-secondary-color, #6c757d));
+	}
+
+	&:focus {
+		border-color: var(--bs-primary, var(--muk-primary, #0d6efd));
+		box-shadow: 0 0 0 0.25rem var(--bs-focus-ring-color, var(--muk-focus-ring-color, rgba(13, 110, 253, 0.25)));
+		z-index: 1;
+	}
+
+	&:disabled {
+		background-color: var(--bs-secondary-bg, var(--muk-secondary-bg, #e9ecef));
+		opacity: 0.65;
+		cursor: not-allowed;
+	}
+}
+
+// addon が左にある時、field の左角丸を消す
+.hasAddonStart .field {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+// addon が右にある時、field の右角丸を消す
+.hasAddonEnd .field {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.addon {
+	display: flex;
+	align-items: center;
+	padding: 0 0.75rem;
+	background-color: var(--bs-tertiary-bg, var(--muk-tertiary-bg, #f8f9fa));
+	border: 1px solid var(--bs-border-color, var(--muk-border-color, #dee2e6));
+	color: var(--bs-body-color, var(--muk-body-color, #212529));
+	white-space: nowrap;
+	font-size: inherit;
+}
+
+.addonStart {
+	border-right: 0;
+	border-radius: var(--bs-border-radius, var(--muk-border-radius, 0.375rem)) 0 0 var(--bs-border-radius, var(--muk-border-radius, 0.375rem));
+}
+
+.addonEnd {
+	border-left: 0;
+	border-radius: 0 var(--bs-border-radius, var(--muk-border-radius, 0.375rem)) var(--bs-border-radius, var(--muk-border-radius, 0.375rem)) 0;
+}
+
+.element {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	pointer-events: none;
+	z-index: 2;
+	color: var(--bs-secondary-color, var(--muk-secondary-color, #6c757d));
+
+	// element 内のボタンやリンクはクリック可能に
+	> button,
+	> a,
+	> [role="button"] {
+		pointer-events: auto;
+	}
+}
+
+.elementStart {
+	left: 0;
+}
+
+.elementEnd {
+	right: 0;
+}
+
+// --- バリアント ---
+.variantOutline {
+	// デフォルト（上記のスタイル）
+}
+
+.variantFilled {
+	.field {
+		border-color: transparent;
+		background-color: var(--bs-tertiary-bg, var(--muk-tertiary-bg, #f8f9fa));
+
+		&:focus {
+			background-color: var(--bs-body-bg, var(--muk-body-bg, #fff));
+			border-color: var(--bs-primary, var(--muk-primary, #0d6efd));
+		}
+	}
+}
+
+.variantFlushed {
+	.field {
+		border-radius: 0;
+		border-left: 0;
+		border-right: 0;
+		border-top: 0;
+		padding-left: 0;
+		padding-right: 0;
+
+		&:focus {
+			box-shadow: 0 1px 0 0 var(--bs-primary, var(--muk-primary, #0d6efd));
+		}
+	}
+
+	.addon {
+		border-radius: 0;
+		border-left: 0;
+		border-right: 0;
+		border-top: 0;
+		background: transparent;
+	}
+}
+
+// --- サイズ ---
+.sizeXs {
+	font-size: 0.75rem;
+
+	.field {
+		padding: 0.125rem 0.375rem;
+		font-size: 0.75rem;
+	}
+
+	.addon {
+		padding: 0 0.375rem;
+		font-size: 0.75rem;
+	}
+
+	.element {
+		width: 1.5rem;
+		font-size: 0.75rem;
+	}
+}
+
+.sizeSm {
+	font-size: 0.875rem;
+
+	.field {
+		padding: 0.25rem 0.5rem;
+		font-size: 0.875rem;
+	}
+
+	.addon {
+		padding: 0 0.5rem;
+		font-size: 0.875rem;
+	}
+
+	.element {
+		width: 2rem;
+		font-size: 0.875rem;
+	}
+}
+
+.sizeMd {
+	font-size: 1rem;
+
+	.field {
+		padding: 0.375rem 0.75rem;
+		font-size: 1rem;
+	}
+
+	.addon {
+		padding: 0 0.75rem;
+	}
+
+	.element {
+		width: 2.5rem;
+	}
+}
+
+.sizeLg {
+	font-size: 1.125rem;
+
+	.field {
+		padding: 0.5rem 1rem;
+		font-size: 1.125rem;
+	}
+
+	.addon {
+		padding: 0 1rem;
+		font-size: 1.125rem;
+	}
+
+	.element {
+		width: 3rem;
+		font-size: 1.125rem;
+	}
+}
+
+// --- invalid ---
+.invalid {
+	.field {
+		border-color: var(--bs-danger, var(--muk-danger, #dc3545));
+
+		&:focus {
+			box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+		}
+	}
+}
+
+// --- disabled ---
+.disabled {
+	opacity: 0.65;
+	cursor: not-allowed;
+}

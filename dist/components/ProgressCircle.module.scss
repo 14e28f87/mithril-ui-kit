@@ -1,0 +1,49 @@
+.root {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	--pc-accent: var(--bs-primary, var(--muk-primary, #0d6efd));
+}
+
+.svg {
+	width: 100%;
+	height: 100%;
+}
+
+.track {
+	stroke: var(--bs-tertiary-bg, var(--muk-subtle-bg, #e9ecef));
+}
+
+.range {
+	stroke: var(--pc-accent);
+	transition: stroke-dashoffset 0.3s ease;
+}
+
+.valueText {
+	position: absolute;
+	font-size: 0.75em;
+	font-weight: 600;
+	color: var(--bs-body-color, var(--muk-body-color, #212529));
+}
+
+/* ─── 不確定 ─── */
+.indeterminate .svg {
+	animation: pcSpin 1.4s linear infinite;
+}
+
+@keyframes pcSpin {
+	to { transform: rotate(360deg); }
+}
+
+/* ─── カラーパレット ─── */
+.colorGray   { --pc-accent: var(--bs-secondary, var(--muk-secondary, #6c757d)); }
+.colorRed    { --pc-accent: var(--bs-danger, var(--muk-danger, #dc3545)); }
+.colorGreen  { --pc-accent: var(--bs-success, var(--muk-success, #198754)); }
+.colorBlue   { --pc-accent: var(--bs-primary, var(--muk-primary, #0d6efd)); }
+.colorOrange { --pc-accent: var(--bs-warning, var(--muk-warning, #fd7e14)); }
+.colorTeal   { --pc-accent: var(--muk-teal, #20c997); }
+.colorPurple { --pc-accent: var(--muk-purple, #6f42c1); }
+.colorPink   { --pc-accent: var(--muk-pink, #d63384); }
+.colorCyan   { --pc-accent: var(--bs-info, var(--muk-info, #0dcaf0)); }
+.colorYellow { --pc-accent: var(--muk-yellow, #ffc107); }

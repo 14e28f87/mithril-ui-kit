@@ -1,0 +1,14 @@
+.flex {
+	display: flex;
+	box-sizing: border-box;
+}
+
+.inline {
+	display: inline-flex;
+}
+
+.spacer {
+	flex: 1;
+	justify-self: stretch;
+	align-self: stretch;
+}

@@ -1,0 +1,46 @@
+.scrollArea {
+	overflow: auto;
+	box-sizing: border-box;
+}
+
+.typeScroll {
+	overflow: scroll;
+}
+.typeAuto {
+	overflow: auto;
+}
+.typeHover {
+	overflow: hidden;
+	&:hover {
+		overflow: auto;
+	}
+}
+.typeAlways {
+	overflow: scroll;
+}
+
+/* ─── スクロールバーサイズ ─── */
+.scrollbarSm {
+	&::-webkit-scrollbar { width: 4px; height: 4px; }
+}
+.scrollbarMd {
+	&::-webkit-scrollbar { width: 8px; height: 8px; }
+}
+.scrollbarLg {
+	&::-webkit-scrollbar { width: 12px; height: 12px; }
+}
+
+/* ─── スクロールバースタイリング ─── */
+.scrollArea {
+	&::-webkit-scrollbar-track {
+		background: var(--bs-tertiary-bg, var(--muk-tertiary-bg, #f8f9fa));
+		border-radius: 8px;
+	}
+	&::-webkit-scrollbar-thumb {
+		background: var(--bs-secondary-bg, var(--muk-secondary-bg, #adb5bd));
+		border-radius: 8px;
+		&:hover {
+			background: var(--bs-secondary, var(--muk-secondary, #6c757d));
+		}
+	}
+}

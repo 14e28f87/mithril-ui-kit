@@ -1,0 +1,37 @@
+.mku-tooltip {
+  position: absolute;
+  z-index: 1075;
+  background: #212529;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 120ms ease, transform 120ms ease;
+  pointer-events: none;
+  max-width: 320px;
+  word-break: break-word;
+}
+
+.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.mku-tooltip-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.mku-tooltip-arrow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #212529;
+  transform: rotate(45deg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  z-index: 0;
+}

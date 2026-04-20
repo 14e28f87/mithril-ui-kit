@@ -1,0 +1,127 @@
+// Checkbox.module.scss — Chakra UI Checkbox 風 compound component
+
+.root {
+	display: inline-flex;
+	align-items: flex-start;
+	gap: 0.5rem;
+	cursor: pointer;
+	position: relative;
+	user-select: none;
+	vertical-align: top;
+
+	&.disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+
+	&.readOnly {
+		cursor: default;
+	}
+}
+
+.hiddenInput {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+	clip: rect(0, 0, 0, 0);
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.control {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	border-radius: var(--bs-border-radius-sm, var(--muk-border-radius-sm, 0.25rem));
+	border: 2px solid var(--bs-border-color, var(--muk-border-color, #dee2e6));
+	background-color: var(--bs-body-bg, var(--muk-body-bg, #fff));
+	transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+	&:focus-within {
+		box-shadow: 0 0 0 0.25rem var(--bs-focus-ring-color, var(--muk-focus-ring-color, rgba(13, 110, 253, 0.25)));
+	}
+}
+
+// --- variant: solid (checked) ---
+.variantSolid .control[data-state="checked"],
+.variantSolid .control[data-state="indeterminate"] {
+	background-color: var(--checkbox-color, var(--bs-primary, var(--muk-primary, #0d6efd)));
+	border-color: var(--checkbox-color, var(--bs-primary, var(--muk-primary, #0d6efd)));
+	color: #fff;
+}
+
+// --- variant: outline (checked) ---
+.variantOutline .control[data-state="checked"],
+.variantOutline .control[data-state="indeterminate"] {
+	border-color: var(--checkbox-color, var(--bs-primary, var(--muk-primary, #0d6efd)));
+	color: var(--checkbox-color, var(--bs-primary, var(--muk-primary, #0d6efd)));
+	background-color: transparent;
+}
+
+// --- variant: subtle (checked) ---
+.variantSubtle .control[data-state="checked"],
+.variantSubtle .control[data-state="indeterminate"] {
+	background-color: color-mix(in srgb, var(--checkbox-color, var(--bs-primary, var(--muk-primary, #0d6efd))) 15%, transparent);
+	border-color: transparent;
+	color: var(--checkbox-color, var(--bs-primary, var(--muk-primary, #0d6efd)));
+}
+
+// --- invalid ---
+.invalid .control {
+	border-color: var(--bs-danger, var(--muk-danger, #dc3545));
+}
+
+.indicator {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.75em;
+	line-height: 1;
+}
+
+.label {
+	font-size: inherit;
+	line-height: 1.5;
+	color: var(--bs-body-color, var(--muk-body-color, #212529));
+}
+
+// --- サイズ ---
+.sizeXs {
+	font-size: 0.75rem;
+
+	.control {
+		width: 0.875rem;
+		height: 0.875rem;
+	}
+}
+
+.sizeSm {
+	font-size: 0.875rem;
+
+	.control {
+		width: 1rem;
+		height: 1rem;
+	}
+}
+
+.sizeMd {
+	font-size: 1rem;
+
+	.control {
+		width: 1.25rem;
+		height: 1.25rem;
+	}
+}
+
+.sizeLg {
+	font-size: 1.125rem;
+
+	.control {
+		width: 1.5rem;
+		height: 1.5rem;
+	}
+}

@@ -1,0 +1,106 @@
+/**
+ * ExpandableEditingTable コンポーネント用スタイル定義（CSS Modules）
+ *
+ * テーブル + 行内フォーム編集の構造スタイル。
+ * Bootstrap 5 .table / .btn / .alert-info 相当の互換スタイルを内包。
+ * CSS カスタムプロパティの二段フォールバック:
+ *   var(--bs-*, var(--muk-*, #hardcode))
+ */
+
+/* ラッパー全体 */
+.expandableEditingTable {
+	width: 100%;
+}
+
+/* ツールバー行（追加ボタン + 件数） */
+.toolbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+/* 件数テキスト */
+.countText {
+	font-size: 0.875em;
+	color: var(--bs-secondary-color, var(--muk-muted-color, #6c757d));
+}
+
+/* データなし表示（Bootstrap 5: .alert.alert-info 準拠） */
+.emptyAlert {
+	position: relative;
+	padding: 1rem;
+	margin-bottom: 1rem;
+	border: 1px solid var(--bs-info-border-subtle, #9eeaf9);
+	border-radius: var(--bs-border-radius, var(--muk-border-radius, 0.375rem));
+	color: var(--bs-info-text-emphasis, #055160);
+	background-color: var(--bs-info-bg-subtle, #cff4fc);
+}
+
+/* テーブルスクロールラッパー（Bootstrap 5: .table-responsive 準拠） */
+.tableResponsive {
+	overflow-x: auto;
+	width: 100%;
+}
+
+/* テーブル本体（Bootstrap 5: .table.table-sm.align-middle 準拠） */
+.table {
+	width: 100%;
+	border-collapse: collapse;
+	color: var(--bs-body-color, var(--muk-body-color, #212529));
+	background: var(--bs-body-bg, var(--muk-body-bg, #fff));
+}
+
+.table > :not(caption) > * > * {
+	padding: 0.35rem;
+	border-bottom: 1px solid var(--bs-border-color, var(--muk-border-color, #dee2e6));
+	vertical-align: middle;
+}
+
+/* 展開ボタン (Bootstrap 5: .btn.btn-sm 準拠) */
+.expandBtn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.25rem 0.5rem;
+	font-size: var(--muk-font-size-sm, 0.875rem);
+	border-radius: var(--bs-border-radius-sm, var(--muk-border-radius-sm, 0.25rem));
+	border: 1px solid transparent;
+	background: transparent;
+	color: inherit;
+	cursor: pointer;
+	text-decoration: none;
+	line-height: 1.5;
+}
+
+/* テキスト右寄せセル */
+.textEnd {
+	text-align: right;
+}
+
+/* 編集中バッジ（Bootstrap 5: .badge.bg-secondary 準拠） */
+.badgeSecondary {
+	display: inline-block;
+	padding: 0.35em 0.6em;
+	font-size: 0.75em;
+	font-weight: 600;
+	line-height: 1;
+	color: #fff;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	border-radius: var(--bs-border-radius-sm, var(--muk-border-radius-sm, 0.25rem));
+	background-color: var(--bs-secondary, var(--muk-secondary, #6c757d));
+}
+
+/* 展開コンテンツ領域 */
+.expandedContent {
+	padding: 1rem;
+}
+
+/* フォーム内ボタン行（Bootstrap 5: .d-flex.gap-2 準拠） */
+.formActions {
+	display: flex;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+}

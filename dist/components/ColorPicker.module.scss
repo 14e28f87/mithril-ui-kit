@@ -1,0 +1,234 @@
+// ColorPicker.module.scss — Chakra UI ColorPicker 風コンポーネント
+
+.root {
+	display: inline-flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	position: relative;
+}
+
+.label {
+	font-weight: 500;
+	font-size: 0.875rem;
+	color: var(--bs-body-color, var(--muk-body-color, #212529));
+}
+
+.control {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.input {
+	padding: 0.375rem 0.5rem;
+	border: 1px solid var(--bs-border-color, var(--muk-border-color, #dee2e6));
+	border-radius: var(--bs-border-radius, var(--muk-border-radius, 0.375rem));
+	font-size: 0.875rem;
+	font-family: monospace;
+	width: 8rem;
+	outline: none;
+	background-color: var(--bs-body-bg, var(--muk-body-bg, #fff));
+	color: var(--bs-body-color, var(--muk-body-color, #212529));
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+	&:focus {
+		border-color: var(--bs-primary, var(--muk-primary, #0d6efd));
+		box-shadow: 0 0 0 0.25rem var(--bs-focus-ring-color, var(--muk-focus-ring-color, rgba(13, 110, 253, 0.25)));
+	}
+}
+
+.trigger {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2rem;
+	height: 2rem;
+	border: 1px solid var(--bs-border-color, var(--muk-border-color, #dee2e6));
+	border-radius: var(--bs-border-radius, var(--muk-border-radius, 0.375rem));
+	cursor: pointer;
+	background-color: var(--cp-current-color, #000);
+	transition: box-shadow 0.15s ease-in-out;
+
+	&:hover {
+		box-shadow: 0 0 0 2px var(--bs-primary, var(--muk-primary, #0d6efd));
+	}
+}
+
+.positioner {
+	position: absolute;
+	z-index: 1050;
+	top: calc(100% + 4px);
+	left: 0;
+}
+
+.content {
+	background-color: var(--bs-body-bg, var(--muk-body-bg, #fff));
+	border: 1px solid var(--bs-border-color, var(--muk-border-color, #dee2e6));
+	border-radius: var(--bs-border-radius-lg, var(--muk-border-radius-lg, 0.5rem));
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+	padding: 0.75rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	min-width: 220px;
+}
+
+.area {
+	position: relative;
+	width: 100%;
+	min-width: 200px;
+	height: 160px;
+	border-radius: var(--bs-border-radius, var(--muk-border-radius, 0.375rem));
+	overflow: hidden;
+	cursor: crosshair;
+	touch-action: none;
+
+	// 背景: 色相 + 白→透明の横グラデ + 透明→黒の縦グラデ
+	background:
+		linear-gradient(to top, #000, transparent),
+		linear-gradient(to right, #fff, transparent),
+		var(--cp-hue-bg, hsl(0, 100%, 50%));
+}
+
+.areaThumb {
+	position: absolute;
+	width: 14px;
+	height: 14px;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+	transform: translate(-50%, -50%);
+	pointer-events: none;
+}
+
+.sliders {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.channelSlider {
+	position: relative;
+	width: 100%;
+	min-width: 200px;
+	height: 14px;
+	border-radius: 7px;
+	cursor: pointer;
+	touch-action: none;
+}
+
+.hueSlider {
+	background: linear-gradient(to right,
+		hsl(0, 100%, 50%),
+		hsl(60, 100%, 50%),
+		hsl(120, 100%, 50%),
+		hsl(180, 100%, 50%),
+		hsl(240, 100%, 50%),
+		hsl(300, 100%, 50%),
+		hsl(360, 100%, 50%)
+	);
+}
+
+.alphaSlider {
+	background:
+		linear-gradient(to right, transparent, var(--cp-alpha-end, #000)),
+		repeating-conic-gradient(#ddd 0% 25%, #fff 0% 50%) 0 0 / 10px 10px;
+}
+
+.sliderThumb {
+	position: absolute;
+	top: 50%;
+	width: 16px;
+	height: 16px;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+	transform: translate(-50%, -50%);
+	pointer-events: none;
+}
+
+.eyeDropper {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	padding: 0.375rem;
+	border: 1px solid var(--bs-border-color, var(--muk-border-color, #dee2e6));
+	border-radius: var(--bs-border-radius, var(--muk-border-radius, 0.375rem));
+	background-color: var(--bs-body-bg, var(--muk-body-bg, #fff));
+	transition: background-color 0.15s ease-in-out;
+
+	&:hover {
+		background-color: var(--bs-tertiary-bg, var(--muk-tertiary-bg, #f8f9fa));
+	}
+}
+
+.swatchGroup {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.375rem;
+}
+
+.swatchTrigger {
+	display: inline-flex;
+	cursor: pointer;
+	border: none;
+	padding: 0;
+	background: none;
+	border-radius: var(--bs-border-radius-sm, var(--muk-border-radius-sm, 0.25rem));
+	transition: box-shadow 0.15s ease-in-out;
+
+	&:hover {
+		box-shadow: 0 0 0 2px var(--bs-primary, var(--muk-primary, #0d6efd));
+	}
+}
+
+.swatch {
+	width: 1.5rem;
+	height: 1.5rem;
+	border-radius: var(--bs-border-radius-sm, var(--muk-border-radius-sm, 0.25rem));
+	border: 1px solid var(--bs-border-color, var(--muk-border-color, #dee2e6));
+}
+
+// --- サイズ ---
+.sizeSm {
+	.content {
+		min-width: 180px;
+		padding: 0.5rem;
+	}
+
+	.area {
+		height: 120px;
+		min-width: 160px;
+	}
+
+	.channelSlider {
+		min-width: 160px;
+	}
+}
+
+.sizeMd {
+	// デフォルト
+}
+
+.sizeLg {
+	.content {
+		min-width: 280px;
+		padding: 1rem;
+	}
+
+	.area {
+		height: 200px;
+		min-width: 260px;
+	}
+
+	.channelSlider {
+		min-width: 260px;
+	}
+}
+
+// --- 状態 ---
+.disabled {
+	opacity: 0.5;
+	pointer-events: none;
+}

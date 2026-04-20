@@ -1,0 +1,95 @@
+// Breadcrumb2.module.scss — Chakra UI 現行 API 準拠パンくずリストの CSS Modules
+.root {
+	display: block;
+}
+
+.list {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.25rem;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.item {
+	display: inline-flex;
+	align-items: center;
+}
+
+.link {
+	color: var(--bs-primary, var(--muk-primary, #0d6efd));
+	text-decoration: none;
+	transition: color 0.15s;
+
+	&:hover {
+		color: var(--bs-primary-text-emphasis, var(--muk-primary-emphasis, #0a58ca));
+		text-decoration: underline;
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--bs-primary, var(--muk-primary, #0d6efd));
+		outline-offset: 2px;
+		border-radius: 2px;
+	}
+}
+
+.currentLink {
+	color: var(--bs-body-color, var(--muk-body-color, #212529));
+	font-weight: 600;
+}
+
+.separator {
+	display: inline-flex;
+	align-items: center;
+	color: var(--bs-secondary-color, var(--muk-secondary-color, #6c757d));
+	user-select: none;
+}
+
+.ellipsis {
+	color: var(--bs-secondary-color, var(--muk-secondary-color, #6c757d));
+	letter-spacing: 0.1em;
+}
+
+// === Variants ===
+.variantUnderline {
+	.link {
+		text-decoration: underline;
+	}
+}
+
+.variantPlain {
+	.link {
+		text-decoration: none;
+	}
+}
+
+// === Sizes ===
+.sizeSm {
+	font-size: 0.8125rem;
+
+	.list {
+		gap: 0.125rem;
+	}
+
+	.separator {
+		padding: 0 0.125rem;
+	}
+}
+
+.sizeMd {
+	font-size: 0.875rem;
+
+	.separator {
+		padding: 0 0.25rem;
+	}
+}
+
+.sizeLg {
+	font-size: 1rem;
+
+	.separator {
+		padding: 0 0.375rem;
+	}
+}

@@ -1,0 +1,22 @@
+.center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+}
+
+.inline {
+	display: inline-flex;
+}
+
+.square {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	box-sizing: border-box;
+}
+
+.circle {
+	border-radius: 9999px;
+}

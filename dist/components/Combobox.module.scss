@@ -1,0 +1,180 @@
+.root {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+}
+
+.disabled {
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+.control {
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+	flex-wrap: wrap;
+}
+
+.input {
+	flex: 1;
+	min-width: 4rem;
+	border: none;
+	outline: none;
+	font-family: inherit;
+	background: transparent;
+	color: var(--bs-body-color, var(--muk-body-color, #212529));
+
+	&::placeholder {
+		color: var(--bs-secondary-color, var(--muk-placeholder-color, #6c757d));
+	}
+}
+
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.25rem;
+}
+
+.tag {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25rem;
+	padding: 0.0625rem 0.375rem;
+	background-color: var(--bs-tertiary-bg, var(--muk-subtle-bg, #e9ecef));
+	border-radius: var(--bs-border-radius-sm, var(--muk-border-radius-sm, 0.25rem));
+	font-size: 0.8125em;
+}
+
+.tagClose {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	font-size: 0.6875em;
+	color: inherit;
+	opacity: 0.7;
+
+	&:hover { opacity: 1; }
+}
+
+.triggerIcon {
+	cursor: pointer;
+	color: var(--bs-secondary-color, var(--muk-secondary-color, #6c757d));
+	flex-shrink: 0;
+}
+
+.clearTrigger {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	font-size: 0.75em;
+	color: var(--bs-secondary-color, var(--muk-secondary-color, #6c757d));
+	flex-shrink: 0;
+
+	&:hover { color: var(--bs-body-color, var(--muk-body-color, #212529)); }
+}
+
+.content {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	margin-top: 0.25rem;
+	max-height: 15rem;
+	overflow-y: auto;
+	background-color: var(--bs-body-bg, var(--muk-body-bg, #fff));
+	border: 1px solid var(--bs-border-color, var(--muk-border-color, #dee2e6));
+	border-radius: var(--bs-border-radius, var(--muk-border-radius, 0.375rem));
+	box-shadow: var(--bs-box-shadow-sm, 0 2px 4px rgba(0, 0, 0, 0.08));
+	animation: cbFadeIn 0.1s ease-out;
+}
+
+@keyframes cbFadeIn {
+	from { opacity: 0; transform: translateY(-4px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+.empty {
+	padding: 0.75rem 1rem;
+	text-align: center;
+	color: var(--bs-secondary-color, var(--muk-secondary-color, #6c757d));
+	font-size: 0.875rem;
+}
+
+.item {
+	padding: 0.375rem 0.75rem;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 0.375rem;
+	font-size: 0.875rem;
+	transition: background-color 0.1s;
+}
+
+.itemHighlighted {
+	background-color: var(--bs-tertiary-bg, var(--muk-subtle-bg, #f8f9fa));
+}
+
+.itemSelected {
+	font-weight: 500;
+	color: var(--bs-primary, var(--muk-primary, #0d6efd));
+}
+
+.itemDisabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.itemCheck {
+	width: 1rem;
+	text-align: center;
+	font-size: 0.75rem;
+	color: var(--bs-primary, var(--muk-primary, #0d6efd));
+}
+
+/* ─── バリアント ─── */
+.variantOutline .control {
+	border: 1px solid var(--bs-border-color, var(--muk-border-color, #dee2e6));
+	border-radius: var(--bs-border-radius, var(--muk-border-radius, 0.375rem));
+	padding: 0.375rem 0.5rem;
+
+	&:focus-within {
+		border-color: var(--bs-primary, var(--muk-primary, #0d6efd));
+		box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+	}
+}
+
+.variantSubtle .control {
+	border: 1px solid transparent;
+	border-radius: var(--bs-border-radius, var(--muk-border-radius, 0.375rem));
+	padding: 0.375rem 0.5rem;
+	background-color: var(--bs-tertiary-bg, var(--muk-subtle-bg, #f8f9fa));
+
+	&:focus-within {
+		border-color: var(--bs-primary, var(--muk-primary, #0d6efd));
+	}
+}
+
+.variantFlushed .control {
+	border: none;
+	border-bottom: 2px solid var(--bs-border-color, var(--muk-border-color, #dee2e6));
+	border-radius: 0;
+	padding: 0.375rem 0;
+
+	&:focus-within {
+		border-bottom-color: var(--bs-primary, var(--muk-primary, #0d6efd));
+	}
+}
+
+/* ─── サイズ ─── */
+.sizeXs .control { font-size: 0.75rem; }
+.sizeXs .input { font-size: 0.75rem; }
+.sizeSm .control { font-size: 0.875rem; }
+.sizeSm .input { font-size: 0.875rem; }
+.sizeMd .control { font-size: 1rem; }
+.sizeMd .input { font-size: 1rem; }
+.sizeLg .control { font-size: 1.125rem; }
+.sizeLg .input { font-size: 1.125rem; }

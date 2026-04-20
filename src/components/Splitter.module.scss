@@ -1,0 +1,68 @@
+.root {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+.horizontal { flex-direction: row; }
+.vertical { flex-direction: column; }
+
+.dragging {
+	cursor: col-resize;
+	user-select: none;
+	&.vertical { cursor: row-resize; }
+}
+
+/* ─── Panel ─── */
+.panel {
+	overflow: auto;
+	box-sizing: border-box;
+}
+
+/* ─── ResizeTrigger ─── */
+.trigger {
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--bs-border-color, var(--muk-border-color, #dee2e6));
+	transition: background-color 0.15s ease;
+	z-index: 1;
+
+	&:hover {
+		background: var(--bs-secondary-bg, var(--muk-secondary-bg, #adb5bd));
+	}
+	&:focus-visible {
+		outline: 2px solid var(--bs-primary, var(--muk-primary, #0d6efd));
+		outline-offset: -1px;
+	}
+}
+
+.triggerHorizontal {
+	width: 6px;
+	cursor: col-resize;
+	.triggerBar {
+		width: 2px;
+		height: 24px;
+		border-radius: 1px;
+		background: var(--bs-secondary, var(--muk-secondary, #6c757d));
+	}
+}
+
+.triggerVertical {
+	height: 6px;
+	cursor: row-resize;
+	.triggerBar {
+		width: 24px;
+		height: 2px;
+		border-radius: 1px;
+		background: var(--bs-secondary, var(--muk-secondary, #6c757d));
+	}
+}
+
+.triggerDisabled {
+	cursor: not-allowed;
+	opacity: 0.5;
+}

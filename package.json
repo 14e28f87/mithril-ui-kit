@@ -1,0 +1,52 @@
+{
+  "name": "mithriluikit",
+  "version": "0.0.1",
+  "description": "Mithril.js UI Component Library",
+  "type": "module",
+  "author": "K.Tsuru",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./components": {
+      "import": "./dist/components/index.js",
+      "types": "./dist/components/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc && npm run copy-styles",
+    "copy-styles": "powershell -Command \"Get-ChildItem -Path src/components -Filter '*.scss' | ForEach-Object { Copy-Item $_.FullName (Join-Path 'dist/components' $_.Name) }\"",
+    "watch": "tsc --watch",
+    "dev": "npm run watch",
+    "docs:dev": "vitepress dev docs --host --port 6172",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs --host --port 6172"
+  },
+  "dependencies": {
+    "@floating-ui/dom": "^1.6.12",
+    "animate.css": "^4.1.1",
+    "bootstrap-icons": "^1.13.1",
+    "classnames": "^2.5.1",
+    "eventemitter3": "^5.0.4",
+    "gridstack": "^12.4.2",
+    "lodash-es": "^4.17.22",
+    "mithril": "^2.3.8"
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.3.4",
+    "@types/lodash-es": "^4.17.12",
+    "@types/mithril": "^2.2.7",
+    "mermaid": "^11.13.0",
+    "sass": "^1.97.2",
+    "typescript": "^5.9.3",
+    "vitepress": "^1.6.4",
+    "vitepress-plugin-mermaid": "^2.0.17"
+  }
+}

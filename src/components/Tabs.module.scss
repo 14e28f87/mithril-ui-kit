@@ -1,0 +1,173 @@
+// Tabs2.module.scss — Chakra UI 現行 API 準拠タブの CSS Modules
+.root {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+
+	&.orientationVertical {
+		flex-direction: row;
+	}
+
+	&.fitted .list {
+		.trigger {
+			flex: 1 1 0;
+		}
+	}
+}
+
+// --- タブリスト ---
+.list {
+	display: flex;
+	gap: 0;
+	border-bottom: 2px solid var(--bs-border-color, var(--muk-border-color, #dee2e6));
+
+	.orientationVertical & {
+		flex-direction: column;
+		border-bottom: none;
+		border-right: 2px solid var(--bs-border-color, var(--muk-border-color, #dee2e6));
+	}
+}
+
+// --- トリガー ---
+.trigger {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.375rem;
+	padding: 0.5rem 1rem;
+	border: none;
+	background: transparent;
+	color: var(--bs-body-color, var(--muk-body-color, #212529));
+	font-weight: 500;
+	cursor: pointer;
+	position: relative;
+	white-space: nowrap;
+	transition: color 0.15s, background-color 0.15s, border-color 0.15s;
+
+	&:hover:not(.triggerDisabled) {
+		color: var(--bs-primary, var(--muk-primary, #0d6efd));
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--bs-primary, var(--muk-primary, #0d6efd));
+		outline-offset: -2px;
+		z-index: 1;
+	}
+}
+
+.triggerActive {
+	color: var(--bs-primary, var(--muk-primary, #0d6efd));
+}
+
+.triggerDisabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+// --- コンテンツ ---
+.content {
+	padding: 1rem 0;
+}
+
+.contentHidden {
+	display: none;
+}
+
+// === Variants ===
+
+// line
+.variantLine {
+	.triggerActive {
+		box-shadow: inset 0 -2px 0 0 var(--bs-primary, var(--muk-primary, #0d6efd));
+	}
+
+	&.orientationVertical .triggerActive {
+		box-shadow: inset -2px 0 0 0 var(--bs-primary, var(--muk-primary, #0d6efd));
+	}
+}
+
+// subtle
+.variantSubtle {
+	.list {
+		border-bottom-color: transparent;
+	}
+
+	.triggerActive {
+		background-color: var(--bs-primary-bg-subtle, var(--muk-primary-bg-subtle, #cfe2ff));
+		color: var(--bs-primary, var(--muk-primary, #0d6efd));
+		border-radius: 0.375rem;
+	}
+}
+
+// enclosed
+.variantEnclosed {
+	.list {
+		border-bottom: 1px solid var(--bs-border-color, var(--muk-border-color, #dee2e6));
+	}
+
+	.trigger {
+		border: 1px solid transparent;
+		border-bottom: none;
+		border-radius: 0.375rem 0.375rem 0 0;
+		margin-bottom: -1px;
+	}
+
+	.triggerActive {
+		border-color: var(--bs-border-color, var(--muk-border-color, #dee2e6));
+		background-color: var(--bs-body-bg, var(--muk-body-bg, #fff));
+	}
+}
+
+// outline
+.variantOutline {
+	.list {
+		border-bottom-color: transparent;
+	}
+
+	.trigger {
+		border: 1px solid transparent;
+		border-radius: 0.375rem;
+	}
+
+	.triggerActive {
+		border-color: var(--bs-border-color, var(--muk-border-color, #dee2e6));
+	}
+}
+
+// plain
+.variantPlain {
+	.list {
+		border-bottom-color: transparent;
+	}
+}
+
+// === Sizes ===
+.sizeSm {
+	.trigger {
+		padding: 0.25rem 0.625rem;
+		font-size: 0.8125rem;
+	}
+
+	.content {
+		padding: 0.625rem 0;
+		font-size: 0.875rem;
+	}
+}
+
+.sizeMd {
+	.trigger {
+		padding: 0.5rem 1rem;
+		font-size: 0.875rem;
+	}
+}
+
+.sizeLg {
+	.trigger {
+		padding: 0.75rem 1.25rem;
+		font-size: 1rem;
+	}
+
+	.content {
+		padding: 1.25rem 0;
+	}
+}

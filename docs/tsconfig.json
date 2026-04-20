@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "jsx": "react",
+    "jsxFactory": "m",
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "ignoreDeprecations": "6.0",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "types": ["mithril", "vite/client"],
+    "baseUrl": ".",
+    "paths": {
+      "mithriluikit": ["../src/index.ts"]
+    }
+  },
+  "include": [
+    "./.vitepress/**/*.ts",
+    "./demos/**/*.ts",
+    "./demos/**/*.tsx"
+  ],
+  "exclude": [
+    "./.vitepress/cache",
+    "./.vitepress/dist"
+  ]
+}
