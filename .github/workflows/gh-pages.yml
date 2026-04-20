@@ -40,13 +40,13 @@ jobs:
         uses: actions/configure-pages@v4
 
       - name: 依存ライブラリのインストール
-        run: npm install
+        run: npm install --include=dev
 
       - name: ライブラリをビルド
         run: npm run build
 
       - name: VitePress ビルド
-        run: npm run docs:build # docs/.vitepress/dist に HTML が生成される
+        run: npx vitepress build docs # docs/.vitepress/dist に HTML が生成される
 
       - name: 成果物のアップロード
         uses: actions/upload-pages-artifact@v3
