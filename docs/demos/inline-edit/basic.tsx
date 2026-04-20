@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { InlineEdit } from "mithriluikit";
+import { InlineEdit } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let title = "キルン温度プロファイル";

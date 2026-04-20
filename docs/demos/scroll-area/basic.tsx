@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { ScrollArea } from "mithriluikit";
+import { ScrollArea } from "mithril-ui-kit";
 
 const rows = Array.from({ length: 18 }, (_, index) => `Log line ${index + 1}`);
 

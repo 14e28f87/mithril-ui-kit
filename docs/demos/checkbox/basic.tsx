@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Checkbox, type CheckedState } from "mithriluikit";
+import { Checkbox, type CheckedState } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let checked: CheckedState = true;

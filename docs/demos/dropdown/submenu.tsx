@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Dropdown, type DropdownSelectDetails } from "mithriluikit";
+import { Dropdown, type DropdownSelectDetails } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let lastAction = "なし";

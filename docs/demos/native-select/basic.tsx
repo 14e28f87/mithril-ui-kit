@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { NativeSelect } from "mithriluikit";
+import { NativeSelect } from "mithril-ui-kit";
 
 let value = "auto";
 

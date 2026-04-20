@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { ColorPicker } from "mithriluikit";
+import { ColorPicker } from "mithril-ui-kit";
 
 const swatches = ["#ef4444", "#f59e0b", "#10b981", "#3b82f6", "#8b5cf6"];
 

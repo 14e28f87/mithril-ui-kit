@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Container } from "mithriluikit";
+import { Container } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
 	m.mount(el, {

@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Editable } from "mithriluikit";
+import { Editable } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let value = "窯焼成プラン A";

@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Accordion } from "mithriluikit";
+import { Accordion } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   m.mount(el, {

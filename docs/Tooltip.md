@@ -15,7 +15,7 @@ import controlledCode from './demos/tooltip/controlled.tsx?raw'
 `Tooltip` はホバーまたはフォーカス時に補足情報を浮かせて表示する compound component です。`placement` による表示方向、`openDelay` / `closeDelay` による遅延調整、`interactive` によるコンテンツ内ホバー保持に対応しており、ラベルだけでは説明しきれない UI の補助表示に向いています。
 
 ::: tip
-旧ツールチップ（`TooltipClassic`）は `mithriluikit-dev` パッケージに移動しました。
+旧ツールチップ（`TooltipClassic`）はレガシー扱いです。このページでは current API を案内します。
 :::
 
 ## Usage 使用例

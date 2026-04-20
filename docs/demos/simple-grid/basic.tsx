@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { SimpleGrid } from "mithriluikit";
+import { SimpleGrid } from "mithril-ui-kit";
 
 const cards = ["Kiln", "Sensor", "Recipe", "Alarm", "Batch", "Report"];
 

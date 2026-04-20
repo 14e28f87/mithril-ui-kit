@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Modal } from "mithriluikit";
+import { Modal } from "mithril-ui-kit";
 
 /**
  * Modal 命令的 API のデモ

@@ -1,6 +1,6 @@
-﻿/** @jsx m */
+/** @jsx m */
 import m from "mithril";
-import { PasswordInput } from "mithriluikit";
+import { PasswordInput } from "mithril-ui-kit";
 
 /** variant / size バリエーション比較 */
 export function setup(el: HTMLElement): void {

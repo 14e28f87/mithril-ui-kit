@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Rating } from "mithriluikit";
+import { Rating } from "mithril-ui-kit";
 
 let rating = 3.5;
 

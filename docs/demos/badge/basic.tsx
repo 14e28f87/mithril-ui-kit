@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Badge } from "mithriluikit";
+import { Badge } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
 	m.mount(el, {

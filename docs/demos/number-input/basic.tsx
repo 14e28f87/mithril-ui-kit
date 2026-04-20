@@ -1,6 +1,6 @@
-﻿/** @jsx m */
+/** @jsx m */
 import m from "mithril";
-import { NumberInput } from "mithriluikit";
+import { NumberInput } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   m.mount(el, {

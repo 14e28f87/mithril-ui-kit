@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Tooltip } from "mithriluikit";
+import { Tooltip } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let open = false;

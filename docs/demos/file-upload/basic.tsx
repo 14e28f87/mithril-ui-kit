@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { FileUpload } from "mithriluikit";
+import { FileUpload } from "mithril-ui-kit";
 
 let files: File[] = [];
 

@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Radio } from "mithriluikit";
+import { Radio } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let selected = "manual";

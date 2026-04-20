@@ -1,9 +1,17 @@
 {
-  "name": "mithriluikit",
+  "name": "mithril-ui-kit",
   "version": "0.0.1",
   "description": "Mithril.js UI Component Library",
   "type": "module",
   "author": "K.Tsuru",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/14e28f87/mithril-ui-ki.git"
+  },
+  "homepage": "https://github.com/14e28f87/mithril-ui-ki",
+  "bugs": {
+    "url": "https://github.com/14e28f87/mithril-ui-ki/issues"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [

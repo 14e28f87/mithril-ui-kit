@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Form, FormItem, Input } from "mithriluikit";
+import { Form, FormItem, Input } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   class FormItemDemo implements m.Component {

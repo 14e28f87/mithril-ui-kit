@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Group } from "mithriluikit";
+import { Group } from "mithril-ui-kit";
 
 function button(label: string): m.Children {
 	return (

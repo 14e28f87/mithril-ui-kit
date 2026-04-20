@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { ColorSwatch, ColorSwatchMix } from "mithriluikit";
+import { ColorSwatch, ColorSwatchMix } from "mithril-ui-kit";
 
 const colors = ["#0ea5e9", "#22c55e", "#f59e0b", "#ef4444"];
 

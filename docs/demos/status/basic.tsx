@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Status } from "mithriluikit";
+import { Status } from "mithril-ui-kit";
 
 const rows = [
 	{ value: "info", label: "Waiting" },

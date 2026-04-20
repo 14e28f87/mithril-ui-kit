@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { ColorPicker } from "mithriluikit";
+import { ColorPicker } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let value = "#3b82f6";

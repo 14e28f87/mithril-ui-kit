@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Pagination2 } from "mithriluikit";
+import { Pagination2 } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   m.mount(el, {

@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Grid, GridItem } from "mithriluikit";
+import { Grid, GridItem } from "mithril-ui-kit";
 
 function cell(label: string, background: string): m.Children {
 	return (

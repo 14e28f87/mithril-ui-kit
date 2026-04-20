@@ -37,6 +37,7 @@ const props = defineProps<{
 const hostEl = ref<HTMLElement>();
 const showCode = ref(false);
 const highlightedCode = ref("");
+const STYLE_ID_HINTS = ["mithril-ui-kit", "mithril-ui-kit"];
 let mountPoint: HTMLDivElement | null = null;
 let styleObserver: MutationObserver | null = null;
 
@@ -56,14 +57,18 @@ async function updateHighlight() {
 }
 
 /**
- * Vite dev モードで document.head に注入された mithriluikit 関連の
+ * Vite dev モードで document.head に注入された mithril-ui-kit 関連の
  * <style> タグを Shadow DOM にクローンする
  */
+function isLibraryStyleTag(style: HTMLStyleElement): boolean {
+  const id = style.getAttribute("data-vite-dev-id") || "";
+  return STYLE_ID_HINTS.some((hint) => id.includes(hint));
+}
+
 function cloneComponentStyles(shadow: ShadowRoot): boolean {
   let found = false;
   document.querySelectorAll("style").forEach((style) => {
-    const id = style.getAttribute("data-vite-dev-id") || "";
-    if (id.includes("mithriluikit")) {
+    if (style instanceof HTMLStyleElement && isLibraryStyleTag(style)) {
       shadow.appendChild(style.cloneNode(true));
       found = true;
     }
@@ -79,11 +84,8 @@ function observeNewStyles(shadow: ShadowRoot): MutationObserver {
   const obs = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
       for (const node of mutation.addedNodes) {
-        if (node instanceof HTMLStyleElement) {
-          const id = node.getAttribute("data-vite-dev-id") || "";
-          if (id.includes("mithriluikit")) {
-            shadow.appendChild(node.cloneNode(true));
-          }
+        if (node instanceof HTMLStyleElement && isLibraryStyleTag(node)) {
+          shadow.appendChild(node.cloneNode(true));
         }
       }
     }

@@ -23,7 +23,7 @@ import basicCode from './demos/overlay/basic.tsx?raw'
 ## 使用例
 
 ```tsx
-import { Overlay } from 'mithriluikit';
+import { Overlay } from 'mithril-ui-kit';
 
 const overlay = new Overlay(ModalComponent, {
   closeOnEscapeKey: true,

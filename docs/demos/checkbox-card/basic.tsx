@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { CheckboxCard } from "mithriluikit";
+import { CheckboxCard } from "mithril-ui-kit";
 
 let checked = true;
 

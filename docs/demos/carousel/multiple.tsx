@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Carousel } from "mithriluikit";
+import { Carousel } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   const cards = [

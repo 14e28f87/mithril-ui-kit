@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Flex, Spacer } from "mithriluikit";
+import { Flex, Spacer } from "mithril-ui-kit";
 
 function panel(label: string, color: string): m.Children {
 	return (

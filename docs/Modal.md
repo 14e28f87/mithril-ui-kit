@@ -9,7 +9,7 @@ import basicCode from './demos/modal/basic.tsx?raw'
 
 Chakra UI Dialog 風の compound モーダルコンポーネント。**命令的 API**（`Modal.show()`）と**宣言的 API**（JSX compound component）の 2 つの使い方をサポート。
 
-> レガシーの Bootstrap 5 スタイルモーダル（`ModalClassic`）は `mithriluikit-dev` パッケージに移動しました。
+> レガシーの Bootstrap 5 スタイルモーダル（`ModalClassic`）は旧 API です。このページでは current API を案内します。
 
 | 特徴 | 説明 |
 |------|------|
@@ -29,7 +29,7 @@ Chakra UI Dialog 風の compound モーダルコンポーネント。**命令的
 `Modal.show()` は Promise を返す。コンテンツコンポーネントには `resolve` と `hide` が attrs に注入される。
 
 ```tsx
-import { Modal } from 'mithriluikit';
+import { Modal } from 'mithril-ui-kit';
 
 const result = await Modal.show<boolean>({
   size: "md",
@@ -61,7 +61,7 @@ console.log(result); // true or false
 ## 使い方 — 宣言的 API（JSX Compound Component）
 
 ```tsx
-import { Modal, Portal } from 'mithriluikit';
+import { Modal, Portal } from 'mithril-ui-kit';
 
 let open = false;
 

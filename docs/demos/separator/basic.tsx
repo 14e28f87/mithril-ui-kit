@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Separator } from "mithriluikit";
+import { Separator } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
 	m.mount(el, {

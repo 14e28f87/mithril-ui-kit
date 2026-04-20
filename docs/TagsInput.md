@@ -13,7 +13,7 @@ import editableCode from './demos/tags-input/editable.tsx?raw'
 `TagsInput` は Chakra UI 風の compound component です。タグの追加・削除・編集・クリアを、サブコンポーネントの組み合わせで構成できます。
 
 ::: tip
-旧単体コンポーネント API（`TagsInputClassic`）は `mithriluikit-dev` パッケージに移動しました。
+旧単体コンポーネント API（`TagsInputClassic`）はレガシー扱いです。このページでは current API を案内します。
 :::
 
 ## Usage 使用例

@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Offcanvas, type OffcanvasContentInjectedAttrs, type OffcanvasPlacement } from "mithriluikit";
+import { Offcanvas, type OffcanvasContentInjectedAttrs, type OffcanvasPlacement } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let result = "未実行";

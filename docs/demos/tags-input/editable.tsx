@@ -1,7 +1,7 @@
 /** @jsx m */
 /** @jsxRuntime classic */
 import m from "mithril";
-import { TagsInput, type TagsInputValueChangeDetails } from "mithriluikit";
+import { TagsInput, type TagsInputValueChangeDetails } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let tags = ["kiln", "sensor", "opcua"];

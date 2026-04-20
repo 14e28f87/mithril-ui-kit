@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { RadioGroup } from "mithriluikit";
+import { RadioGroup } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let selected = "opt1";

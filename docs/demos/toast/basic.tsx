@@ -1,7 +1,7 @@
 /** @jsx m */
 /** @jsxRuntime classic */
 import m from "mithril";
-import { Toast, createToaster } from "mithriluikit";
+import { Toast, createToaster } from "mithril-ui-kit";
 
 const toaster = createToaster({ placement: "top-end", duration: 3000, max: 5 });
 

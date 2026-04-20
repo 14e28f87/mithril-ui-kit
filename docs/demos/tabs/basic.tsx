@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Tabs } from "mithriluikit";
+import { Tabs } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   m.mount(el, {

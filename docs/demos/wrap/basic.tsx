@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Wrap } from "mithriluikit";
+import { Wrap } from "mithril-ui-kit";
 
 const tags = [
 	{ label: "Temperature", color: "#dbeafe" },

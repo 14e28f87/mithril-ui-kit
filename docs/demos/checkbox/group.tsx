@@ -1,7 +1,7 @@
 /** @jsx m */
 /** @jsxRuntime classic */
 import m from "mithril";
-import { Checkbox } from "mithriluikit";
+import { Checkbox } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let values = ["opcua", "ws"];

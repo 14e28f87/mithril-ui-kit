@@ -1,7 +1,7 @@
 /** @jsx m */
 /** @jsxRuntime classic */
 import m from "mithril";
-import { RadioCard } from "mithriluikit";
+import { RadioCard } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let value = "manual";

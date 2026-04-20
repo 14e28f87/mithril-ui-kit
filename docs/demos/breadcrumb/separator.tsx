@@ -27,7 +27,7 @@
 
 
 import m from "mithril";
-import { Breadcrumb2 } from "mithriluikit";
+import { Breadcrumb2 } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   m.mount(el, {

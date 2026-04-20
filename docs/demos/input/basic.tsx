@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Input } from "mithriluikit";
+import { Input } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let value: string | null = "mithril-user";

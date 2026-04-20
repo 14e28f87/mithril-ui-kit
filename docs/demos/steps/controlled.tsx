@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Steps } from "mithriluikit";
+import { Steps } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let step = 1;

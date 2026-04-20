@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { HStack, Stack, VStack } from "mithriluikit";
+import { HStack, Stack, VStack } from "mithril-ui-kit";
 
 function chip(label: string, color: string): m.Children {
 	return (

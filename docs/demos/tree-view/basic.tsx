@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { TreeView } from "mithriluikit";
+import { TreeView } from "mithril-ui-kit";
 
 const data = [
 	{

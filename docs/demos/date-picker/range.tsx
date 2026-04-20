@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { DatePicker, type DatePickerValueChangeDetails } from "mithriluikit";
+import { DatePicker, type DatePickerValueChangeDetails } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let rangeValue: Date[] = [];

@@ -1,0 +1,76 @@
+.root {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.125rem;
+	--rating-accent: var(--muk-yellow, #ffc107);
+	--rating-empty: var(--bs-tertiary-bg, var(--muk-subtle-bg, #e9ecef));
+}
+
+.item {
+	position: relative;
+	cursor: pointer;
+	color: var(--rating-empty);
+	transition: color 0.1s, transform 0.1s;
+	line-height: 1;
+	user-select: none;
+
+	&:hover:not(.disabled) {
+		transform: scale(1.15);
+	}
+}
+
+.filled {
+	color: var(--rating-accent);
+}
+
+.disabled {
+	cursor: not-allowed;
+	opacity: 0.5;
+}
+
+.readOnly .item {
+	cursor: default;
+
+	&:hover {
+		transform: none;
+	}
+}
+
+/* 半分刻み用 */
+.halfLeft,
+.halfRight {
+	display: inline-block;
+	overflow: hidden;
+	width: 0.5em;
+	color: var(--rating-empty);
+	transition: color 0.1s;
+}
+
+.halfLeft {
+	direction: ltr;
+}
+
+.halfRight {
+	direction: rtl;
+}
+
+.halfLeft.filled,
+.halfRight.filled {
+	color: var(--rating-accent);
+}
+
+/* ─── サイズ ─── */
+.sizeXs { font-size: 0.875rem; }
+.sizeSm { font-size: 1.125rem; }
+.sizeMd { font-size: 1.5rem; }
+.sizeLg { font-size: 2rem; }
+
+/* ─── カラーパレット ─── */
+.colorOrange { --rating-accent: var(--muk-yellow, #ffc107); }
+.colorRed    { --rating-accent: var(--bs-danger, var(--muk-danger, #dc3545)); }
+.colorGreen  { --rating-accent: var(--bs-success, var(--muk-success, #198754)); }
+.colorBlue   { --rating-accent: var(--bs-primary, var(--muk-primary, #0d6efd)); }
+.colorPurple { --rating-accent: var(--muk-purple, #6f42c1); }
+.colorPink   { --rating-accent: var(--muk-pink, #d63384); }
+.colorTeal   { --rating-accent: var(--muk-teal, #20c997); }
+.colorCyan   { --rating-accent: var(--bs-info, var(--muk-info, #0dcaf0)); }

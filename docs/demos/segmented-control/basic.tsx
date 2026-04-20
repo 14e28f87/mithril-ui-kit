@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { SegmentedControl } from "mithriluikit";
+import { SegmentedControl } from "mithril-ui-kit";
 
 let value = "overview";
 

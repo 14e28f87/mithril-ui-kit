@@ -28,7 +28,7 @@ import basicCode from './demos/form/basic.tsx?raw'
 Form コンポーネントを使用する際は、**必ず事前にインスタンスを作成し、再利用**してください。JSX で直接 `<Form>` と記述してはいけません。
 
 ```tsx
-import { Form, FormItem, Input } from 'mithriluikit';
+import { Form, FormItem, Input } from 'mithril-ui-kit';
 
 export default class MyComponent implements m.Component {
   // ✅ 正しい方法：コンポーネント外でインスタンスを作成

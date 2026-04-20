@@ -1,6 +1,6 @@
-﻿/** @jsx m */
+/** @jsx m */
 import m from "mithril";
-import { PasswordInput } from "mithriluikit";
+import { PasswordInput } from "mithril-ui-kit";
 
 /** 制御モード — visible / onVisibleChange */
 export function setup(el: HTMLElement): void {

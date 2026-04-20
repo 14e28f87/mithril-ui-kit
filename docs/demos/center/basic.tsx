@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Center, Circle, Square } from "mithriluikit";
+import { Center, Circle, Square } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
 	m.mount(el, {

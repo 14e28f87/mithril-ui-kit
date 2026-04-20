@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Table } from "mithriluikit";
+import { Table } from "mithril-ui-kit";
 
 const rows = [
 	{ name: "Kiln A", status: "Running", temp: "812℃" },

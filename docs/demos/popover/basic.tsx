@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Popover2 } from "mithriluikit";
+import { Popover2 } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   m.mount(el, {

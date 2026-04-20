@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Combobox } from "mithriluikit";
+import { Combobox } from "mithril-ui-kit";
 
 const items = [
 	{ value: "manual", label: "Manual" },

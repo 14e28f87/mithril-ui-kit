@@ -10,7 +10,7 @@ import basicCode from './demos/offcanvas/basic.tsx?raw'
 Chakra UI Drawer 風の compound オフキャンバスコンポーネント。**命令的 API**（`Offcanvas.show()` / `Offcanvas2.show()`）と**宣言的 API**（JSX compound component）の 2 つの使い方をサポート。
 
 > **Note:** `Offcanvas` と `Offcanvas2` は同一コンポーネントです。`Offcanvas2` は後方互換のエイリアスとして引き続き使用可能です。  
-> レガシーの Bootstrap 5 スタイルオフキャンバス（`OffcanvasClassic`）は `mithriluikit-dev` パッケージに移動しました。
+> レガシーの Bootstrap 5 スタイルオフキャンバス（`OffcanvasClassic`）は旧 API です。このページでは current API を案内します。
 
 | 特徴 | 説明 |
 |------|------|
@@ -29,7 +29,7 @@ Chakra UI Drawer 風の compound オフキャンバスコンポーネント。**
 `Offcanvas.show()` は Promise を返す。コンテンツコンポーネントには `resolve` と `hide` が attrs に注入される。
 
 ```tsx
-import { Offcanvas } from 'mithriluikit';
+import { Offcanvas } from 'mithril-ui-kit';
 
 const result = await Offcanvas.show<boolean>({
   size: "md",
@@ -61,7 +61,7 @@ console.log(result); // true or false
 ## 使い方 — 宣言的 API（JSX Compound Component）
 
 ```tsx
-import { Offcanvas } from 'mithriluikit';
+import { Offcanvas } from 'mithril-ui-kit';
 
 let open = false;
 

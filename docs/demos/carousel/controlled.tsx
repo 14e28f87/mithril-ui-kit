@@ -1,7 +1,7 @@
 /** @jsx m */
 import m from "mithril";
-import { Carousel } from "mithriluikit";
-import type { CarouselPageChangeDetails } from "mithriluikit";
+import { Carousel } from "mithril-ui-kit";
+import type { CarouselPageChangeDetails } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let page = 0;

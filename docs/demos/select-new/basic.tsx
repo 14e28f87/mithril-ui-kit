@@ -1,7 +1,7 @@
 /** @jsx m */
 import m from "mithril";
-import { Select } from "mithriluikit";
-import type { SelectItem } from "mithriluikit";
+import { Select } from "mithril-ui-kit";
+import type { SelectItem } from "mithril-ui-kit";
 
 const items: SelectItem[] = [
   { value: "react", label: "React" },

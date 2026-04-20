@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { TextArea } from "mithriluikit";
+import { TextArea } from "mithril-ui-kit";
 
 let value = "初期値\n2 行目";
 

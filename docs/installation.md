@@ -1,33 +1,23 @@
 # Mithril UI Kit とは?
 
+Mithril UI Kit は Mithril.js 向けの UI コンポーネントライブラリです。
+このリポジトリは standalone 版の正本で、正式なパッケージ名は `mithril-ui-kit` です。
 
-Mithril UI Kit は Mithril.js で動作する UI コンポーネント ライブラリです。
-MIT License で配布されているオープンソース ソフトウェアです。
-
-自由につかって Mithril.js の開発を、より良く進めましょう！
-
-
-過去の開発の経緯などから、 Mithril UI Kit では Bootstrap 5 が一部で使用されています。
-そのため Bootstrap 5 に慣れている人からすると共存しやすいと思います。が、Bootstrap 以外のシステムと組み合わせると Style の崩れなどの問題を引き起こしやすいため注意が必要です。
-
+Bootstrap 5 と相性のよい API を持ちつつ、Mithril らしい軽量な実装を目指しています。
 
 # セットアップガイド
 
-現在 まだ npm リポジトリにちゃんと登録しておらず 次のようにインストールしてください。
+npm registry への公開前でも、GitHub リポジトリから直接導入できます。
 
+~~~bash
+npm install git+https://github.com/14e28f87/mithril-ui-ki.git
 ~~~
-npm install git://
-~~~
-
-
-
 
 ## 使用方法
 
-
 ~~~tsx
 import m from "mithril";
-import { Input } from "mithriluikit";
+import { Input } from "mithril-ui-kit";
 
 let value: string | null = "mithril-user";
 
@@ -53,18 +43,11 @@ const Component = {
 };
 
 m.mount(el, Component);
-
-
 ~~~
 
+## 補足
 
-
-
-
-Include the main CSS file:
-
-~~~
-// Use with a bundler like webpack or parcel
-import 'path/to/node_modules/construct-ui/lib/index.css'
-~~~
+- import 名は常に `mithril-ui-kit` を使用します
+- docs のデモも同じ import 名で統一します
+- Bootstrap 5 を併用しない場合でも破綻しない設計を基本にしています
 

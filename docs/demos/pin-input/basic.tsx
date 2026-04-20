@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { PinInput } from "mithriluikit";
+import { PinInput } from "mithril-ui-kit";
 
 let values = ["1", "2", "", ""];
 let completed = "";

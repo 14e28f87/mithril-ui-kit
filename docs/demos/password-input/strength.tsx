@@ -1,6 +1,6 @@
-﻿/** @jsx m */
+/** @jsx m */
 import m from "mithril";
-import { PasswordInput } from "mithriluikit";
+import { PasswordInput } from "mithril-ui-kit";
 
 /** StrengthMeter 付きパスワード入力 */
 export function setup(el: HTMLElement): void {

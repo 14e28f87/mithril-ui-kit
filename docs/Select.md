@@ -14,7 +14,7 @@ import groupCode from './demos/select-new/group.tsx?raw'
 `Select` は Chakra UI 風の compound component 型セレクトです。`Select.Root`, `Select.Trigger`, `Select.Content`, `Select.Item` などのサブコンポーネントを組み合わせて柔軟にカスタマイズできます。
 
 ::: tip
-従来の `<select>` ベースのセレクト（`SelectClassic`）は `mithriluikit-dev` パッケージに移動しました。
+従来の `<select>` ベースのセレクト（`SelectClassic`）はレガシー扱いです。このページでは current API を案内します。
 :::
 
 ## Usage 使用例

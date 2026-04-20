@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Listbox } from "mithriluikit";
+import { Listbox } from "mithril-ui-kit";
 
 const items = [
 	{ value: "temp", label: "Temperature" },

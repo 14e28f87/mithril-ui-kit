@@ -644,7 +644,7 @@ export class AccordionRoot implements m.Component<AccordionRootAttrs> {
  * `Accordion.Root`, `Accordion.Item` などの形式で使う。
  *
  * @example
- * import { Accordion } from "mithriluikit";
+ * import { Accordion } from "mithril-ui-kit";
  *
  * <Accordion.Root collapsible>
  *   <Accordion.Item value="a">

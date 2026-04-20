@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Editable } from "mithriluikit";
+import { Editable } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let notes = "原料投入後に 15 分保持し、その後 10 度ずつ昇温します。";

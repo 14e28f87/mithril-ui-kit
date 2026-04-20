@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Overlay } from "mithriluikit";
+import { Overlay } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let overlayRef: Overlay | null = null;
