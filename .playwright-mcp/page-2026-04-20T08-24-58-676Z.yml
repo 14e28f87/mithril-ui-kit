@@ -1,0 +1,514 @@
+- generic [ref=e2]:
+  - region
+  - generic [ref=e3]:
+    - link "Skip to content" [ref=e4] [cursor=pointer]:
+      - /url: "#start-of-content"
+    - banner [ref=e6]:
+      - heading "Navigation Menu" [level=2] [ref=e7]
+      - generic [ref=e8]:
+        - link "Homepage" [ref=e10] [cursor=pointer]:
+          - /url: /
+          - img [ref=e11]
+        - generic [ref=e13]:
+          - navigation "Global" [ref=e16]:
+            - list [ref=e17]:
+              - listitem [ref=e18]:
+                - button "Platform" [ref=e20] [cursor=pointer]:
+                  - text: Platform
+                  - img [ref=e21]
+              - listitem [ref=e23]:
+                - button "Solutions" [ref=e25] [cursor=pointer]:
+                  - text: Solutions
+                  - img [ref=e26]
+              - listitem [ref=e28]:
+                - button "Resources" [ref=e30] [cursor=pointer]:
+                  - text: Resources
+                  - img [ref=e31]
+              - listitem [ref=e33]:
+                - button "Open Source" [ref=e35] [cursor=pointer]:
+                  - text: Open Source
+                  - img [ref=e36]
+              - listitem [ref=e38]:
+                - button "Enterprise" [ref=e40] [cursor=pointer]:
+                  - text: Enterprise
+                  - img [ref=e41]
+              - listitem [ref=e43]:
+                - link "Pricing" [ref=e44] [cursor=pointer]:
+                  - /url: https://github.com/pricing
+                  - generic [ref=e45]: Pricing
+          - generic [ref=e46]:
+            - button "Search or jump to…" [ref=e49] [cursor=pointer]:
+              - img [ref=e51]
+              - generic [ref=e53]: Search or jump to...
+              - img [ref=e55]
+            - link "Sign in" [ref=e59] [cursor=pointer]:
+              - /url: /login?return_to=https%3A%2F%2Fgithub.com%2F14e28f87%2Fmithril-ui-kit%2Factions
+            - link "Sign up" [ref=e60] [cursor=pointer]:
+              - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E%2Factions%2Findex&source=header-repo&source_repo=14e28f87%2Fmithril-ui-kit
+            - button "Appearance settings" [ref=e63] [cursor=pointer]:
+              - img
+  - main [ref=e67]:
+    - generic [ref=e68]:
+      - generic [ref=e69]:
+        - generic [ref=e71]:
+          - img [ref=e72]
+          - link "14e28f87" [ref=e75] [cursor=pointer]:
+            - /url: /14e28f87
+          - generic [ref=e76]: /
+          - strong [ref=e77]:
+            - link "mithril-ui-kit" [ref=e78] [cursor=pointer]:
+              - /url: /14e28f87/mithril-ui-kit
+          - generic [ref=e79]: Public
+        - generic [ref=e80]:
+          - list:
+            - listitem [ref=e81]:
+              - link "You must be signed in to change notification settings" [ref=e82] [cursor=pointer]:
+                - /url: /login?return_to=%2F14e28f87%2Fmithril-ui-kit
+                - img [ref=e83]
+                - text: Notifications
+            - listitem [ref=e85]:
+              - link "Fork 0" [ref=e86] [cursor=pointer]:
+                - /url: /login?return_to=%2F14e28f87%2Fmithril-ui-kit
+                - img [ref=e87]
+                - text: Fork
+                - generic "0" [ref=e89]
+            - listitem [ref=e90]:
+              - link "You must be signed in to star a repository" [ref=e92] [cursor=pointer]:
+                - /url: /login?return_to=%2F14e28f87%2Fmithril-ui-kit
+                - img [ref=e93]
+                - text: Star
+                - generic "0 users starred this repository" [ref=e95]: "0"
+      - navigation "Repository" [ref=e96]:
+        - list [ref=e97]:
+          - listitem [ref=e98]:
+            - link "Code" [ref=e99] [cursor=pointer]:
+              - /url: /14e28f87/mithril-ui-kit
+              - img [ref=e100]
+              - generic [ref=e102]: Code
+          - listitem [ref=e103]:
+            - link "Issues" [ref=e104] [cursor=pointer]:
+              - /url: /14e28f87/mithril-ui-kit/issues
+              - img [ref=e105]
+              - generic [ref=e108]: Issues
+          - listitem [ref=e109]:
+            - link "Pull requests" [ref=e110] [cursor=pointer]:
+              - /url: /14e28f87/mithril-ui-kit/pulls
+              - img [ref=e111]
+              - generic [ref=e113]: Pull requests
+          - listitem [ref=e114]:
+            - link "Actions" [ref=e115] [cursor=pointer]:
+              - /url: /14e28f87/mithril-ui-kit/actions
+              - img [ref=e116]
+              - generic [ref=e118]: Actions
+          - listitem [ref=e119]:
+            - link "Projects" [ref=e120] [cursor=pointer]:
+              - /url: /14e28f87/mithril-ui-kit/projects
+              - img [ref=e121]
+              - generic [ref=e123]: Projects
+          - listitem [ref=e124]:
+            - link "Security and quality" [ref=e125] [cursor=pointer]:
+              - /url: /14e28f87/mithril-ui-kit/security
+              - img [ref=e126]
+              - generic [ref=e128]: Security and quality
+          - listitem [ref=e129]:
+            - link "Insights" [ref=e130] [cursor=pointer]:
+              - /url: /14e28f87/mithril-ui-kit/pulse
+              - img [ref=e131]
+              - generic [ref=e133]: Insights
+    - generic [ref=e135]:
+      - 'heading "Actions: 14e28f87/mithril-ui-kit" [level=1] [ref=e136]'
+      - generic [ref=e139]:
+        - generic [ref=e140]:
+          - heading "Actions" [level=2] [ref=e142]
+          - navigation "Actions Workflows" [ref=e146]:
+            - list [ref=e148]:
+              - listitem [ref=e149]:
+                - link "All workflows" [ref=e150] [cursor=pointer]:
+                  - /url: /14e28f87/mithril-ui-kit/actions
+                  - generic [ref=e151]: All workflows
+              - listitem [ref=e152]
+              - listitem [ref=e153]:
+                - list "Workflows" [ref=e157]:
+                  - listitem [ref=e158]:
+                    - link "pages-build-deployment" [ref=e159] [cursor=pointer]:
+                      - /url: /14e28f87/mithril-ui-kit/actions/workflows/pages/pages-build-deployment
+                      - generic [ref=e160]: pages-build-deployment
+                  - listitem [ref=e161]:
+                    - link "VitePress サイトをデプロイ" [ref=e162] [cursor=pointer]:
+                      - /url: /14e28f87/mithril-ui-kit/actions/workflows/gh-pages.yml
+                      - generic [ref=e163]: VitePress サイトをデプロイ
+              - listitem [ref=e164]
+              - listitem [ref=e165]:
+                - generic [ref=e168]:
+                  - heading "Management" [level=3] [ref=e170]
+                  - list "Management" [ref=e171]:
+                    - listitem [ref=e172]:
+                      - link "Caches" [ref=e173] [cursor=pointer]:
+                        - /url: /14e28f87/mithril-ui-kit/actions/caches
+                        - generic:
+                          - img
+                        - generic [ref=e174]: Caches
+                    - listitem [ref=e175]:
+                      - link "Deployments" [ref=e176] [cursor=pointer]:
+                        - /url: /14e28f87/mithril-ui-kit/deployments
+                        - generic:
+                          - img
+                        - generic [ref=e177]: Deployments
+                        - generic:
+                          - img
+        - generic [ref=e180]:
+          - generic [ref=e181]:
+            - generic [ref=e182]:
+              - heading "All workflows" [level=2] [ref=e184]:
+                - generic [ref=e186]: All workflows
+              - search [ref=e190]:
+                - combobox "Filter workflow runs" [ref=e191]
+                - img
+            - generic [ref=e192]: Showing runs from all workflows
+          - generic [ref=e193]:
+            - generic [ref=e194]:
+              - strong [ref=e197]: 13 workflow runs
+              - generic [ref=e198]:
+                - button "Workflow" [ref=e202] [cursor=pointer]:
+                  - generic [ref=e204]: Workflow
+                  - generic:
+                    - img
+                - button "Event" [ref=e208] [cursor=pointer]:
+                  - generic [ref=e210]: Event
+                  - generic:
+                    - img
+                - button "Status" [ref=e214] [cursor=pointer]:
+                  - generic [ref=e216]: Status
+                  - generic:
+                    - img
+                - button "Branch" [ref=e220] [cursor=pointer]:
+                  - generic [ref=e222]: Branch
+                  - generic:
+                    - img
+                - button "Actor" [ref=e226] [cursor=pointer]:
+                  - generic [ref=e228]: Actor
+                  - generic:
+                    - img
+            - generic [ref=e229]:
+              - generic [ref=e231]:
+                - generic [ref=e232]:
+                  - 'link "currently running: Run 6 of VitePress サイトをデプロイ. Fix GitHub Pages workflow dependencies" [ref=e233] [cursor=pointer]':
+                    - /url: /14e28f87/mithril-ui-kit/actions/runs/24656240347
+                    - img "currently running:" [ref=e236]
+                    - generic [ref=e240]: Fix GitHub Pages workflow dependencies
+                  - generic [ref=e241]:
+                    - text: "VitePress サイトをデプロイ #6:"
+                    - generic [ref=e242]:
+                      - text: Commit
+                      - link "25b9a84" [ref=e243] [cursor=pointer]:
+                        - /url: /14e28f87/mithril-ui-kit/commit/25b9a84c36c8dd178fbd8d5dce791d2dc769302c
+                      - text: pushed by
+                      - link "14e28f87" [ref=e244] [cursor=pointer]:
+                        - /url: /14e28f87
+                - link "main" [ref=e246] [cursor=pointer]:
+                  - /url: /14e28f87/mithril-ui-kit/tree/refs/heads/main
+                - generic [ref=e248]:
+                  - generic [ref=e249]:
+                    - generic [ref=e250]:
+                      - img [ref=e252]
+                      - generic "Apr 20, 2026, 5:24 PM GMT+9" [ref=e254]: now
+                    - generic [ref=e255]:
+                      - img [ref=e256]
+                      - text: In progress
+                  - group [ref=e259]:
+                    - generic "Show options" [ref=e260] [cursor=pointer]:
+                      - img "Show options" [ref=e261]
+              - generic [ref=e264]:
+                - generic [ref=e265]:
+                  - 'link "waiting for another serialized run to finish: Run 5 of VitePress サイトをデプロイ. Add stylesheet module declarations for CI" [ref=e266] [cursor=pointer]':
+                    - /url: /14e28f87/mithril-ui-kit/actions/runs/24656011858
+                    - img "waiting for another serialized run to finish:" [ref=e268]
+                    - generic [ref=e270]: Add stylesheet module declarations for CI
+                  - generic [ref=e271]:
+                    - text: "VitePress サイトをデプロイ #5:"
+                    - generic [ref=e272]:
+                      - text: Commit
+                      - link "82b7771" [ref=e273] [cursor=pointer]:
+                        - /url: /14e28f87/mithril-ui-kit/commit/82b7771afa4494fab98299f8b91b16547860371c
+                      - text: pushed by
+                      - link "14e28f87" [ref=e274] [cursor=pointer]:
+                        - /url: /14e28f87
+                - link "main" [ref=e276] [cursor=pointer]:
+                  - /url: /14e28f87/mithril-ui-kit/tree/refs/heads/main
+                - generic [ref=e278]:
+                  - generic [ref=e279]:
+                    - generic [ref=e280]:
+                      - img [ref=e282]
+                      - generic "Apr 20, 2026, 5:19 PM GMT+9" [ref=e284]: 5 minutes ago
+                    - generic [ref=e285]:
+                      - img [ref=e286]
+                      - text: Pending
+                  - group [ref=e289]:
+                    - generic "Show options" [ref=e290] [cursor=pointer]:
+                      - img "Show options" [ref=e291]
+              - generic [ref=e294]:
+                - generic [ref=e295]:
+                  - 'link "failed: Run 6 of pages-build-deployment. pages build and deployment" [ref=e296] [cursor=pointer]':
+                    - /url: /14e28f87/mithril-ui-kit/actions/runs/24656010939
+                    - img "failed:" [ref=e298]
+                    - generic [ref=e300]: pages build and deployment
+                  - generic [ref=e301]:
+                    - text: "pages-build-deployment #6:"
+                    - generic [ref=e302]:
+                      - text: by
+                      - link "14e28f87" [ref=e303] [cursor=pointer]:
+                        - /url: /14e28f87
+                - link "main" [ref=e305] [cursor=pointer]:
+                  - /url: /14e28f87/mithril-ui-kit/tree/refs/heads/main
+                - generic [ref=e308]:
+                  - generic [ref=e309]:
+                    - img [ref=e311]
+                    - generic "Apr 20, 2026, 5:19 PM GMT+9" [ref=e313]: 5 minutes ago
+                  - generic [ref=e314]:
+                    - img "Run duration" [ref=e315]
+                    - text: 38s
+              - generic [ref=e318]:
+                - generic [ref=e319]:
+                  - 'link "failed: Run 4 of VitePress サイトをデプロイ. Silence TypeScript deprecation for CI" [ref=e320] [cursor=pointer]':
+                    - /url: /14e28f87/mithril-ui-kit/actions/runs/24655912468
+                    - img "failed:" [ref=e322]
+                    - generic [ref=e324]: Silence TypeScript deprecation for CI
+                  - generic [ref=e325]:
+                    - text: "VitePress サイトをデプロイ #4:"
+                    - generic [ref=e326]:
+                      - text: Commit
+                      - link "d3ad01f" [ref=e327] [cursor=pointer]:
+                        - /url: /14e28f87/mithril-ui-kit/commit/d3ad01f104e1b612914e968dc1fbfde859091ff7
+                      - text: pushed by
+                      - link "14e28f87" [ref=e328] [cursor=pointer]:
+                        - /url: /14e28f87
+                - link "main" [ref=e330] [cursor=pointer]:
+                  - /url: /14e28f87/mithril-ui-kit/tree/refs/heads/main
+                - generic [ref=e332]:
+                  - generic [ref=e333]:
+                    - generic [ref=e334]:
+                      - img [ref=e336]
+                      - generic "Apr 20, 2026, 5:16 PM GMT+9" [ref=e338]: 8 minutes ago
+                    - generic [ref=e339]:
+                      - img "Run duration" [ref=e340]
+                      - text: 22s
+                  - group [ref=e343]:
+                    - generic "Show options" [ref=e344] [cursor=pointer]:
+                      - img "Show options" [ref=e345]
+              - generic [ref=e348]:
+                - generic [ref=e349]:
+                  - 'link "failed: Run 5 of pages-build-deployment. pages build and deployment" [ref=e350] [cursor=pointer]':
+                    - /url: /14e28f87/mithril-ui-kit/actions/runs/24655911864
+                    - img "failed:" [ref=e352]
+                    - generic [ref=e354]: pages build and deployment
+                  - generic [ref=e355]:
+                    - text: "pages-build-deployment #5:"
+                    - generic [ref=e356]:
+                      - text: by
+                      - link "14e28f87" [ref=e357] [cursor=pointer]:
+                        - /url: /14e28f87
+                - link "main" [ref=e359] [cursor=pointer]:
+                  - /url: /14e28f87/mithril-ui-kit/tree/refs/heads/main
+                - generic [ref=e362]:
+                  - generic [ref=e363]:
+                    - img [ref=e365]
+                    - generic "Apr 20, 2026, 5:16 PM GMT+9" [ref=e367]: 8 minutes ago
+                  - generic [ref=e368]:
+                    - img "Run duration" [ref=e369]
+                    - text: 33s
+              - generic [ref=e372]:
+                - generic [ref=e373]:
+                  - 'link "failed: Run 3 of VitePress サイトをデプロイ. Make GitHub Pages build cross-platform" [ref=e374] [cursor=pointer]':
+                    - /url: /14e28f87/mithril-ui-kit/actions/runs/24655754026
+                    - img "failed:" [ref=e376]
+                    - generic [ref=e378]: Make GitHub Pages build cross-platform
+                  - generic [ref=e379]:
+                    - text: "VitePress サイトをデプロイ #3:"
+                    - generic [ref=e380]:
+                      - text: Commit
+                      - link "54154c9" [ref=e381] [cursor=pointer]:
+                        - /url: /14e28f87/mithril-ui-kit/commit/54154c9295ef5872ef21ddc066e7458f9418f09f
+                      - text: pushed by
+                      - link "14e28f87" [ref=e382] [cursor=pointer]:
+                        - /url: /14e28f87
+                - link "main" [ref=e384] [cursor=pointer]:
+                  - /url: /14e28f87/mithril-ui-kit/tree/refs/heads/main
+                - generic [ref=e386]:
+                  - generic [ref=e387]:
+                    - generic [ref=e388]:
+                      - img [ref=e390]
+                      - generic "Apr 20, 2026, 5:12 PM GMT+9" [ref=e392]: 12 minutes ago
+                    - generic [ref=e393]:
+                      - img "Run duration" [ref=e394]
+                      - text: 17s
+                  - group [ref=e397]:
+                    - generic "Show options" [ref=e398] [cursor=pointer]:
+                      - img "Show options" [ref=e399]
+              - generic [ref=e402]:
+                - generic [ref=e403]:
+                  - 'link "failed: Run 4 of pages-build-deployment. pages build and deployment" [ref=e404] [cursor=pointer]':
+                    - /url: /14e28f87/mithril-ui-kit/actions/runs/24655753490
+                    - img "failed:" [ref=e406]
+                    - generic [ref=e408]: pages build and deployment
+                  - generic [ref=e409]:
+                    - text: "pages-build-deployment #4:"
+                    - generic [ref=e410]:
+                      - text: by
+                      - link "14e28f87" [ref=e411] [cursor=pointer]:
+                        - /url: /14e28f87
+                - link "main" [ref=e413] [cursor=pointer]:
+                  - /url: /14e28f87/mithril-ui-kit/tree/refs/heads/main
+                - generic [ref=e416]:
+                  - generic [ref=e417]:
+                    - img [ref=e419]
+                    - generic "Apr 20, 2026, 5:12 PM GMT+9" [ref=e421]: 12 minutes ago
+                  - generic [ref=e422]:
+                    - img "Run duration" [ref=e423]
+                    - text: 34s
+              - generic [ref=e426]:
+                - generic [ref=e427]:
+                  - 'link "failed: Run 2 of VitePress サイトをデプロイ. Configure GitHub Pages deployment" [ref=e428] [cursor=pointer]':
+                    - /url: /14e28f87/mithril-ui-kit/actions/runs/24655600725
+                    - img "failed:" [ref=e430]
+                    - generic [ref=e432]: Configure GitHub Pages deployment
+                  - generic [ref=e433]:
+                    - text: "VitePress サイトをデプロイ #2:"
+                    - generic [ref=e434]:
+                      - text: Commit
+                      - link "0e77764" [ref=e435] [cursor=pointer]:
+                        - /url: /14e28f87/mithril-ui-kit/commit/0e77764cd30d20497c28e5760e19a4b99846ca30
+                      - text: pushed by
+                      - link "14e28f87" [ref=e436] [cursor=pointer]:
+                        - /url: /14e28f87
+                - link "main" [ref=e438] [cursor=pointer]:
+                  - /url: /14e28f87/mithril-ui-kit/tree/refs/heads/main
+                - generic [ref=e440]:
+                  - generic [ref=e441]:
+                    - generic [ref=e442]:
+                      - img [ref=e444]
+                      - generic "Apr 20, 2026, 5:08 PM GMT+9" [ref=e446]: 16 minutes ago
+                    - generic [ref=e447]:
+                      - img "Run duration" [ref=e448]
+                      - text: 17s
+                  - group [ref=e451]:
+                    - generic "Show options" [ref=e452] [cursor=pointer]:
+                      - img "Show options" [ref=e453]
+              - generic [ref=e456]:
+                - generic [ref=e457]:
+                  - 'link "failed: Run 3 of pages-build-deployment. pages build and deployment" [ref=e458] [cursor=pointer]':
+                    - /url: /14e28f87/mithril-ui-kit/actions/runs/24655600306
+                    - img "failed:" [ref=e460]
+                    - generic [ref=e462]: pages build and deployment
+                  - generic [ref=e463]:
+                    - text: "pages-build-deployment #3:"
+                    - generic [ref=e464]:
+                      - text: by
+                      - link "14e28f87" [ref=e465] [cursor=pointer]:
+                        - /url: /14e28f87
+                - link "main" [ref=e467] [cursor=pointer]:
+                  - /url: /14e28f87/mithril-ui-kit/tree/refs/heads/main
+                - generic [ref=e470]:
+                  - generic [ref=e471]:
+                    - img [ref=e473]
+                    - generic "Apr 20, 2026, 5:08 PM GMT+9" [ref=e475]: 16 minutes ago
+                  - generic [ref=e476]:
+                    - img "Run duration" [ref=e477]
+                    - text: 30s
+              - generic [ref=e480]:
+                - generic [ref=e481]:
+                  - 'link "failed: Run 1 of VitePress サイトをデプロイ. version 0.0.1 - ghpages" [ref=e482] [cursor=pointer]':
+                    - /url: /14e28f87/mithril-ui-kit/actions/runs/24649649497
+                    - img "failed:" [ref=e484]
+                    - generic [ref=e486]: version 0.0.1 - ghpages
+                  - generic [ref=e487]:
+                    - text: "VitePress サイトをデプロイ #1:"
+                    - generic [ref=e488]:
+                      - text: Commit
+                      - link "4a344ca" [ref=e489] [cursor=pointer]:
+                        - /url: /14e28f87/mithril-ui-kit/commit/4a344ca86c11e821092afa2825e8ef1472cb547a
+                      - text: pushed by
+                      - link "14e28f87" [ref=e490] [cursor=pointer]:
+                        - /url: /14e28f87
+                - link "main" [ref=e492] [cursor=pointer]:
+                  - /url: /14e28f87/mithril-ui-kit/tree/refs/heads/main
+                - generic [ref=e494]:
+                  - generic [ref=e495]:
+                    - generic [ref=e496]:
+                      - img [ref=e498]
+                      - generic "Apr 20, 2026, 2:14 PM GMT+9" [ref=e500]: Today at 2:14 PM
+                    - generic [ref=e501]:
+                      - img "Run duration" [ref=e502]
+                      - text: 44s
+                  - group [ref=e505]:
+                    - generic "Show options" [ref=e506] [cursor=pointer]:
+                      - img "Show options" [ref=e507]
+              - generic [ref=e510]:
+                - generic [ref=e511]:
+                  - 'link "failed: Run 2 of pages-build-deployment. pages build and deployment" [ref=e512] [cursor=pointer]':
+                    - /url: /14e28f87/mithril-ui-kit/actions/runs/24649649123
+                    - img "failed:" [ref=e514]
+                    - generic [ref=e516]: pages build and deployment
+                  - generic [ref=e517]:
+                    - text: "pages-build-deployment #2:"
+                    - generic [ref=e518]:
+                      - text: by
+                      - link "14e28f87" [ref=e519] [cursor=pointer]:
+                        - /url: /14e28f87
+                - link "main" [ref=e521] [cursor=pointer]:
+                  - /url: /14e28f87/mithril-ui-kit/tree/refs/heads/main
+                - generic [ref=e524]:
+                  - generic [ref=e525]:
+                    - img [ref=e527]
+                    - generic "Apr 20, 2026, 2:14 PM GMT+9" [ref=e529]: Today at 2:14 PM
+                  - generic [ref=e530]:
+                    - img "Run duration" [ref=e531]
+                    - text: 31s
+              - generic [ref=e534]:
+                - generic [ref=e535]:
+                  - 'link "failed: Run 1 of pages-build-deployment. pages build and deployment" [ref=e536] [cursor=pointer]':
+                    - /url: /14e28f87/mithril-ui-kit/actions/runs/24646077065
+                    - img "failed:" [ref=e538]
+                    - generic [ref=e540]: pages build and deployment
+                  - generic [ref=e541]:
+                    - text: "pages-build-deployment #1:"
+                    - generic [ref=e542]:
+                      - text: by
+                      - link "14e28f87" [ref=e543] [cursor=pointer]:
+                        - /url: /14e28f87
+                - link "main" [ref=e545] [cursor=pointer]:
+                  - /url: /14e28f87/mithril-ui-kit/tree/refs/heads/main
+                - generic [ref=e548]:
+                  - generic [ref=e549]:
+                    - img [ref=e551]
+                    - generic "Apr 20, 2026, 11:48 AM GMT+9" [ref=e553]: Today at 11:48 AM
+                  - generic [ref=e554]:
+                    - img "Run duration" [ref=e555]
+                    - text: 32s
+              - generic [ref=e558]:
+                - generic [ref=e559]:
+                  - 'link "failed: Run 1 of Deploy VitePress site to Pages. version 0.0.1" [ref=e560] [cursor=pointer]':
+                    - /url: /14e28f87/mithril-ui-kit/actions/runs/24646034593
+                    - img "failed:" [ref=e562]
+                    - generic [ref=e564]: version 0.0.1
+                  - generic [ref=e565]:
+                    - text: "Deploy VitePress site to Pages #1:"
+                    - generic [ref=e566]:
+                      - text: Commit
+                      - link "8511eba" [ref=e567] [cursor=pointer]:
+                        - /url: /14e28f87/mithril-ui-kit/commit/8511ebac6c526b86986569deac08327ed9ea81f8
+                      - text: pushed by
+                      - link "14e28f87" [ref=e568] [cursor=pointer]:
+                        - /url: /14e28f87
+                - link "main" [ref=e570] [cursor=pointer]:
+                  - /url: /14e28f87/mithril-ui-kit/tree/refs/heads/main
+                - generic [ref=e572]:
+                  - generic [ref=e573]:
+                    - generic [ref=e574]:
+                      - img [ref=e576]
+                      - generic "Apr 20, 2026, 11:46 AM GMT+9" [ref=e578]: Today at 11:46 AM
+                    - generic [ref=e579]:
+                      - img "Run duration" [ref=e580]
+                      - text: 45s
+                  - group [ref=e583]:
+                    - generic "Show options" [ref=e584] [cursor=pointer]:
+                      - img "Show options" [ref=e585]

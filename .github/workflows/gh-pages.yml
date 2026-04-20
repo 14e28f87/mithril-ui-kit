@@ -46,7 +46,7 @@ jobs:
         run: npm run build
 
       - name: VitePress ビルド
-        run: npx vitepress build docs # docs/.vitepress/dist に HTML が生成される
+        run: node ./node_modules/vitepress/dist/node/cli.js build docs # docs/.vitepress/dist に HTML が生成される
 
       - name: 成果物のアップロード
         uses: actions/upload-pages-artifact@v3
