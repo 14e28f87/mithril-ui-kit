@@ -30,7 +30,7 @@
   },
   "scripts": {
     "build": "tsc && npm run copy-styles",
-    "copy-styles": "powershell -Command \"Get-ChildItem -Path src/components -Filter '*.scss' | ForEach-Object { Copy-Item $_.FullName (Join-Path 'dist/components' $_.Name) }\"",
+    "copy-styles": "node ./scripts/copy-styles.mjs",
     "watch": "tsc --watch",
     "dev": "npm run watch",
     "docs:dev": "vitepress dev docs --host --port 6172",

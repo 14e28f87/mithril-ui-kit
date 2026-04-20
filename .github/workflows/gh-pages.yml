@@ -17,6 +17,9 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   # ビルドジョブ：ソースコードから HTML を生成する
   build:
@@ -30,7 +33,7 @@ jobs:
       - name: Node.js のセットアップ
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm # パッケージのキャッシュを有効にして高速化
 
       - name: Pages の初期設定
@@ -38,6 +41,9 @@ jobs:
 
       - name: 依存ライブラリのインストール
         run: npm install
+
+      - name: ライブラリをビルド
+        run: npm run build
 
       - name: VitePress ビルド
         run: npm run docs:build # docs/.vitepress/dist に HTML が生成される
