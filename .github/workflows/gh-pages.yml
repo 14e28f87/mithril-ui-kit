@@ -4,6 +4,7 @@ name: VitePress サイトをデプロイ
 on:
   push:
     branches: [main] # main ブランチに push された時に動かす
+  workflow_dispatch: # 必要に応じて手動実行もできるようにする
 
 # GitHub Pages への書き込み権限などを設定
 permissions:

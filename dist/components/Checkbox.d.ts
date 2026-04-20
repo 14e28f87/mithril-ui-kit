@@ -36,7 +36,7 @@ export type CheckboxRootAttrs = {
     variant?: CheckboxVariant;
     /** カラー（CSS変数 --checkbox-color で反映） */
     colorPalette?: string;
-    /** formRef（MithrilUIKit の Form 連携） */
+    /** formRef（Mithril UI Kit の Form 連携） */
     formRef?: any;
     /** 追加クラス */
     class?: string;
@@ -95,7 +95,7 @@ export declare class CheckboxLabelMarker implements m.Component<CheckboxLabelAtt
  * - solid / outline / subtle バリアント
  * - xs / sm / md / lg サイズ
  * - colorPalette によるカスタムカラー
- * - formRef による MithrilUIKit Form 連携
+ * - formRef による Mithril UI Kit Form 連携
  * - indeterminate 状態
  *
  * @example

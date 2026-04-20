@@ -83,7 +83,7 @@ function IndeterminateIcon() {
  * - solid / outline / subtle バリアント
  * - xs / sm / md / lg サイズ
  * - colorPalette によるカスタムカラー
- * - formRef による MithrilUIKit Form 連携
+ * - formRef による Mithril UI Kit Form 連携
  * - indeterminate 状態
  *
  * @example

@@ -5,11 +5,12 @@ export default defineConfig({
   title: "Mithril UI Kit",
   description: "Mithril.js 向け UI コンポーネントライブラリ",
   lang: "ja-JP",
+  base: "/mithril-ui-kit/",
   cleanUrls: true,
   themeConfig: {
     nav: [
       { text: "Docs", link: "/" },
-      { text: "GitHub", link: "https://github.com/14e28f87/mithril-ui-ki" }
+      { text: "GitHub", link: "https://github.com/14e28f87/mithril-ui-kit" }
     ],
     search: {
       provider: "local"

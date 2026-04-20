@@ -6,11 +6,11 @@
   "author": "K.Tsuru",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/14e28f87/mithril-ui-ki.git"
+    "url": "git+https://github.com/14e28f87/mithril-ui-kit.git"
   },
-  "homepage": "https://github.com/14e28f87/mithril-ui-ki",
+  "homepage": "https://github.com/14e28f87/mithril-ui-kit",
   "bugs": {
-    "url": "https://github.com/14e28f87/mithril-ui-ki/issues"
+    "url": "https://github.com/14e28f87/mithril-ui-kit/issues"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
