@@ -12,11 +12,9 @@ import inlineCode from './demos/date-picker/inline.tsx?raw'
 
 ## 概要
 
-`DatePicker` は Chakra UI 風の compound component で、単一選択・複数選択・範囲選択、ポップオーバー表示とインライン表示、`day` / `month` / `year` ビュー切り替えをサポートします。
+`DatePicker` は 日付を選択できるコンポーネントです。
+単一選択・複数選択・範囲選択、ポップオーバー表示とインライン表示、`day` / `month` / `year` ビュー切り替えをサポートします。
 
-::: tip
-旧 API（`DatePickerClassic`）はレガシー扱いです。このページでは current API を案内します。
-:::
 
 ## Usage 使用例
 

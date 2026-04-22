@@ -7,7 +7,7 @@ import basicCode from './demos/radio/basic.tsx?raw'
 
 ## 概要
 
-`Radio` は compound component 版のラジオグループです。`Radio.Root` 配下に `Radio.Item` を並べて単一選択を構成し、`onValueChange` で現在値を受け取ります。
+`Radio` はラジオグループです。`Radio.Root` 配下に `Radio.Item` を並べて単一選択を構成し、`onValueChange` で現在値を受け取ります。
 
 旧来の単体ラジオ API（`RadioClassic`）はレガシー扱いです。このページでは current API を案内します。
 

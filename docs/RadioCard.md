@@ -10,7 +10,7 @@ import horizontalCode from './demos/radio-card/horizontal.tsx?raw'
 
 ## 概要
 
-`RadioCard` はカード単位で単一選択を行う compound component です。モード選択やプラン比較のように、選択肢ごとに説明を持たせたい場面に向いています。
+`RadioCard` はカード単位で単一選択を行うコンポーネントです。モード選択やプラン比較のように、選択肢ごとに説明を持たせたい場面に向いています。
 
 ## Usage 使用例
 

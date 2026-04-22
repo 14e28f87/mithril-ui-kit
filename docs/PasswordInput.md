@@ -18,8 +18,6 @@ import variantCode from './demos/password-input/variant.tsx?raw'
 
 `PasswordInput` は compound component 型のパスワード入力コンポーネントです。パスワードの表示/非表示トグル、強度メーター、制御/非制御モードに対応しています。
 
-Chakra UI の PasswordInput API を参考に設計されています。
-
 サブコンポーネント: `Root` / `Input` / `VisibilityTrigger` / `Label` / `StrengthMeter`
 
 ## Usage

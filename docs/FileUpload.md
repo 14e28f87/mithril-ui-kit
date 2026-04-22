@@ -7,7 +7,7 @@ import basicCode from './demos/file-upload/basic.tsx?raw'
 
 ## 概要
 
-`FileUpload` はクリック選択とドラッグアンドドロップの両方を扱える compound component です。選択済みファイル一覧も同じコンポーネント内で描画でき、添付 UI を 1 つのパターンにまとめられます。
+`FileUpload` はクリック選択とドラッグアンドドロップの両方を扱えるコンポーネントです。選択済みファイル一覧も同じコンポーネント内で描画でき、添付 UI を 1 つのパターンにまとめられます。
 
 ## Usage 使用例
 

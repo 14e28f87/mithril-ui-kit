@@ -7,7 +7,7 @@ import basicCode from './demos/table/basic.tsx?raw'
 
 ## 概要
 
-`Table` は表形式データを semantic な HTML 構造で組み立てる compound component です。`Header`、`Body`、`Row`、`Cell` を明示的に分けられるため、静的な管理表やサマリーテーブルを見通しよく書けます。
+`Table` は表形式データを semantic な HTML 構造で組み立てるコンポーネントです。`Header`、`Body`、`Row`、`Cell` を明示的に分けられるため、静的な管理表やサマリーテーブルを見通しよく書けます。
 
 ## Usage 使用例
 

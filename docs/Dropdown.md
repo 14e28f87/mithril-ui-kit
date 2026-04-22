@@ -13,12 +13,9 @@ import mixedCode from './demos/dropdown/mixed.tsx?raw'
 
 ## 概要
 
-Chakra UI 風の compound component パターンで構成されたドロップダウンメニューコンポーネント。  
+ドロップダウンメニューコンポーネント。  
 `Item`、`CheckboxItem`、`RadioItemGroup` / `RadioItem` を組み合わせて、柔軟なメニュー構成が可能。
 
-::: tip
-旧 API（`DropdownClassic`）はレガシー扱いです。このページでは current API を案内します。
-:::
 
 ## デモ
 

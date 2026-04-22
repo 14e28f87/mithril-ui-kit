@@ -7,7 +7,7 @@ import basicCode from './demos/popover/basic.tsx?raw'
 
 ## 概要
 
-`Popover` はクリックで開くリッチコンテンツ向けの compound component ポップオーバーです。
+`Popover` はクリックで開くリッチコンテンツ向けのポップオーバーです。
 
 ## デモ
 

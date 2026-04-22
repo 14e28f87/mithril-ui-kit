@@ -10,7 +10,7 @@ import groupCode from './demos/checkbox/group.tsx?raw'
 
 ## 概要
 
-`Checkbox` は compound component 版のチェックボックスです。`Checkbox.Root` 単体での利用に加えて、`Checkbox.Group` で複数選択をまとめて管理できます。
+`Checkbox` は チェックボックスです。`Checkbox.Root` 単体での利用に加えて、`Checkbox.Group` で複数選択をまとめて管理できます。
 
 ## Usage 使用例
 

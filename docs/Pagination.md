@@ -14,7 +14,7 @@ import pagetextCode from './demos/pagination/pagetext.tsx?raw'
 
 ## 概要
 
-`Pagination` は省略記号付きのページ番号リストを自動生成する compound component ページネーションです。
+`Pagination` は省略記号付きのページ番号リストを自動生成するページネーションのコンポーネントです。
 
 サブコンポーネント: `Root` / `PrevTrigger` / `NextTrigger` / `Items` / `PageText`
 

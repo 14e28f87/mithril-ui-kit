@@ -16,7 +16,7 @@ import variantCode from './demos/number-input/variant.tsx?raw'
 
 ## 概要
 
-`NumberInput` は source 上 `InputNumber` として実装されている compound component 型の数値入力コンポーネントです。増減ボタン、キーボード操作、マウスホイール操作、`precision` による小数制御に対応し、`Form` / `FormItem` と統合して使用できます。
+`NumberInput` は数値入力コンポーネントです。増減ボタン、キーボード操作、マウスホイール操作、`precision` による小数制御に対応し、`Form` / `FormItem` と統合して使用できます。
 
 サブコンポーネント: `Root` / `Input` / `Control` / `IncrementTrigger` / `DecrementTrigger` / `Label` / `ValueText`
 

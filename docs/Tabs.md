@@ -12,7 +12,7 @@ import verticalCode from './demos/tabs/vertical.tsx?raw'
 
 ## 概要
 
-`Tabs` は `Tabs.Root`, `Tabs.List`, `Tabs.Trigger`, `Tabs.Content` を組み合わせて使う compound component 型のタブです。表示中のパネル切り替えだけでなく、`activationMode` によるキーボード操作の制御、`lazyMount` / `unmountOnExit` による描画コスト調整、`orientation` による縦配置にも対応しています。
+`Tabs` は `Tabs.Root`, `Tabs.List`, `Tabs.Trigger`, `Tabs.Content` を組み合わせて使うタブです。表示中のパネル切り替えだけでなく、`activationMode` によるキーボード操作の制御、`lazyMount` / `unmountOnExit` による描画コスト調整、`orientation` による縦配置にも対応しています。
 
 ::: tip
 旧タブ UI（`TabsClassic`）はレガシー扱いです。このページでは current API を案内します。

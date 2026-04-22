@@ -14,7 +14,7 @@ import orientationCode from './demos/accordion/orientation.tsx?raw'
 
 ## 概要
 
-`Accordion` は、コンテンツを縦方向に積み重ねて表示するための、折りたたみ可能な compound component です。
+`Accordion` は、コンテンツを縦方向に積み重ねて表示するための、折りたたみ可能なコンポーネントです。
 
 以下のサブコンポーネントで構成されます:
 

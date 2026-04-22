@@ -7,7 +7,7 @@ import basicCode from './demos/alert/basic.tsx?raw'
 
 ## 概要
 
-`Alert` は成功・警告・エラーなどのフィードバックをまとまったブロックで表示する compound component です。`Alert.Content` の中で `Title` と `Description` を組み合わせると、情報密度を保った通知を作れます。
+`Alert` は成功・警告・エラーなどのフィードバックをまとまったブロックで表示するコンポーネントです。`Alert.Content` の中で `Title` と `Description` を組み合わせると、情報密度を保った通知を作れます。
 
 ## Usage 使用例
 

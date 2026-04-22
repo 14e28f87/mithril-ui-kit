@@ -7,7 +7,7 @@ import basicCode from './demos/checkbox-card/basic.tsx?raw'
 
 ## 概要
 
-`CheckboxCard` はカード全体をクリック可能な選択 UI にする compound component です。設定項目の有効化や比較的長い説明文を伴う選択肢に向いています。
+`CheckboxCard` はカード全体をクリック可能なチェックボックスです。設定項目の有効化や比較的長い説明文を伴う選択肢に向いています。
 
 ## Usage 使用例
 

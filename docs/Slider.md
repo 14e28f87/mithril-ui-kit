@@ -7,7 +7,7 @@ import basicCode from './demos/slider/basic.tsx?raw'
 
 ## 概要
 
-Chakra UI 風の Slider compound component。シングルサム、レンジ（マルチサム）、マーカー表示に対応。ドラッグとキーボード操作をサポート。
+スライダー。シングルサム、レンジ（マルチサム）、マーカー表示に対応。ドラッグとキーボード操作をサポート。
 
 ## Usage 使用例
 

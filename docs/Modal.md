@@ -7,7 +7,7 @@ import basicCode from './demos/modal/basic.tsx?raw'
 
 ## 概要
 
-Chakra UI Dialog 風の compound モーダルコンポーネント。**命令的 API**（`Modal.show()`）と**宣言的 API**（JSX compound component）の 2 つの使い方をサポート。
+モーダルコンポーネント。**命令的 API**（`Modal.show()`）と**宣言的 API**（JSX compound component）の 2 つの使い方をサポート。
 
 > レガシーの Bootstrap 5 スタイルモーダル（`ModalClassic`）は旧 API です。このページでは current API を案内します。
 

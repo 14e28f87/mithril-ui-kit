@@ -7,7 +7,7 @@ import basicCode from './demos/empty-state/basic.tsx?raw'
 
 ## 概要
 
-`EmptyState` はデータが存在しない状態を説明付きで表示するための compound component です。アイコン、タイトル、説明文を縦に積み、一覧や検索結果の空状態を明確に伝えます。
+`EmptyState` はデータが存在しない状態を説明付きで表示するためのコンポーネントです。アイコン、タイトル、説明文を縦に積み、一覧や検索結果の空状態を明確に伝えます。
 
 ## Usage 使用例
 

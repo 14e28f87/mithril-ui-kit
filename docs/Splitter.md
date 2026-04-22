@@ -7,7 +7,7 @@ import basicCode from './demos/splitter/basic.tsx?raw'
 
 ## 概要
 
-`Splitter` は複数パネル間の境界をドラッグしてサイズ変更できる compound component です。ナビゲーションと詳細パネル、エディタとプレビューなどを同一画面で並べたいときに使います。
+`Splitter` は複数パネル間の境界をドラッグしてサイズ変更できるコンポーネントです。ナビゲーションと詳細パネル、エディタとプレビューなどを同一画面で並べたいときに使います。
 
 ## Usage 使用例
 

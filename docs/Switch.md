@@ -7,7 +7,7 @@ import basicCode from './demos/switch/basic.tsx?raw'
 
 ## 概要
 
-Chakra UI 風の Switch compound component。制御モード（`checked`）と非制御モード（`defaultChecked`）の両方をサポート。
+スイッチ コンポーネント。制御モード（`checked`）と非制御モード（`defaultChecked`）の両方をサポート。
 
 ## デモ
 

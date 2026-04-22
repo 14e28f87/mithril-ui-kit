@@ -16,7 +16,7 @@ import variantCode from './demos/breadcrumb/variant.tsx?raw'
 
 ## 概要
 
-`Breadcrumb` は、サイトの階層構造内におけるページの位置を表示するためのパンくずリスト compound component です。
+`Breadcrumb` は、サイトの階層構造内におけるページの位置を表示するためのパンくずリストのコンポーネントです。
 
 以下のサブコンポーネントで構成されます:
 

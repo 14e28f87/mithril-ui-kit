@@ -7,7 +7,7 @@ import basicCode from './demos/timeline/basic.tsx?raw'
 
 ## 概要
 
-`Timeline` はイベントやステップの流れを縦方向に可視化する compound component です。ジョブ履歴、処理段階、監査ログの可読性を高める用途に向いています。
+`Timeline` はイベントやステップの流れを縦方向に可視化するコンポーネントです。ジョブ履歴、処理段階、監査ログの可読性を高める用途に向いています。
 
 ## Usage 使用例
 

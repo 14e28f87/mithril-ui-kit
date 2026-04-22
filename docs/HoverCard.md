@@ -7,7 +7,7 @@ import basicCode from './demos/hover-card/basic.tsx?raw'
 
 ## 概要
 
-`HoverCard` はホバー中だけ詳細情報を表示する軽量な compound component です。ツールチップより情報量を増やしたいが、クリック操作までは不要な場面に向いています。
+`HoverCard` はホバー中だけ詳細情報を表示する軽量なコンポーネントです。ツールチップより情報量を増やしたいが、クリック操作までは不要な場面に向いています。
 
 ## Usage 使用例
 

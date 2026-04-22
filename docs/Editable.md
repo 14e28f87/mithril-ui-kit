@@ -10,7 +10,7 @@ import textareaCode from './demos/editable/textarea.tsx?raw'
 
 ## 概要
 
-`Editable` はインライン編集用の compound component です。表示モードと編集モードを切り替えながら、input または textarea ベースの編集体験を組み立てられます。
+`Editable` はインライン編集用なコンポーネントです。表示モードと編集モードを切り替えながら、input または textarea ベースの編集体験を組み立てられます。
 
 ## Usage 使用例
 

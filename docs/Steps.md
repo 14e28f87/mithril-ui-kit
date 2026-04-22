@@ -12,7 +12,7 @@ import verticalCode from './demos/steps/vertical.tsx?raw'
 
 ## 概要
 
-`Steps` は `Steps.List`, `Steps.Item`, `Steps.Trigger`, `Steps.Content` を組み合わせて進行状況を表す compound component です。現在ステップの表示だけでなく、完了済み状態の可視化、`PrevTrigger` / `NextTrigger` による前後移動、`linear` による順序制約、`orientation` による縦配置に対応しています。
+`Steps` は `Steps.List`, `Steps.Item`, `Steps.Trigger`, `Steps.Content` を組み合わせて進行状況を表すコンポーネントです。現在ステップの表示だけでなく、完了済み状態の可視化、`PrevTrigger` / `NextTrigger` による前後移動、`linear` による順序制約、`orientation` による縦配置に対応しています。
 
 ::: tip
 旧ステッパー（`StepsClassic`）はレガシー扱いです。このページでは current API を案内します。

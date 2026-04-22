@@ -7,7 +7,7 @@ import basicCode from './demos/progress/basic.tsx?raw'
 
 ## 概要
 
-`Progress` は横方向の進捗バーを表現する compound component です。ラベル、パーセンテージ表示、トラックを組み合わせて、処理進行やアップロード状況を視覚化できます。
+`Progress` は横方向の進捗バーを表現するコンポーネントです。ラベル、パーセンテージ表示、トラックを組み合わせて、処理進行やアップロード状況を視覚化できます。
 
 ## Usage 使用例
 

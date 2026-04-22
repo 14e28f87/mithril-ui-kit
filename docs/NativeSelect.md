@@ -7,7 +7,7 @@ import basicCode from './demos/native-select/basic.tsx?raw'
 
 ## 概要
 
-`NativeSelect` はブラウザ標準の `select` をラップして見た目を整える compound component です。アクセシビリティやフォーム互換を保ったまま、統一された外観を与えたい場面に向いています。
+`NativeSelect` はブラウザ標準の `select` をラップして見た目を整えるコンポーネントです。アクセシビリティやフォーム互換を保ったまま、統一された外観を与えたい場面に向いています。
 
 ## Usage 使用例
 
