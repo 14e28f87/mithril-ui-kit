@@ -45,6 +45,15 @@ const Component = {
 m.mount(el, Component);
 ~~~
 
+## スタイルのカスタマイズ
+
+CSS / SCSS ベースで見た目を調整したい場合は、[スタイリングとテーマ設定](./styling.md) を参照してください。
+
+- `--bs-*` と `--muk-*` の優先順位
+- Bootstrap 併用時の theme 上書き方法
+- Bootstrap なしでの `--muk-*` 定義方法
+- `Modal` / `Offcanvas` などのコンポーネント固有変数
+
 ## 補足
 
 - import 名は常に `mithril-ui-kit` を使用します

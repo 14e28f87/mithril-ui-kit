@@ -33,6 +33,11 @@ features:
 
 ---
 
+## Getting Started
+
+- [installation](./installation.md)
+- [styling](./styling.md)
+
 ## Component Documents
 
 ### Actions and Buttons

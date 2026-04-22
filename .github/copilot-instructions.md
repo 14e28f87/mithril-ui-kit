@@ -2,9 +2,6 @@
 
 ## Overview
 
-このリポジトリは、旧モノレポから切り出した standalone 版の Mithril.js UI コンポーネントライブラリです。
-現在の正本はこのリポジトリ自身であり、`packages/*` 前提のモノレポとして扱わないでください。
-
 - 正式名称: `mithril-ui-kit`
 - 公式 import 名: `mithril-ui-kit`
 - リポジトリ: https://github.com/14e28f87/mithril-ui-ki
@@ -64,7 +61,7 @@ npm run docs:preview
 
 ## Important Gotchas
 
-- ビルドスクリプトには Windows PowerShell を使う SCSS コピー処理が含まれる
+- ビルドの `copy-styles` スクリプトは `tsx scripts/copy-styles.ts` で実行されるため Windows / Linux / macOS いずれでも動作する
 - docs の live demo は `docs/.vitepress/theme/MithrilDemo.vue` を正本として扱う
 - docs / demo の import 名は必ず `mithril-ui-kit` にする
 - テストフレームワークは未導入。必要なら Vitest または Playwright を提案する
