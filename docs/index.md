@@ -124,3 +124,9 @@ features:
 - [ScrollArea](./ScrollArea.md)
 - [Splitter](./Splitter.md)
 
+---
+
+## ライセンス
+
+このプロジェクトは MIT ライセンスの下で公開されています。詳細はリポジトリルートの [LICENSE](../LICENSE) をご確認ください。
+

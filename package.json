@@ -2,6 +2,7 @@
   "name": "mithril-ui-kit",
   "version": "0.0.1",
   "description": "Mithril.js UI Component Library",
+  "license": "MIT",
   "type": "module",
   "author": "K.Tsuru",
   "repository": {
