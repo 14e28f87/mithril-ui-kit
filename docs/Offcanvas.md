@@ -7,7 +7,7 @@ import basicCode from './demos/offcanvas/basic.tsx?raw'
 
 ## 概要
 
-オフキャンバスコンポーネント。**命令的 API**（`Offcanvas.show()` / `Offcanvas2.show()`）と**宣言的 API**（JSX compound component）の 2 つの使い方をサポートしています。
+オフキャンバスコンポーネント。**命令的 API**（`Offcanvas.show()` / `Offcanvas2.show()`）と**宣言的 API**（JSX component）の 2 つの使い方をサポートしています。
 
 
 
@@ -57,7 +57,7 @@ const result = await Offcanvas.show<boolean>({
 console.log(result); // true or false
 ```
 
-## 使い方 — 宣言的 API（JSX Compound Component）
+## 使い方 — 宣言的 API（JSX Component）
 
 ```tsx
 import { Offcanvas } from 'mithril-ui-kit';

@@ -7,7 +7,7 @@ import basicCode from './demos/modal/basic.tsx?raw'
 
 ## 概要
 
-モーダルコンポーネント。**命令的 API**（`Modal.show()`）と**宣言的 API**（JSX compound component）の 2 つの使い方をサポート。
+モーダルコンポーネント。**命令的 API**（`Modal.show()`）と**宣言的 API**（JSX component）の 2 つの使い方をサポート。
 
 > レガシーの Bootstrap 5 スタイルモーダル（`ModalClassic`）は旧 API です。このページでは current API を案内します。
 
@@ -58,7 +58,7 @@ const result = await Modal.show<boolean>({
 console.log(result); // true or false
 ```
 
-## 使い方 — 宣言的 API（JSX Compound Component）
+## 使い方 — 宣言的 API（JSX Component）
 
 ```tsx
 import { Modal, Portal } from 'mithril-ui-kit';

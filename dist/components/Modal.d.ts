@@ -298,7 +298,7 @@ export declare class ModalRoot implements m.Component<ModalRootAttrs> {
  * });
  * ```
  *
- * **方式2: 宣言的 API（JSX compound component）**
+ * **方式2: 宣言的 API（JSX component）**
  * ```tsx
  * <Modal.Root open={open} onOpenChange={(d) => { open = d.open; }}>
  *   <Modal.Trigger asChild><button>開く</button></Modal.Trigger>

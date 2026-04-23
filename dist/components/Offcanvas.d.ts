@@ -250,7 +250,7 @@ export declare class OffcanvasRoot implements m.Component<OffcanvasRootAttrs> {
  * });
  * ```
  *
- * **方式2: 宣言的 API（JSX compound component）**
+ * **方式2: 宣言的 API（JSX component）**
  * ```tsx
  * <Offcanvas.Root open={open} onOpenChange={(d) => { open = d.open; }} size="md" placement="end">
  *   <Offcanvas.Trigger asChild><button>開く</button></Offcanvas.Trigger>
