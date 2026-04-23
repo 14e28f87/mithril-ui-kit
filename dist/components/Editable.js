@@ -267,12 +267,8 @@ export class EditableRoot {
                     if (attrs.selectOnFocus !== false) {
                         this.inputEl.select();
                     }
-                } }))) : (
-            // 表示モード
-            m("span", { class: classNames(styles.preview, { [styles.placeholder]: !value }, previewVnode?.attrs.class), style: previewVnode?.attrs.style, tabindex: activationMode === "focus" ? 0 : undefined, "data-part": "preview", ...activationHandlers }, value || this.getPlaceholder(attrs, "preview") || "\u00a0"))),
-            (controlVnode || editTriggerVnode || submitTriggerVnode || cancelTriggerVnode) && (m("div", { class: classNames(styles.control, controlVnode?.attrs.class), style: controlVnode?.attrs.style, "data-part": "control" }, editing ? (
-            // 編集中: Submit / Cancel
-            m("span", { "data-part": "control-buttons" },
+                } }))) : (m("span", { class: classNames(styles.preview, { [styles.placeholder]: !value }, previewVnode?.attrs.class), style: previewVnode?.attrs.style, tabindex: activationMode === "focus" ? 0 : undefined, "data-part": "preview", ...activationHandlers }, value || this.getPlaceholder(attrs, "preview") || "\u00a0"))),
+            (controlVnode || editTriggerVnode || submitTriggerVnode || cancelTriggerVnode) && (m("div", { class: classNames(styles.control, controlVnode?.attrs.class), style: controlVnode?.attrs.style, "data-part": "control" }, editing ? (m("span", { "data-part": "control-buttons" },
                 submitTriggerVnode && (m("button", { type: "button", class: classNames(styles.submitTrigger, submitTriggerVnode.attrs.class), style: submitTriggerVnode.attrs.style, "data-part": "submit-trigger", onclick: () => this.submit(attrs) }, submitTriggerVnode.children && submitTriggerVnode.children.length > 0
                     ? submitTriggerVnode.children
                     : "✓")),

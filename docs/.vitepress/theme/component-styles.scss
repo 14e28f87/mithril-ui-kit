@@ -5,11 +5,4 @@
  * Vite dev モードでは document.head の <style> タグから
  * 自動クローンされるため本ファイルは使われない。
  */
-/* DatePicker は CSS Modules 化済みのため、ここでは classic 側のみをフォールバック読み込みする */
-@use "../../../src/components/DatePickerClassic.scss";
-@use "../../../src/components/InputNumberClassic.scss";
-@use "../../../src/components/TabsClassic.scss";
-@use "../../../src/components/StepsClassic.scss";
-@use "../../../src/components/ToastClassic.scss";
-@use "../../../src/components/TagsInputClassic.scss";
-@use "../../../src/components/TooltipClassic.scss";
+
