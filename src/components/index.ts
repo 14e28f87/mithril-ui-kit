@@ -36,16 +36,16 @@ export type {
 } from "./Switch.js";
 
 // Select: Chakra UI 風 compound component 型セレクト
-export { SelectNew as Select, SelectNewRoot as SelectRoot } from "./SelectNew.js";
+export { Select, SelectRoot } from "./Select.js";
 export type {
-	SelectNewRootAttrs as SelectRootAttrs,
-	SelectNewVariant as SelectVariant,
-	SelectNewSize as SelectSize,
-	SelectNewValueChangeDetails as SelectValueChangeDetails,
-	SelectNewOpenChangeDetails as SelectOpenChangeDetails,
-	SelectNewItemAttrs as SelectItemAttrs,
+	SelectRootAttrs,
+	SelectVariant,
+	SelectSize,
+	SelectValueChangeDetails,
+	SelectOpenChangeDetails,
+	SelectItemAttrs,
 	SelectItem,
-} from "./SelectNew.js";
+} from "./Select.js";
 
 // TagsInput: Chakra UI Tags Input 風の compound component
 export { TagsInput, TagsInputRoot } from "./TagsInput.js";

@@ -172,7 +172,8 @@ export class PopoverRoot {
     registerGlobalHandlers(attrs) {
         if (!this.outsideClickHandler && (attrs.closeOnInteractOutside !== false)) {
             this.outsideClickHandler = (e) => {
-                if (this.rootDom && !this.rootDom.contains(e.target)) {
+                // Shadow DOM 内クリック時は e.target がリターゲティングされるため composedPath() で判定
+                if (this.rootDom && !e.composedPath().includes(this.rootDom)) {
                     this.close(attrs);
                 }
             };

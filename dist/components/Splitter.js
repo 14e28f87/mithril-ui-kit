@@ -22,6 +22,7 @@ class SplitterRoot {
         this.dragIndex = -1;
         this.dragStart = 0;
         this.containerSize = 0;
+        this.containerEl = null;
         this.panelElements = [];
         this.orientation = "horizontal";
         this.handleMouseDown = (e, triggerIndex) => {
@@ -29,9 +30,11 @@ class SplitterRoot {
             this.dragging = true;
             this.dragIndex = triggerIndex;
             this.dragStart = this.orientation === "horizontal" ? e.clientX : e.clientY;
-            const el = e.target.parentElement;
-            if (el) {
-                this.containerSize = this.orientation === "horizontal" ? el.offsetWidth : el.offsetHeight;
+            // e.target が .triggerBar span の場合でも containerEl（Root div）から正確なサイズを取得する
+            if (this.containerEl) {
+                this.containerSize = this.orientation === "horizontal"
+                    ? this.containerEl.offsetWidth
+                    : this.containerEl.offsetHeight;
             }
             document.addEventListener("mousemove", this.handleMouseMove);
             document.addEventListener("mouseup", this.handleMouseUp);
@@ -63,9 +66,12 @@ class SplitterRoot {
     get isVertical() { return false; }
     oninit(vnode) {
         this.orientation = vnode.attrs.orientation || "horizontal";
+        // 初回 view() より前に sizes を確定させることで、初回レンダリングから正しい幅が適用される
+        this.initSizes(vnode);
     }
     oncreate(vnode) {
-        this.initSizes(vnode);
+        // コンテナ要素を保持してドラッグ計算に使う
+        this.containerEl = vnode.dom;
     }
     onupdate(vnode) {
         this.orientation = vnode.attrs.orientation || "horizontal";

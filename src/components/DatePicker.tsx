@@ -387,9 +387,12 @@ export class DatePickerRoot implements m.Component<DatePickerRootAttrs> {
 	}
 
 	// --- 外部クリック ---
+	// Shadow DOM 内でクリックされた場合、document レベルのリスナーには e.target が
+	// Shadow Host にリターゲティングされるため、composedPath() で実パスを確認する。
 	private handleOutsideClick = (e: MouseEvent) => {
 		if (!this.isOpen || !this.rootEl) return;
-		if (!this.rootEl.contains(e.target as Node)) {
+		const path = e.composedPath();
+		if (!path.includes(this.rootEl)) {
 			this.setOpen(false);
 		}
 	};
@@ -927,7 +930,7 @@ export class DatePickerRoot implements m.Component<DatePickerRootAttrs> {
 									</div>
 								))}
 							</div>
-							{this.renderChildren(childChildren, attrs)}
+							{/* day ビューは上の multiMonth で描画済みのため childChildren は展開しない */}
 						</div>
 					);
 				}

@@ -273,7 +273,8 @@ export class PopoverRoot implements m.Component<PopoverRootAttrs> {
 	private registerGlobalHandlers(attrs: PopoverRootAttrs) {
 		if (!this.outsideClickHandler && (attrs.closeOnInteractOutside !== false)) {
 			this.outsideClickHandler = (e: MouseEvent) => {
-				if (this.rootDom && !this.rootDom.contains(e.target as Node)) {
+				// Shadow DOM 内クリック時は e.target がリターゲティングされるため composedPath() で判定
+				if (this.rootDom && !e.composedPath().includes(this.rootDom)) {
 					this.close(attrs);
 				}
 			};

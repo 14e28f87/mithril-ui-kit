@@ -12,7 +12,7 @@ export { FormItem } from "./FormItem.js";
 export { RadioGroup } from "./RadioGroup.js";
 export { Switch, SwitchRoot } from "./Switch.js";
 // Select: Chakra UI 風 compound component 型セレクト
-export { SelectNew as Select, SelectNewRoot as SelectRoot } from "./SelectNew.js";
+export { Select, SelectRoot } from "./Select.js";
 // TagsInput: Chakra UI Tags Input 風の compound component
 export { TagsInput, TagsInputRoot } from "./TagsInput.js";
 // Modal: Chakra UI Dialog 風の compound モーダルコンポーネント（命令的 + 宣言的 API）

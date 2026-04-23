@@ -85,6 +85,7 @@ class SplitterRoot implements m.ClassComponent<SplitterRootAttrs> {
 	private dragIndex = -1;
 	private dragStart = 0;
 	private containerSize = 0;
+	private containerEl: HTMLElement | null = null;
 	private panelElements: HTMLElement[] = [];
 
 	private get isVertical() { return false; }
@@ -92,17 +93,20 @@ class SplitterRoot implements m.ClassComponent<SplitterRootAttrs> {
 
 	oninit(vnode: m.Vnode<SplitterRootAttrs>) {
 		this.orientation = vnode.attrs.orientation || "horizontal";
+		// 初回 view() より前に sizes を確定させることで、初回レンダリングから正しい幅が適用される
+		this.initSizes(vnode);
 	}
 
 	oncreate(vnode: m.VnodeDOM<SplitterRootAttrs>) {
-		this.initSizes(vnode);
+		// コンテナ要素を保持してドラッグ計算に使う
+		this.containerEl = vnode.dom as HTMLElement;
 	}
 
 	onupdate(vnode: m.VnodeDOM<SplitterRootAttrs>) {
 		this.orientation = vnode.attrs.orientation || "horizontal";
 	}
 
-	private initSizes(vnode: m.VnodeDOM<SplitterRootAttrs>) {
+	private initSizes(vnode: m.Vnode<SplitterRootAttrs>) {
 		const children = vnode.children as any[];
 		if (!children) return;
 		const panels = (Array.isArray(children) ? children.flat() : [children])
@@ -120,9 +124,11 @@ class SplitterRoot implements m.ClassComponent<SplitterRootAttrs> {
 		this.dragIndex = triggerIndex;
 		this.dragStart = this.orientation === "horizontal" ? e.clientX : e.clientY;
 
-		const el = (e.target as HTMLElement).parentElement;
-		if (el) {
-			this.containerSize = this.orientation === "horizontal" ? el.offsetWidth : el.offsetHeight;
+		// e.target が .triggerBar span の場合でも containerEl（Root div）から正確なサイズを取得する
+		if (this.containerEl) {
+			this.containerSize = this.orientation === "horizontal"
+				? this.containerEl.offsetWidth
+				: this.containerEl.offsetHeight;
 		}
 
 		document.addEventListener("mousemove", this.handleMouseMove);

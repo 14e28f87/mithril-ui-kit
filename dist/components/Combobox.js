@@ -26,7 +26,8 @@ class ComboboxRoot {
         this.inputEl = null;
         this.containerEl = null;
         this.handleOutsideClick = (e) => {
-            if (this.containerEl && !this.containerEl.contains(e.target)) {
+            // Shadow DOM 内クリック時は e.target がリターゲティングされるため composedPath() で判定
+            if (this.containerEl && !e.composedPath().includes(this.containerEl)) {
                 this.isOpen = false;
                 m.redraw();
             }

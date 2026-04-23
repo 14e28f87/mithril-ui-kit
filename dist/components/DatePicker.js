@@ -156,10 +156,13 @@ export class DatePickerRoot {
         this.rangeHoverDate = null;
         this.rootEl = null;
         // --- 外部クリック ---
+        // Shadow DOM 内でクリックされた場合、document レベルのリスナーには e.target が
+        // Shadow Host にリターゲティングされるため、composedPath() で実パスを確認する。
         this.handleOutsideClick = (e) => {
             if (!this.isOpen || !this.rootEl)
                 return;
-            if (!this.rootEl.contains(e.target)) {
+            const path = e.composedPath();
+            if (!path.includes(this.rootEl)) {
                 this.setOpen(false);
             }
         };
@@ -617,8 +620,7 @@ export class DatePickerRoot {
                     return (m("div", { class: contentClass, "data-part": "content" },
                         m("div", { class: styles.multiMonth }, Array.from({ length: numMonths }, (_, i) => (m("div", null,
                             i === 0 ? this.renderHeader(attrs) : this.renderMonthHeader(attrs, i),
-                            this.renderDayTable(attrs, i))))),
-                        this.renderChildren(childChildren, attrs)));
+                            this.renderDayTable(attrs, i)))))));
                 }
                 return (m("div", { class: contentClass, "data-part": "content" }, this.renderChildren(childChildren, attrs)));
             }

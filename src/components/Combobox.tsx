@@ -77,7 +77,8 @@ class ComboboxRoot implements m.ClassComponent<ComboboxRootAttrs> {
 	}
 
 	private handleOutsideClick = (e: MouseEvent) => {
-		if (this.containerEl && !this.containerEl.contains(e.target as Node)) {
+		// Shadow DOM 内クリック時は e.target がリターゲティングされるため composedPath() で判定
+		if (this.containerEl && !e.composedPath().includes(this.containerEl)) {
 			this.isOpen = false;
 			m.redraw();
 		}

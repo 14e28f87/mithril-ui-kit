@@ -70,12 +70,8 @@ export class DropdownRoot {
         this.handleOutsideClick = (e) => {
             if (!this.isOpen || !this.rootEl)
                 return;
-            // composedPath() で Shadow DOM 境界を超えた実際のパスを確認する
-            const path = e.composedPath ? e.composedPath() : [];
-            const isInside = path.length > 0
-                ? path.some(node => node === this.rootEl)
-                : this.rootEl.contains(e.target);
-            if (!isInside) {
+            // Shadow DOM 内クリック時は e.target がリターゲティングされるため composedPath() で判定
+            if (!e.composedPath().includes(this.rootEl)) {
                 this.setOpen(false);
             }
         };

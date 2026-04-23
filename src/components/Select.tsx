@@ -1,7 +1,7 @@
 /** @jsx m */
 import m from "mithril";
 import classNames from "classnames";
-import styles from "./SelectNew.module.scss";
+import styles from "./Select.module.scss";
 
 /* ─── 型定義 ─── */
 
@@ -22,24 +22,24 @@ export interface SelectItem {
 }
 
 /** Select バリアント */
-export type SelectNewVariant = "outline" | "subtle" | "ghost";
+export type SelectVariant = "outline" | "subtle" | "ghost";
 
 /** Select サイズ */
-export type SelectNewSize = "xs" | "sm" | "md" | "lg";
+export type SelectSize = "xs" | "sm" | "md" | "lg";
 
 /** 値変更イベント詳細 */
-export interface SelectNewValueChangeDetails {
+export interface SelectValueChangeDetails {
 	value: string[];
 	items: SelectItem[];
 }
 
 /** 開閉変更イベント詳細 */
-export interface SelectNewOpenChangeDetails {
+export interface SelectOpenChangeDetails {
 	open: boolean;
 }
 
 /** Select.Root の属性 */
-export interface SelectNewRootAttrs {
+export interface SelectRootAttrs {
 	/** 項目リスト */
 	items: SelectItem[];
 	/** 選択値（単一選択: string[], 複数選択: string[]） */
@@ -47,7 +47,7 @@ export interface SelectNewRootAttrs {
 	/** デフォルト値 */
 	defaultValue?: string[];
 	/** 値変更コールバック */
-	onValueChange?: (details: SelectNewValueChangeDetails) => void;
+	onValueChange?: (details: SelectValueChangeDetails) => void;
 	/** 複数選択 */
 	multiple?: boolean;
 	/** 無効状態 */
@@ -59,9 +59,9 @@ export interface SelectNewRootAttrs {
 	/** 不正状態 */
 	invalid?: boolean;
 	/** バリアント */
-	variant?: SelectNewVariant;
+	variant?: SelectVariant;
 	/** サイズ */
-	size?: SelectNewSize;
+	size?: SelectSize;
 	/** プレースホルダ */
 	placeholder?: string;
 	/** アイテム選択後に閉じるか（単一選択のデフォルト: true） */
@@ -73,7 +73,7 @@ export interface SelectNewRootAttrs {
 	/** 開閉の制御 */
 	open?: boolean;
 	/** 開閉変更コールバック */
-	onOpenChange?: (details: SelectNewOpenChangeDetails) => void;
+	onOpenChange?: (details: SelectOpenChangeDetails) => void;
 	/** name 属性（hidden select 用） */
 	name?: string;
 	/** 追加クラス */
@@ -115,8 +115,8 @@ interface SelectContext {
 	placeholder: string;
 	isOpen: boolean;
 	highlightIndex: number;
-	variant: SelectNewVariant;
-	size: SelectNewSize;
+	variant: SelectVariant;
+	size: SelectSize;
 	toggle: () => void;
 	selectItem: (val: string) => void;
 	clearAll: () => void;
@@ -182,7 +182,7 @@ class ContentMarker {
 }
 
 /** Select.Item の属性 */
-export interface SelectNewItemAttrs {
+export interface SelectItemAttrs {
 	/** 項目の値 */
 	item: string;
 	/** 無効状態 */
@@ -209,36 +209,7 @@ class ItemGroupLabelMarker {
 
 /* ─── Root コンポーネント ─── */
 
-/**
- * Select Root コンポーネント — Chakra UI 風 compound component 型セレクト
- *
- * @example
- * ```tsx
- * const items = [
- *   { value: "react", label: "React" },
- *   { value: "vue", label: "Vue" },
- *   { value: "angular", label: "Angular" },
- * ];
- * <Select.Root items={items} value={["react"]} onValueChange={(d) => console.log(d.value)}>
- *   <Select.Label>フレームワーク</Select.Label>
- *   <Select.Control>
- *     <Select.Trigger>
- *       <Select.ValueText placeholder="選択してください" />
- *     </Select.Trigger>
- *     <Select.IndicatorGroup>
- *       <Select.ClearTrigger />
- *       <Select.Indicator />
- *     </Select.IndicatorGroup>
- *   </Select.Control>
- *   <Select.Positioner>
- *     <Select.Content>
- *       {items.map(item => <Select.Item key={item.value} item={item.value}>{item.label}</Select.Item>)}
- *     </Select.Content>
- *   </Select.Positioner>
- * </Select.Root>
- * ```
- */
-class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
+class SelectRoot implements m.ClassComponent<SelectRootAttrs> {
 	private internalOpen = false;
 	private internalValue: string[] = [];
 	private highlightIndex = -1;
@@ -247,8 +218,8 @@ class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
 
 	constructor() {
 		this.handleDocClick = (e: MouseEvent) => {
-			const t = e.target as Node | null;
-			if (this.containerEl && t && this.containerEl.contains(t)) return;
+			// Shadow DOM 内クリック時は e.target がリターゲティングされるため composedPath() で判定
+			if (this.containerEl && e.composedPath().includes(this.containerEl)) return;
 			if (this.internalOpen) {
 				this.internalOpen = false;
 				m.redraw();
@@ -256,11 +227,11 @@ class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
 		};
 	}
 
-	oninit(vnode: m.Vnode<SelectNewRootAttrs>) {
+	oninit(vnode: m.Vnode<SelectRootAttrs>) {
 		this.internalValue = vnode.attrs.value ?? vnode.attrs.defaultValue ?? [];
 	}
 
-	onbeforeupdate(vnode: m.Vnode<SelectNewRootAttrs>, old: m.VnodeDOM<SelectNewRootAttrs>) {
+	onbeforeupdate(vnode: m.Vnode<SelectRootAttrs>, old: m.VnodeDOM<SelectRootAttrs>) {
 		if (vnode.attrs.value !== undefined && vnode.attrs.value !== old.attrs.value) {
 			this.internalValue = vnode.attrs.value;
 		}
@@ -270,22 +241,22 @@ class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
 		return false; // open は常に内部管理（外部制御は onOpenChange で通知）
 	}
 
-	private getOpen(attrs: SelectNewRootAttrs): boolean {
+	private getOpen(attrs: SelectRootAttrs): boolean {
 		return attrs.open !== undefined ? attrs.open : this.internalOpen;
 	}
 
-	private setOpen(attrs: SelectNewRootAttrs, open: boolean) {
+	private setOpen(attrs: SelectRootAttrs, open: boolean) {
 		this.internalOpen = open;
 		this.highlightIndex = open ? 0 : -1;
 		attrs.onOpenChange?.({ open });
 	}
 
-	private toggle(attrs: SelectNewRootAttrs) {
+	private toggle(attrs: SelectRootAttrs) {
 		if (attrs.disabled || attrs.readOnly) return;
 		this.setOpen(attrs, !this.getOpen(attrs));
 	}
 
-	private selectItem(attrs: SelectNewRootAttrs, val: string) {
+	private selectItem(attrs: SelectRootAttrs, val: string) {
 		if (attrs.disabled || attrs.readOnly) return;
 		const item = attrs.items.find(i => i.value === val);
 		if (item?.disabled) return;
@@ -319,7 +290,7 @@ class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
 		attrs.onValueChange?.({ value: newVal, items: selectedItems });
 	}
 
-	private clearAll(attrs: SelectNewRootAttrs) {
+	private clearAll(attrs: SelectRootAttrs) {
 		if (attrs.disabled || attrs.readOnly) return;
 		const newVal: string[] = [];
 		if (attrs.value === undefined) {
@@ -328,7 +299,7 @@ class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
 		attrs.onValueChange?.({ value: newVal, items: [] });
 	}
 
-	private removeTag(attrs: SelectNewRootAttrs, val: string) {
+	private removeTag(attrs: SelectRootAttrs, val: string) {
 		if (attrs.disabled || attrs.readOnly) return;
 		const newVal = this.internalValue.filter(v => v !== val);
 		if (attrs.value === undefined) {
@@ -338,7 +309,7 @@ class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
 		attrs.onValueChange?.({ value: newVal, items: selectedItems });
 	}
 
-	private onKeyDown(attrs: SelectNewRootAttrs, e: KeyboardEvent) {
+	private onKeyDown(attrs: SelectRootAttrs, e: KeyboardEvent) {
 		const isOpen = this.getOpen(attrs);
 		if (!isOpen) {
 			if (e.key === "ArrowDown" || e.key === "ArrowUp" || e.key === "Enter" || e.key === " ") {
@@ -402,13 +373,13 @@ class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
 		}
 	}
 
-	private getVisibleItems(attrs: SelectNewRootAttrs): SelectItem[] {
+	private getVisibleItems(attrs: SelectRootAttrs): SelectItem[] {
 		return attrs.items;
 	}
 
 	/* ─── ツリー描画 ─── */
 
-	view(vnode: m.Vnode<SelectNewRootAttrs>) {
+	view(vnode: m.Vnode<SelectRootAttrs>) {
 		const attrs = vnode.attrs;
 		const {
 			items,
@@ -482,7 +453,7 @@ class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
 		);
 	}
 
-	private renderChildren(children: any, ctx: SelectContext, attrs: SelectNewRootAttrs): m.Children {
+	private renderChildren(children: any, ctx: SelectContext, attrs: SelectRootAttrs): m.Children {
 		if (!children) return null;
 		const arr = Array.isArray(children) ? children.flat(Infinity) : [children];
 		const result: m.Children[] = [];
@@ -521,7 +492,7 @@ class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
 		return result;
 	}
 
-	private renderHiddenSelect(_cv: m.Vnode<any>, ctx: SelectContext, attrs: SelectNewRootAttrs): m.Children {
+	private renderHiddenSelect(_cv: m.Vnode<any>, ctx: SelectContext, attrs: SelectRootAttrs): m.Children {
 		return (
 			<select
 				name={attrs.name}
@@ -549,7 +520,7 @@ class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
 		);
 	}
 
-	private renderControl(cv: m.Vnode<any>, ctx: SelectContext, attrs: SelectNewRootAttrs): m.Children {
+	private renderControl(cv: m.Vnode<any>, ctx: SelectContext, attrs: SelectRootAttrs): m.Children {
 		const controlChildren = cv.children as any;
 		const rendered = this.renderControlChildren(controlChildren, ctx, attrs);
 		return (
@@ -562,7 +533,7 @@ class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
 		);
 	}
 
-	private renderControlChildren(children: any, ctx: SelectContext, attrs: SelectNewRootAttrs): m.Children {
+	private renderControlChildren(children: any, ctx: SelectContext, attrs: SelectRootAttrs): m.Children {
 		if (!children) return null;
 		const arr = Array.isArray(children) ? children.flat(Infinity) : [children];
 		const result: m.Children[] = [];
@@ -595,7 +566,7 @@ class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
 		return result;
 	}
 
-	private renderTrigger(cv: m.Vnode<any>, ctx: SelectContext, attrs: SelectNewRootAttrs): m.Children {
+	private renderTrigger(cv: m.Vnode<any>, ctx: SelectContext, attrs: SelectRootAttrs): m.Children {
 		const triggerChildren = cv.children as any;
 		const rendered = this.renderTriggerChildren(triggerChildren, ctx);
 
@@ -696,7 +667,7 @@ class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
 		);
 	}
 
-	private renderIndicatorGroup(cv: m.Vnode<any>, ctx: SelectContext, attrs: SelectNewRootAttrs): m.Children {
+	private renderIndicatorGroup(cv: m.Vnode<any>, ctx: SelectContext, attrs: SelectRootAttrs): m.Children {
 		const igChildren = cv.children as any;
 		const rendered = this.renderIndicatorGroupChildren(igChildren, ctx, attrs);
 		return (
@@ -738,7 +709,7 @@ class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
 		);
 	}
 
-	private renderIndicatorGroupChildren(children: any, ctx: SelectContext, _attrs: SelectNewRootAttrs): m.Children {
+	private renderIndicatorGroupChildren(children: any, ctx: SelectContext, _attrs: SelectRootAttrs): m.Children {
 		if (!children) return null;
 		const arr = Array.isArray(children) ? children.flat(Infinity) : [children];
 		const result: m.Children[] = [];
@@ -801,7 +772,7 @@ class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
 		);
 	}
 
-	private renderPositioner(cv: m.Vnode<any>, ctx: SelectContext, attrs: SelectNewRootAttrs): m.Children {
+	private renderPositioner(cv: m.Vnode<any>, ctx: SelectContext, attrs: SelectRootAttrs): m.Children {
 		if (!ctx.isOpen) return null;
 
 		const pos = attrs.positioning ?? "bottom";
@@ -822,7 +793,7 @@ class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
 		);
 	}
 
-	private renderPositionerChildren(children: any, ctx: SelectContext, attrs: SelectNewRootAttrs): m.Children {
+	private renderPositionerChildren(children: any, ctx: SelectContext, attrs: SelectRootAttrs): m.Children {
 		if (!children) return null;
 		const arr = Array.isArray(children) ? children.flat(Infinity) : [children];
 		const result: m.Children[] = [];
@@ -844,7 +815,7 @@ class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
 		return result;
 	}
 
-	private renderContent(cv: m.Vnode<any>, ctx: SelectContext, attrs: SelectNewRootAttrs): m.Children {
+	private renderContent(cv: m.Vnode<any>, ctx: SelectContext, attrs: SelectRootAttrs): m.Children {
 		const contentChildren = cv.children as any;
 		const rendered = this.renderContentChildren(contentChildren, ctx, attrs);
 
@@ -860,7 +831,7 @@ class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
 		);
 	}
 
-	private renderContentChildren(children: any, ctx: SelectContext, attrs: SelectNewRootAttrs): m.Children {
+	private renderContentChildren(children: any, ctx: SelectContext, attrs: SelectRootAttrs): m.Children {
 		if (!children) return null;
 		const arr = Array.isArray(children) ? children.flat(Infinity) : [children];
 		const result: m.Children[] = [];
@@ -996,27 +967,8 @@ function filterDomAttrs(attrs: Record<string, any>): Record<string, any> {
 
 /* ─── 名前空間エクスポート ─── */
 
-/**
- * Select compound component 名前空間
- *
- * Chakra UI 風のコンポジション API で利用する:
- * - `Select.Root` — ルートコンテナ
- * - `Select.HiddenSelect` — ネイティブ hidden select（フォーム送信用）
- * - `Select.Label` — ラベル
- * - `Select.Control` — コントロール（Trigger + IndicatorGroup のラッパ）
- * - `Select.Trigger` — 開閉トリガー
- * - `Select.ValueText` — 選択値テキスト
- * - `Select.IndicatorGroup` — インジケータグループ
- * - `Select.Indicator` — 開閉インジケータ矢印
- * - `Select.ClearTrigger` — クリアボタン
- * - `Select.Positioner` — ドロップダウン配置
- * - `Select.Content` — ドロップダウンコンテンツ
- * - `Select.Item` — 個別選択肢
- * - `Select.ItemGroup` — 選択肢グループ
- * - `Select.ItemGroupLabel` — グループラベル
- */
-export const SelectNew = {
-	Root: SelectNewRoot,
+export const Select = {
+	Root: SelectRoot,
 	HiddenSelect: HiddenSelectMarker,
 	Label: LabelMarker,
 	Control: ControlMarker,
@@ -1032,4 +984,4 @@ export const SelectNew = {
 	ItemGroupLabel: ItemGroupLabelMarker,
 } as const;
 
-export { SelectNewRoot };
+export { SelectRoot };

@@ -192,12 +192,8 @@ export class DropdownRoot implements m.Component<DropdownRootAttrs> {
 
 	private handleOutsideClick = (e: MouseEvent) => {
 		if (!this.isOpen || !this.rootEl) return;
-		// composedPath() で Shadow DOM 境界を超えた実際のパスを確認する
-		const path = e.composedPath ? e.composedPath() : [];
-		const isInside = path.length > 0
-			? path.some(node => node === this.rootEl)
-			: this.rootEl.contains(e.target as Node);
-		if (!isInside) {
+		// Shadow DOM 内クリック時は e.target がリターゲティングされるため composedPath() で判定
+		if (!e.composedPath().includes(this.rootEl)) {
 			this.setOpen(false);
 		}
 	};

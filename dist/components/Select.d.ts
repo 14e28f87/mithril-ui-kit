@@ -16,20 +16,20 @@ export interface SelectItem {
     group?: string;
 }
 /** Select バリアント */
-export type SelectNewVariant = "outline" | "subtle" | "ghost";
+export type SelectVariant = "outline" | "subtle" | "ghost";
 /** Select サイズ */
-export type SelectNewSize = "xs" | "sm" | "md" | "lg";
+export type SelectSize = "xs" | "sm" | "md" | "lg";
 /** 値変更イベント詳細 */
-export interface SelectNewValueChangeDetails {
+export interface SelectValueChangeDetails {
     value: string[];
     items: SelectItem[];
 }
 /** 開閉変更イベント詳細 */
-export interface SelectNewOpenChangeDetails {
+export interface SelectOpenChangeDetails {
     open: boolean;
 }
 /** Select.Root の属性 */
-export interface SelectNewRootAttrs {
+export interface SelectRootAttrs {
     /** 項目リスト */
     items: SelectItem[];
     /** 選択値（単一選択: string[], 複数選択: string[]） */
@@ -37,7 +37,7 @@ export interface SelectNewRootAttrs {
     /** デフォルト値 */
     defaultValue?: string[];
     /** 値変更コールバック */
-    onValueChange?: (details: SelectNewValueChangeDetails) => void;
+    onValueChange?: (details: SelectValueChangeDetails) => void;
     /** 複数選択 */
     multiple?: boolean;
     /** 無効状態 */
@@ -49,9 +49,9 @@ export interface SelectNewRootAttrs {
     /** 不正状態 */
     invalid?: boolean;
     /** バリアント */
-    variant?: SelectNewVariant;
+    variant?: SelectVariant;
     /** サイズ */
-    size?: SelectNewSize;
+    size?: SelectSize;
     /** プレースホルダ */
     placeholder?: string;
     /** アイテム選択後に閉じるか（単一選択のデフォルト: true） */
@@ -63,7 +63,7 @@ export interface SelectNewRootAttrs {
     /** 開閉の制御 */
     open?: boolean;
     /** 開閉変更コールバック */
-    onOpenChange?: (details: SelectNewOpenChangeDetails) => void;
+    onOpenChange?: (details: SelectOpenChangeDetails) => void;
     /** name 属性（hidden select 用） */
     name?: string;
     /** 追加クラス */
@@ -114,7 +114,7 @@ declare class ContentMarker {
     view(): null;
 }
 /** Select.Item の属性 */
-export interface SelectNewItemAttrs {
+export interface SelectItemAttrs {
     /** 項目の値 */
     item: string;
     /** 無効状態 */
@@ -135,44 +135,15 @@ declare class ItemGroupLabelMarker {
     static __selRole: SelectRole;
     view(): null;
 }
-/**
- * Select Root コンポーネント — Chakra UI 風 compound component 型セレクト
- *
- * @example
- * ```tsx
- * const items = [
- *   { value: "react", label: "React" },
- *   { value: "vue", label: "Vue" },
- *   { value: "angular", label: "Angular" },
- * ];
- * <Select.Root items={items} value={["react"]} onValueChange={(d) => console.log(d.value)}>
- *   <Select.Label>フレームワーク</Select.Label>
- *   <Select.Control>
- *     <Select.Trigger>
- *       <Select.ValueText placeholder="選択してください" />
- *     </Select.Trigger>
- *     <Select.IndicatorGroup>
- *       <Select.ClearTrigger />
- *       <Select.Indicator />
- *     </Select.IndicatorGroup>
- *   </Select.Control>
- *   <Select.Positioner>
- *     <Select.Content>
- *       {items.map(item => <Select.Item key={item.value} item={item.value}>{item.label}</Select.Item>)}
- *     </Select.Content>
- *   </Select.Positioner>
- * </Select.Root>
- * ```
- */
-declare class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
+declare class SelectRoot implements m.ClassComponent<SelectRootAttrs> {
     private internalOpen;
     private internalValue;
     private highlightIndex;
     private containerEl?;
     private handleDocClick;
     constructor();
-    oninit(vnode: m.Vnode<SelectNewRootAttrs>): void;
-    onbeforeupdate(vnode: m.Vnode<SelectNewRootAttrs>, old: m.VnodeDOM<SelectNewRootAttrs>): void;
+    oninit(vnode: m.Vnode<SelectRootAttrs>): void;
+    onbeforeupdate(vnode: m.Vnode<SelectRootAttrs>, old: m.VnodeDOM<SelectRootAttrs>): void;
     private get isControlled();
     private getOpen;
     private setOpen;
@@ -183,7 +154,7 @@ declare class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
     private onKeyDown;
     private skipDisabled;
     private getVisibleItems;
-    view(vnode: m.Vnode<SelectNewRootAttrs>): JSX.Element;
+    view(vnode: m.Vnode<SelectRootAttrs>): JSX.Element;
     private renderChildren;
     private renderHiddenSelect;
     private renderLabel;
@@ -205,27 +176,8 @@ declare class SelectNewRoot implements m.ClassComponent<SelectNewRootAttrs> {
     private renderItemGroup;
     private renderItemGroupChildren;
 }
-/**
- * Select compound component 名前空間
- *
- * Chakra UI 風のコンポジション API で利用する:
- * - `Select.Root` — ルートコンテナ
- * - `Select.HiddenSelect` — ネイティブ hidden select（フォーム送信用）
- * - `Select.Label` — ラベル
- * - `Select.Control` — コントロール（Trigger + IndicatorGroup のラッパ）
- * - `Select.Trigger` — 開閉トリガー
- * - `Select.ValueText` — 選択値テキスト
- * - `Select.IndicatorGroup` — インジケータグループ
- * - `Select.Indicator` — 開閉インジケータ矢印
- * - `Select.ClearTrigger` — クリアボタン
- * - `Select.Positioner` — ドロップダウン配置
- * - `Select.Content` — ドロップダウンコンテンツ
- * - `Select.Item` — 個別選択肢
- * - `Select.ItemGroup` — 選択肢グループ
- * - `Select.ItemGroupLabel` — グループラベル
- */
-export declare const SelectNew: {
-    readonly Root: typeof SelectNewRoot;
+export declare const Select: {
+    readonly Root: typeof SelectRoot;
     readonly HiddenSelect: typeof HiddenSelectMarker;
     readonly Label: typeof LabelMarker;
     readonly Control: typeof ControlMarker;
@@ -240,5 +192,5 @@ export declare const SelectNew: {
     readonly ItemGroup: typeof ItemGroupMarker;
     readonly ItemGroupLabel: typeof ItemGroupLabelMarker;
 };
-export { SelectNewRoot };
-//# sourceMappingURL=SelectNew.d.ts.map
+export { SelectRoot };
+//# sourceMappingURL=Select.d.ts.map

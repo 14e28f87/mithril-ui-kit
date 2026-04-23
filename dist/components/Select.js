@@ -1,7 +1,7 @@
 /** @jsx m */
 import m from "mithril";
 import classNames from "classnames";
-import styles from "./SelectNew.module.scss";
+import styles from "./Select.module.scss";
 /* ─── ユーティリティ ─── */
 function capitalize(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
@@ -62,43 +62,14 @@ class ItemGroupLabelMarker {
 }
 ItemGroupLabelMarker.__selRole = "item-group-label";
 /* ─── Root コンポーネント ─── */
-/**
- * Select Root コンポーネント — Chakra UI 風 compound component 型セレクト
- *
- * @example
- * ```tsx
- * const items = [
- *   { value: "react", label: "React" },
- *   { value: "vue", label: "Vue" },
- *   { value: "angular", label: "Angular" },
- * ];
- * <Select.Root items={items} value={["react"]} onValueChange={(d) => console.log(d.value)}>
- *   <Select.Label>フレームワーク</Select.Label>
- *   <Select.Control>
- *     <Select.Trigger>
- *       <Select.ValueText placeholder="選択してください" />
- *     </Select.Trigger>
- *     <Select.IndicatorGroup>
- *       <Select.ClearTrigger />
- *       <Select.Indicator />
- *     </Select.IndicatorGroup>
- *   </Select.Control>
- *   <Select.Positioner>
- *     <Select.Content>
- *       {items.map(item => <Select.Item key={item.value} item={item.value}>{item.label}</Select.Item>)}
- *     </Select.Content>
- *   </Select.Positioner>
- * </Select.Root>
- * ```
- */
-class SelectNewRoot {
+class SelectRoot {
     constructor() {
         this.internalOpen = false;
         this.internalValue = [];
         this.highlightIndex = -1;
         this.handleDocClick = (e) => {
-            const t = e.target;
-            if (this.containerEl && t && this.containerEl.contains(t))
+            // Shadow DOM 内クリック時は e.target がリターゲティングされるため composedPath() で判定
+            if (this.containerEl && e.composedPath().includes(this.containerEl))
                 return;
             if (this.internalOpen) {
                 this.internalOpen = false;
@@ -623,27 +594,8 @@ function filterDomAttrs(attrs) {
     return out;
 }
 /* ─── 名前空間エクスポート ─── */
-/**
- * Select compound component 名前空間
- *
- * Chakra UI 風のコンポジション API で利用する:
- * - `Select.Root` — ルートコンテナ
- * - `Select.HiddenSelect` — ネイティブ hidden select（フォーム送信用）
- * - `Select.Label` — ラベル
- * - `Select.Control` — コントロール（Trigger + IndicatorGroup のラッパ）
- * - `Select.Trigger` — 開閉トリガー
- * - `Select.ValueText` — 選択値テキスト
- * - `Select.IndicatorGroup` — インジケータグループ
- * - `Select.Indicator` — 開閉インジケータ矢印
- * - `Select.ClearTrigger` — クリアボタン
- * - `Select.Positioner` — ドロップダウン配置
- * - `Select.Content` — ドロップダウンコンテンツ
- * - `Select.Item` — 個別選択肢
- * - `Select.ItemGroup` — 選択肢グループ
- * - `Select.ItemGroupLabel` — グループラベル
- */
-export const SelectNew = {
-    Root: SelectNewRoot,
+export const Select = {
+    Root: SelectRoot,
     HiddenSelect: HiddenSelectMarker,
     Label: LabelMarker,
     Control: ControlMarker,
@@ -658,4 +610,4 @@ export const SelectNew = {
     ItemGroup: ItemGroupMarker,
     ItemGroupLabel: ItemGroupLabelMarker,
 };
-export { SelectNewRoot };
+export { SelectRoot };

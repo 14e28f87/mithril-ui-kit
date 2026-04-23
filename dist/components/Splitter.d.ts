@@ -78,6 +78,7 @@ declare class SplitterRoot implements m.ClassComponent<SplitterRootAttrs> {
     private dragIndex;
     private dragStart;
     private containerSize;
+    private containerEl;
     private panelElements;
     private get isVertical();
     private orientation;
