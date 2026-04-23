@@ -1,8 +1,0 @@
-jj (jujutsu): Shadow DOM の外部クリック判定修正と DatePicker/Select 等の不具合修正
-
-- Shadow DOM によるイベントリターゲティング問題を修正: document レベルの外部クリック判定で `e.target` の代わりに `e.composedPath().includes(el)` を使用するよう変更。
-- 修正対象: `DatePicker`, `Combobox`, `Dropdown`, `ColorPicker`, `Popover`, `Select`。
-- DatePicker: `.mithril-demo` の overflow によるカレンダーポップアップの切り取りを docs のデモスタイル修正（`.mithril-demo { overflow: visible }`）で対応。range 選択時の `multiMonth` 二重レンダリングを解消。
-- Select: `SelectNew` を削除して `Select.tsx` に統一。`Select.module.scss` を追加、`src/components/index.ts` のエクスポートを更新。
-- ビルド確認: `npm run build` 実行済み（build complete）。
-- 注意: docs のブラウザ上での最終動作確認（`npm run docs:dev`）を推奨。
