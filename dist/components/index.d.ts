@@ -7,8 +7,6 @@
  */
 export { Input } from "./Input.js";
 export type { InputAttrs } from "./Input.js";
-export { InlineEdit } from "./InlineEdit.js";
-export type { InlineEditAttrs, InlineEditControlRef } from "./InlineEdit.js";
 export { Form } from "./Form.js";
 export type { FormAttrs, FormState } from "./Form.js";
 export { FormItem } from "./FormItem.js";

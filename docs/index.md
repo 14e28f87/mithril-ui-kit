@@ -70,7 +70,6 @@ features:
 - [PinInput](./PinInput.md)
 - [FileUpload](./FileUpload.md)
 - [Editable](./Editable.md)
-- [InlineEdit](./InlineEdit.md)
 - [SegmentedControl](./SegmentedControl.md)
 
 ### Feedback and Overlay

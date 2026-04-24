@@ -6,7 +6,6 @@
  * レガシー / 実験的なコンポーネントはこの公開 export から分離して管理する。
  */
 export { Input } from "./Input.js";
-export { InlineEdit } from "./InlineEdit.js";
 export { Form } from "./Form.js";
 export { FormItem } from "./FormItem.js";
 export { RadioGroup } from "./RadioGroup.js";

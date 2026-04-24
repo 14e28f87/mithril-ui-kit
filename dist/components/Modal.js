@@ -7,11 +7,27 @@ let _modalCtx = null;
 // ===========================
 // ユーティリティ
 // ===========================
+/**
+ * @function capitalize
+ * @description 文字列の先頭を大文字に変換する。
+ * CSS Modules のクラス名（例: `sizeMd`, `sizeXl`）を動的に組み立てる際に使用する。
+ *
+ * @param {string} s - 変換する文字列
+ * @returns {string} 先頭を大文字に変換した文字列
+ */
 function capitalize(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
 }
 /**
- * asChild: 子要素の onclick をラップして追加のハンドラを呼ぶ
+ * @function wrapChildOnclick
+ * @description
+ * `asChild` 使用時に子要素の既存 `onclick` を保持したまま、追加のハンドラを割り込む。
+ * 元の `onclick` があれば先に実行され、その後 `handler`（モーダルを開く / 閉じる）を呼び出す。
+ * Mithril の仮想 DOM vnode（`"tag"` プロパティを持つオブジェクト）以外はそのまま返す。
+ *
+ * @param {m.Children} children - ラップ対象の子要素
+ * @param {() => void} handler - 追加で実行するハンドラ（例: モーダルを開く / 閉じる）
+ * @returns {m.Children} `onclick` が拡張された子要素
  */
 function wrapChildOnclick(children, handler) {
     if (!children)
@@ -38,7 +54,19 @@ function wrapChildOnclick(children, handler) {
 // セルフスタイリング マーカーコンポーネント
 // ===========================
 /**
- * Modal.Trigger — モーダルを開くトリガー（Root 内で使用）
+ * @class ModalTriggerMarker
+ * @description
+ * `Modal.Trigger` — モーダルを開くトリガーコンポーネント。`Modal.Root` の直下に配置して使う。
+ *
+ * `asChild` を指定すると子要素をそのままトリガーとして扱い、`onclick` にモーダルを開く処理を
+ * ラップする。省略した場合は `<button>` で自動ラップされる。
+ *
+ * @example
+ * // asChild なし（デフォルト: `<button>` でラップされる）
+ * <Modal.Trigger>開く</Modal.Trigger>
+ *
+ * // asChild あり（子要素そのままをトリガーに）
+ * <Modal.Trigger asChild><a href="#">開く</a></Modal.Trigger>
  */
 export class ModalTriggerMarker {
     view(vnode) {
@@ -47,7 +75,19 @@ export class ModalTriggerMarker {
 }
 ModalTriggerMarker.__modalRole = "trigger";
 /**
- * Modal.Backdrop — 半透明バックドロップ。コンテキストからアニメーション状態を取得。
+ * @class ModalBackdropMarker
+ * @description
+ * `Modal.Backdrop` — モーダルの背後に表示される半透明のオーバーレイ。
+ *
+ * モジュールレベルの `_modalCtx` からアニメーション状態（`entering` / `exiting`）を読み取り、
+ * CSS クラスを切り替えることでフェードイン・フェードアウトを実現する。
+ * `motionPreset === "none"` の場合はアニメーションクラスを付与しない。
+ *
+ * @example
+ * <Modal.Root open={open}>
+ *   <Modal.Backdrop />
+ *   <Modal.Positioner>...</Modal.Positioner>
+ * </Modal.Root>
  */
 export class ModalBackdropMarker {
     view(vnode) {
@@ -60,8 +100,19 @@ export class ModalBackdropMarker {
 }
 ModalBackdropMarker.__modalRole = "backdrop";
 /**
- * Modal.Positioner — ポジショニングコンテナ。
- * コンテキストからサイズ・配置・スクロール動作を読み取り、外側クリックで閉じる。
+ * @class ModalPositionerMarker
+ * @description
+ * `Modal.Positioner` — モーダルコンテンツを画面内に配置するコンテナ。
+ *
+ * `_modalCtx` からサイズ（`size`）・配置（`placement`）・スクロール動作（`scrollBehavior`）を読み取り、
+ * 対応する CSS クラスを付与する。`closeOnInteractOutside` が有効な場合、
+ * 自身（背景部分）のクリックで `ctx.close()` を呼びモーダルを閉じる。
+ * `Modal.Content` 内で `e.stopPropagation()` を設定しているため、コンテンツ内のクリックでは閃じない。
+ *
+ * @example
+ * <Modal.Positioner>
+ *   <Modal.Content>...</Modal.Content>
+ * </Modal.Positioner>
  */
 export class ModalPositionerMarker {
     view(vnode) {
@@ -82,8 +133,21 @@ export class ModalPositionerMarker {
 }
 ModalPositionerMarker.__modalRole = "positioner";
 /**
- * Modal.Content — モーダル本体のカード枠。コンテキストからアニメーション状態を取得。
- * onclick stopPropagation によりポジショナーの閉じる動作を阻止する。
+ * @class ModalContentMarker
+ * @description
+ * `Modal.Content` — モーダル本体を描画するカード框コンポーネント。
+ *
+ * `_modalCtx` から `entering` / `exiting` を読み取り、スケールアニメーションの CSS クラスを付与する。
+ * `onclick` に `e.stopPropagation()` を設定し、コンテンツ内クリックが `Modal.Positioner` の
+ * 「外側クリックで閃じる」処理に伝播するのを防ぐ。
+ * `role="dialog"` と `aria-modal="true"` を付与してアクセシビリティに対応する。
+ *
+ * @example
+ * <Modal.Content>
+ *   <Modal.Header><Modal.Title>タイトル</Modal.Title></Modal.Header>
+ *   <Modal.Body>本文</Modal.Body>
+ *   <Modal.Footer>...</Modal.Footer>
+ * </Modal.Content>
  */
 export class ModalContentMarker {
     view(vnode) {
@@ -96,7 +160,10 @@ export class ModalContentMarker {
 }
 ModalContentMarker.__modalRole = "content";
 /**
- * Modal.Header — ヘッダー領域
+ * @class ModalHeaderMarker
+ * @description
+ * `Modal.Header` — モーダルのヘッダー領域。タイトル（`Modal.Title`）や
+ * 閃じるボタン（`Modal.CloseTrigger`）を配置するエリア。
  */
 export class ModalHeaderMarker {
     view(vnode) {
@@ -105,7 +172,9 @@ export class ModalHeaderMarker {
 }
 ModalHeaderMarker.__modalRole = "header";
 /**
- * Modal.Title — タイトル（h2）
+ * @class ModalTitleMarker
+ * @description
+ * `Modal.Title` — モーダルのタイトル。セマンティクに `<h2>` としてレンダリングされる。
  */
 export class ModalTitleMarker {
     view(vnode) {
@@ -114,7 +183,10 @@ export class ModalTitleMarker {
 }
 ModalTitleMarker.__modalRole = "title";
 /**
- * Modal.Description — 説明文（p）
+ * @class ModalDescriptionMarker
+ * @description
+ * `Modal.Description` — モーダルの補足説明文。`<p>` タグでレンダリングされる。
+ * モーダルの目的や操作の概要をウーザーに传える際に使用する。
  */
 export class ModalDescriptionMarker {
     view(vnode) {
@@ -123,7 +195,10 @@ export class ModalDescriptionMarker {
 }
 ModalDescriptionMarker.__modalRole = "description";
 /**
- * Modal.Body — ボディ領域
+ * @class ModalBodyMarker
+ * @description
+ * `Modal.Body` — モーダルのメインコンテンツ領域。
+ * `scrollBehavior === "inside"` の場合、この領域のみスクロールする。
  */
 export class ModalBodyMarker {
     view(vnode) {
@@ -132,7 +207,9 @@ export class ModalBodyMarker {
 }
 ModalBodyMarker.__modalRole = "body";
 /**
- * Modal.Footer — フッター領域
+ * @class ModalFooterMarker
+ * @description
+ * `Modal.Footer` — モーダルのフッター領域。アクションボタン（OK ・キャンセル等）を配置する。
  */
 export class ModalFooterMarker {
     view(vnode) {
@@ -141,7 +218,20 @@ export class ModalFooterMarker {
 }
 ModalFooterMarker.__modalRole = "footer";
 /**
- * Modal.CloseTrigger — 閉じる×ボタン。コンテキストから close ハンドラを自動取得。
+ * @class ModalCloseTriggerMarker
+ * @description
+ * `Modal.CloseTrigger` — モーダルを閃じるためのボタンコンポーネント。
+ *
+ * `_modalCtx` から `close` ハンドラを自動取得するため、`Modal.Root` でも `Modal.show()` でも
+ * 明示的なコールバックの渡しこみは不要。
+ * `asChild` を指定すると子要素の `onclick` にクローズ処理をラップする。
+ *
+ * @example
+ * // デフォルト（×ボタン）
+ * <Modal.CloseTrigger />
+ *
+ * // asChild（カスタムボタン）
+ * <Modal.CloseTrigger asChild><button>閃じる</button></Modal.CloseTrigger>
  */
 export class ModalCloseTriggerMarker {
     view(vnode) {
@@ -155,7 +245,15 @@ export class ModalCloseTriggerMarker {
 }
 ModalCloseTriggerMarker.__modalRole = "closeTrigger";
 /**
- * Modal.ActionTrigger — アクション実行＋閉じるトリガー
+ * @class ModalActionTriggerMarker
+ * @description
+ * `Modal.ActionTrigger` — アクションを実行しつつモーダルを閃じるトリガーボタン。
+ *
+ * `CloseTrigger` との違いは、子要素（ラベルなど）をそのまま `<button>` 内に描画できる点。
+ * `asChild` を指定すると子要素の `onclick` にクローズ処理をラップする。
+ *
+ * @example
+ * <Modal.ActionTrigger>送信して閃じる</Modal.ActionTrigger>
  */
 export class ModalActionTriggerMarker {
     view(vnode) {
@@ -172,19 +270,30 @@ ModalActionTriggerMarker.__modalRole = "actionTrigger";
 // Portal コンポーネント
 // ===========================
 /**
- * Portal — 子要素を document.body に転送するコンポーネント。
+ * @class Portal
+ * @description
+ * 子要素を `document.body` に転送する汎用コンポーネント。
+ *
+ * Mithril の仮想 DOM ツリーから切り離して `body` 直下に独立したポータルルートを作成し、
+ * `m.render()` で子要素を直接描画する。z-index や `overflow: hidden` の影響を
+ * 受けたくない要素（モーダル・トーストなど）に使用する。
+ *
+ * 注意: `ModalRoot` では `Portal` を直接使わず `m.mount()` 方式を採用しているため、
+ * この `Portal` クラスは他のコンポーネントから利用する汎用実装として公開している。
  */
 export class Portal {
     constructor() {
         this.portalRoot = null;
     }
     oncreate(vnode) {
+        // ポータル用の <div> を body に追加し、子要素を m.render() で描画する
         this.portalRoot = document.createElement("div");
         this.portalRoot.setAttribute("data-modal-portal", "");
         document.body.appendChild(this.portalRoot);
         this.renderPortal(vnode);
     }
     onupdate(vnode) {
+        // 再描画のたびにポータルの内容を最新状態に更新する
         this.renderPortal(vnode);
     }
     renderPortal(vnode) {
@@ -193,6 +302,7 @@ export class Portal {
         m.render(this.portalRoot, vnode.children);
     }
     onremove() {
+        // m.render(null) でアンマウントしてから DOM を削除し、メモリリークを防ぐ
         if (this.portalRoot) {
             m.render(this.portalRoot, null);
             this.portalRoot.remove();
@@ -200,6 +310,7 @@ export class Portal {
         }
     }
     view() {
+        // ポータル本体は body 側に描画するため、メインツリーには非表示の div を置くだけ
         return m("div", { style: "display:none" });
     }
 }
@@ -246,13 +357,16 @@ export class ModalRoot {
         this.portalOpen = false;
     }
     oninit(vnode) {
+        // 非制御モードの場合、defaultOpen を初期値として内部状態を設定する
         this.internalOpen = vnode.attrs.defaultOpen ?? false;
     }
     oncreate() {
+        // ポータル用 <div> を body に追加し、m.mount で登録する
+        // m.mount を使う理由: m.render と異なり auto-redraw に参加するため、
+        // ポータル内のイベント（クリック等）でメインツリーも自動再描画される
         this.portalEl = document.createElement("div");
         this.portalEl.setAttribute("data-modal-portal", "");
         document.body.appendChild(this.portalEl);
-        // m.mount でポータルを登録 → auto-redraw に参加し、ポータル内のイベントでメインツリーも再描画される
         const self = this;
         m.mount(this.portalEl, {
             view() {
@@ -260,18 +374,30 @@ export class ModalRoot {
             },
         });
     }
+    /** `open` prop が渡されているか（制御モード）かどうかを返す */
     isControlled(attrs) {
         return attrs.open !== undefined;
     }
+    /** 現在の open 状態を返す。制御モードなら `attrs.open`、非制御なら内部状態を使う */
     getOpen(attrs) {
         return this.isControlled(attrs) ? attrs.open : this.internalOpen;
     }
+    /**
+     * open 状態を変更する。
+     * 非制御モードなら内部状態を更新し、`onOpenChange` コールバックを常に呼ぶ。
+     */
     setOpen(attrs, value) {
         if (!this.isControlled(attrs)) {
             this.internalOpen = value;
         }
         attrs.onOpenChange?.({ open: value });
     }
+    /**
+     * @description
+     * モーダルを開き、エンターアニメーションを開始する。
+     * `requestAnimationFrame` + `setTimeout(220ms)` の二重待機で
+     * CSS トランジションが確実に再生されてから `entering` フラグを落とす。
+     */
     doOpen(attrs) {
         if (this.getOpen(attrs))
             return;
@@ -285,6 +411,12 @@ export class ModalRoot {
             }, 220);
         });
     }
+    /**
+     * @description
+     * モーダルを閉じ、エグジットアニメーションを開始する。
+     * `exiting` フラグを立てて CSS アニメーションを開始し、
+     * 170ms 後にフラグを落として open を false にする。
+     */
     doClose(attrs) {
         if (!this.getOpen(attrs) && !this.exiting)
             return;
@@ -296,6 +428,11 @@ export class ModalRoot {
             m.redraw();
         }, 170);
     }
+    /**
+     * @description
+     * `preventScroll` が有効な場合、`body` の `overflow` を `hidden` にして背後のスクロールを防ぐ。
+     * 元の `overflow` 値を `prevOverflow` に退避しておき、`unlockScroll` で復元する。
+     */
     lockScroll(attrs) {
         if (attrs.preventScroll !== false && !this.scrollLocked) {
             this.prevOverflow = document.body.style.overflow;
@@ -303,12 +440,19 @@ export class ModalRoot {
             this.scrollLocked = true;
         }
     }
+    /** スクロールロックを解除し、退避しておいた `overflow` 値を復元する */
     unlockScroll() {
         if (this.scrollLocked) {
             document.body.style.overflow = this.prevOverflow;
             this.scrollLocked = false;
         }
     }
+    /**
+     * @description
+     * Escape キーの `keydown` リスナーを `document` に登録する。
+     * 多重登録を防ぐため `escHandler` が既に存在する場合は何もしない。
+     * `closeOnEscape === false` のときは登録をスキップする。
+     */
     bindEscape(attrs) {
         if (attrs.closeOnEscape === false)
             return;
@@ -321,6 +465,7 @@ export class ModalRoot {
         };
         document.addEventListener("keydown", this.escHandler);
     }
+    /** Escape キーリスナーを解除し、`escHandler` を null に戻す */
     unbindEscape() {
         if (this.escHandler) {
             document.removeEventListener("keydown", this.escHandler);
@@ -396,10 +541,18 @@ export class ModalRoot {
 // 命令的 API（Modal.show）用の内部ラッパー
 // ===========================
 /**
- * show() で使われる内部ラッパーコンポーネント。
- * Overlay 経由で body にマウントされる。
- * バックドロップとポジショナーを自動生成し、ユーザーの content コンポーネントを
- * ポジショナー内にマウントする。content 側は <Modal.Content> で囲んで使う。
+ * @class ModalImperativeWrapper
+ * @description
+ * `Modal.show()` で使われる内部ラッパーコンポーネント。
+ *
+ * `Overlay` 経由で `document.body` に動的マウントされ、バックドロップと
+ * ポジショナーを自動生成する。ユーザーが渡した `content` コンポーネントは
+ * ポジショナー内に配置され、`resolve` / `hide` が attrs として注入される。
+ *
+ * アニメーション管理・Escape キー処理・スクロールロックを内包し、
+ * `Modal.show()` の呼び出し元から完全に隠蔽する。
+ *
+ * 注意: このクラスは内部実装であり、直接使用しないこと。
  */
 class ModalImperativeWrapper {
     constructor(opts, resolvePromise) {
@@ -409,6 +562,12 @@ class ModalImperativeWrapper {
         this.opts = opts;
         this.resolvePromise = resolvePromise;
     }
+    /**
+     * @description
+     * モーダルを閉じて Promise を解決する。
+     * 二重呼び出しを防ぐため `resolvePromise` を null にリセットしてから実行する。
+     * フェードアウトアニメーション（170ms）完了後に `hideFn` で Overlay をアンマウントする。
+     */
     doClose(value, hideFn) {
         if (!this.resolvePromise)
             return;
@@ -429,7 +588,7 @@ class ModalImperativeWrapper {
         }
     }
     oncreate(vnode) {
-        // Escape キーハンドラ登録
+        // Escape キーハンドラを登録する（closeOnEscape が false の場合はスキップ）
         if (this.opts.closeOnEscape !== false) {
             const hideFn = vnode.attrs.hide;
             this.escHandler = (e) => {
@@ -439,9 +598,9 @@ class ModalImperativeWrapper {
             };
             document.addEventListener("keydown", this.escHandler);
         }
-        // スクロールロック
+        // モーダル表示中はページのスクロールを禁止する
         document.body.style.overflow = "hidden";
-        // エンターアニメーション終了
+        // requestAnimationFrame + setTimeout で CSS トランジションを確実に開始させてからフラグを落とす
         requestAnimationFrame(() => {
             setTimeout(() => {
                 this.entering = false;
@@ -450,6 +609,7 @@ class ModalImperativeWrapper {
         });
     }
     onremove() {
+        // コンポーネント破棄時に Escape リスナーとスクロールロックを必ずクリーンアップする
         this.removeEscHandler();
         document.body.style.overflow = "";
     }
@@ -550,15 +710,44 @@ export const Modal = {
     CloseTrigger: ModalCloseTriggerMarker,
     ActionTrigger: ModalActionTriggerMarker,
     /**
-     * 命令的にモーダルを表示し、結果を Promise で返す
-     *
+     * @function show
+     * @static
      * @description
-     * content コンポーネントには以下の attrs が自動注入される:
-     * - resolve(value) — 値を返してモーダルを閉じる
-     * - hide() — モーダルを閉じる（false を返す）
+     * 命令的にモーダルを表示し、結果を Promise で返す。
      *
-     * content 内では `<Modal.Content>` で囲み、その中に Header, Body, Footer 等を配置する。
-     * バックドロップとポジショナーは show() が自動生成する。
+     * `content` コンポーネントには以下の attrs が自動注入される:
+     * - `resolve(value)` — 任意の値を返してモーダルを閉じる
+     * - `hide()` — `false` を返してモーダルを閉じる
+     *
+     * バックドロップとポジショナーは `show()` が自動生成するため、
+     * `content` 内では `<Modal.Content>` から始める。
+     *
+     * @param {ModalShowOptions<T>} opts - 表示オプション（content、size、placement など）
+     * @returns {Promise<T>} resolve() に渡した値で解決される Promise
+     *
+     * 実装の詳細:
+     * 1. `ModalImperativeWrapper` を生成してアニメーション・Escape・スクロールロックを委譲
+     * 2. `Overlay` に wrapper をアダプトして body にマウント
+     * 3. resolve() / hide() 呼び出し後、フェードアウト完了で Overlay がアンマウントされ Promise が解決
+     *
+     * @example
+     * const result = await Modal.show({
+     *   content: {
+     *     view(vnode) {
+     *       return (
+     *         <Modal.Content>
+     *           <Modal.Header><Modal.Title>確認</Modal.Title></Modal.Header>
+     *           <Modal.Body>本当によろしいですか？</Modal.Body>
+     *           <Modal.Footer>
+     *             <button onclick={() => vnode.attrs.resolve(true)}>はい</button>
+     *             <button onclick={() => vnode.attrs.hide()}>キャンセル</button>
+     *           </Modal.Footer>
+     *         </Modal.Content>
+     *       );
+     *     }
+     *   }
+     * });
+     * if (result) { // ユーザーが「はい」を選んだ場合
      */
     show(opts) {
         return new Promise((resolve) => {
