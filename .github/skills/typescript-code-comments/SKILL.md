@@ -1,11 +1,13 @@
 ---
-name: code-comments
+name: typescript-code-comments
 description: "ソースコードにコメントを書く。Use when: コメントを追加したい、JSDocを書きたい、ドキュメントコメントを入れたい、コードの説明を追加したい、使用例を書きたい"
 ---
 
 # コードコメント追加スキル
 
 このプロジェクトのコメントスタイルに沿って、TypeScript/TSX ファイルにコメントを追加する。
+
+このスキルは TypeScript/TSX 専用であり、SCSS のコメント記述は対象外とする。
 
 ## コメントの基本方針
 
@@ -171,5 +173,4 @@ setTimeout(() => {
 
 ## 参考ファイル（このプロジェクトの実例）
 
-- [`Modal.tsx`](../../src/components/Modal.tsx) — クラス・スタティックメソッド・ライフサイクルの完成形
-- [`MithrilGridStack.tsx`](../../src/components/MithrilGridStack.tsx) — インターフェース・インラインコメントの実例
+- `.github/skills/typescript-code-comments/samples/Modal.sample.tsx`
