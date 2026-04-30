@@ -132,7 +132,7 @@ Bootstrap を読み込んでいる環境では、スコープ内でも `--bs-*` 
 | 面と文字 | `--bs-body-bg`, `--muk-body-bg`, `--bs-body-color`, `--muk-body-color`, `--bs-secondary-color`, `--muk-secondary-color` | Card, Modal, Offcanvas, Accordion, TagsInput |
 | 補助背景 | `--bs-secondary-bg`, `--muk-secondary-bg`, `--bs-tertiary-bg`, `--muk-tertiary-bg`, `--muk-subtle-bg` | disabled, hover, subtle variant, tag 背景 |
 | 枠線と角丸 | `--bs-border-color`, `--muk-border-color`, `--bs-border-radius`, `--muk-border-radius`, `--bs-border-radius-sm`, `--muk-border-radius-sm`, `--bs-border-radius-lg`, `--muk-border-radius-lg` | フォーム系、パネル系全般 |
-| タイポとフォーカス | `--muk-font-size-base`, `--muk-line-height`, `--bs-focus-ring-color`, `--muk-focus-ring-color`, `--muk-box-shadow` | classic 系、Button、Card など |
+| タイポとフォーカス | `--muk-font-size-base`, `--muk-line-height`, `--bs-focus-ring-color`, `--muk-focus-ring-color`, `--muk-box-shadow` | Button、Card など |
 
 特に `Button` や `Badge` は、単純な `primary` だけでなく `primary-bg-subtle` / `primary-text-emphasis` / `primary-border-subtle` の3点も定義すると整いやすくなります。
 

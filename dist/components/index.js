@@ -72,7 +72,7 @@ export { Box } from "./Box.js";
 export { Flex, Spacer } from "./Flex.js";
 export { Grid, GridItem } from "./Grid.js";
 export { SimpleGrid } from "./SimpleGrid.js";
-export { Stack, HStack, VStack } from "./Stack.js";
+export { Stack, HStack, VStack, StackSeparator } from "./Stack.js";
 export { Wrap } from "./Wrap.js";
 export { Center, Square, Circle } from "./Center.js";
 export { AbsoluteCenter } from "./AbsoluteCenter.js";

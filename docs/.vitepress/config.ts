@@ -75,7 +75,6 @@ export default withMermaid(
           { text: "PinInput", link: "/PinInput" },
           { text: "FileUpload", link: "/FileUpload" },
           { text: "Editable", link: "/Editable" },
-          { text: "InlineEdit", link: "/InlineEdit" },
           { text: "DatePicker", link: "/DatePicker" },
           { text: "SegmentedControl", link: "/SegmentedControl" }
         ]

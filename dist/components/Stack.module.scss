@@ -1,4 +1,15 @@
+// Stack レイアウトコンポーネントのスタイル
+
 .stack {
 	display: flex;
 	box-sizing: border-box;
+}
+
+// StackSeparator — Stack の方向に合わせて縦/横を自動切り替えするセパレーター
+.stackSeparator {
+	--stack-separator-color: var(--bs-border-color, var(--muk-border-color, #dee2e6));
+	border: none;
+	margin: 0;
+	flex-shrink: 0;
+	border-color: var(--stack-separator-color);
 }
