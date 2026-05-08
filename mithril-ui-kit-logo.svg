@@ -1,0 +1,78 @@
+<svg width="256" height="256" viewBox="0 0 256 256"
+     xmlns="http://www.w3.org/2000/svg">
+
+  <!-- ====== 立方体の基本形 ====== -->
+  <!-- 上面（切り欠き入り） -->
+  <polygon fill="#4ab0d0"
+    points="
+      128,36
+      48,76
+      48,116
+      88,136
+      88,116
+      128,136
+      208,96
+      208,76
+    " />
+
+  <!-- 左側面 -->
+  <polygon fill="#2c6f88"
+    points="
+      48,76
+      48,172
+      128,212
+      128,136
+      88,116
+      88,136
+      48,116
+    " />
+
+  <!-- 右側面 -->
+  <polygon fill="#3c8fa8"
+    points="
+      208,76
+      208,172
+      128,212
+      128,136
+      208,96
+    " />
+
+  <!-- ====== 上面のモザイク（青寄り） ====== -->
+  <g opacity="0.9">
+    <polygon fill="#6fd0e0" points="128,44 96,60 112,68 144,52" />
+    <polygon fill="#4ab0d0" points="144,52 112,68 128,76 160,60" />
+    <polygon fill="#5ac0d8" points="160,60 128,76 144,84 176,68" />
+
+    <polygon fill="#3a8fb0" points="96,60 72,72 88,80 112,68" />
+    <polygon fill="#63c7e0" points="112,68 88,80 104,88 128,76" />
+    <polygon fill="#2f7fa0" points="128,76 104,88 120,96 144,84" />
+    <polygon fill="#4ab0d0" points="144,84 120,96 136,104 160,92" />
+
+    <polygon fill="#5ac0d8" points="72,72 56,80 72,88 88,80" />
+    <polygon fill="#3f9bc0" points="88,80 72,88 88,96 104,88" />
+    <polygon fill="#6fd0e0" points="104,88 88,96 104,104 120,96" />
+    <polygon fill="#3a8fb0" points="120,96 104,104 120,112 136,104" />
+    <polygon fill="#4ab0d0" points="136,104 120,112 136,120 152,112" />
+  </g>
+
+  <!-- ====== 左側面モザイク ====== -->
+  <g opacity="0.9">
+    <polygon fill="#275f78" points="48,84 48,108 72,120 72,96" />
+    <polygon fill="#2f7fa0" points="72,96 72,120 96,132 96,108" />
+    <polygon fill="#3a8fb0" points="96,108 96,132 120,144 120,120" />
+    <polygon fill="#275f78" points="48,124 48,148 72,160 72,136" />
+    <polygon fill="#3f9bc0" points="72,136 72,160 96,172 96,148" />
+    <polygon fill="#2f7fa0" points="96,148 96,172 120,184 120,160" />
+  </g>
+
+  <!-- ====== 右側面モザイク ====== -->
+  <g opacity="0.9">
+    <polygon fill="#3a8fb0" points="208,84 208,108 184,120 184,96" />
+    <polygon fill="#4ab0d0" points="184,96 184,120 160,132 160,108" />
+    <polygon fill="#2f7fa0" points="160,108 160,132 136,144 136,120" />
+    <polygon fill="#275f78" points="208,124 208,148 184,160 184,136" />
+    <polygon fill="#3f9bc0" points="184,136 184,160 160,172 160,148" />
+    <polygon fill="#2f7fa0" points="160,148 160,172 136,184 136,160" />
+  </g>
+
+</svg>
