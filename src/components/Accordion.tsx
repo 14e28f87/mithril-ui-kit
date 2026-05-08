@@ -5,7 +5,6 @@
  *
  * Chakra UI の `Accordion.Root` / `Accordion.Item` 系の命名規則に合わせた
  * Mithril.js 用アコーディオンコンポーネント。
- * 旧 `Accordion` は `AccordionClassic` として継続提供する。
  *
  * 使い方:
  * ```tsx

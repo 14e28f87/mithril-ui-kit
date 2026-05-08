@@ -13,9 +13,6 @@ import groupCode from './demos/select-new/group.tsx?raw'
 
 セレクトです。`Select.Root`, `Select.Trigger`, `Select.Content`, `Select.Item` などのサブコンポーネントを組み合わせて柔軟にカスタマイズできます。
 
-::: tip
-従来の `<select>` ベースのセレクト（`SelectClassic`）はレガシー扱いです。このページでは current API を案内します。
-:::
 
 ## Usage 使用例
 

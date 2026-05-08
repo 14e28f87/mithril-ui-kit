@@ -1,5 +1,4 @@
 /** @jsx m */
-/** @jsxRuntime classic */
 import m from "mithril";
 import { RadioCard } from "mithril-ui-kit";
 

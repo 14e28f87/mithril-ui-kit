@@ -9,9 +9,6 @@ import basicCode from './demos/toast/basic.tsx?raw'
 
 `Toast` は `createToaster()` で管理オブジェクトを作成し、`Toast.Toaster` で描画する命令的トースト通知システムです。現在の API は `Toast.show()` ではなく、`toaster.success()` や `toaster.create()` を使います。
 
-::: tip
-旧 Promise ベース API（`ToastClassic`）はレガシー扱いです。このページでは current API を案内します。
-:::
 
 ## Usage 使用例
 

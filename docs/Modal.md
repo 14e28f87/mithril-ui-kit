@@ -9,7 +9,7 @@ import basicCode from './demos/modal/basic.tsx?raw'
 
 モーダルコンポーネント。**命令的 API**（`Modal.show()`）と**宣言的 API**（JSX component）の 2 つの使い方をサポート。
 
-> レガシーの Bootstrap 5 スタイルモーダル（`ModalClassic`）は旧 API です。このページでは current API を案内します。
+
 
 | 特徴 | 説明 |
 |------|------|

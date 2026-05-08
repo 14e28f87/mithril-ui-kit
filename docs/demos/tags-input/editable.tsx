@@ -1,5 +1,4 @@
 /** @jsx m */
-/** @jsxRuntime classic */
 import m from "mithril";
 import { TagsInput, type TagsInputValueChangeDetails } from "mithril-ui-kit";
 
