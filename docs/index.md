@@ -35,10 +35,10 @@ features:
 
 ## Getting Started
 
-- [installation](./installation.md)
-- [styling](./styling.md)
+- [Installation](./installation.md)
+- [Styling](./styling.md)
 
-## Component Documents
+## Components
 
 ### Actions and Buttons
 

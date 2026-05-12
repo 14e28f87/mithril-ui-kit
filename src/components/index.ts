@@ -286,7 +286,7 @@ export type {
 	TooltipOpenChangeDetails as Tooltip2OpenChangeDetails,
 } from "./Tooltip.js";
 
-export { Popover, PopoverRoot, Popover as Popover2, PopoverRoot as Popover2Root } from "./Popover.js";
+export { Popover, PopoverRoot } from "./Popover.js";
 export type {
 	PopoverRootAttrs,
 	PopoverTriggerAttrs,
@@ -300,18 +300,6 @@ export type {
 	PopoverPlacement,
 	PopoverSize,
 	PopoverOpenChangeDetails,
-	PopoverRootAttrs as Popover2RootAttrs,
-	PopoverTriggerAttrs as Popover2TriggerAttrs,
-	PopoverContentAttrs as Popover2ContentAttrs,
-	PopoverHeaderAttrs as Popover2HeaderAttrs,
-	PopoverBodyAttrs as Popover2BodyAttrs,
-	PopoverTitleAttrs as Popover2TitleAttrs,
-	PopoverFooterAttrs as Popover2FooterAttrs,
-	PopoverCloseTriggerAttrs as Popover2CloseTriggerAttrs,
-	PopoverArrowAttrs as Popover2ArrowAttrs,
-	PopoverPlacement as Popover2Placement,
-	PopoverSize as Popover2Size,
-	PopoverOpenChangeDetails as Popover2OpenChangeDetails,
 } from "./Popover.js";
 
 export { Pagination, PaginationRoot, Pagination as Pagination2, PaginationRoot as Pagination2Root } from "./Pagination.js";

@@ -27,7 +27,7 @@ export { Tabs, TabsRoot, Tabs as Tabs2, TabsRoot as Tabs2Root } from "./Tabs.js"
 export { Breadcrumb, BreadcrumbRoot, Breadcrumb as Breadcrumb2, BreadcrumbRoot as Breadcrumb2Root } from "./Breadcrumb.js";
 export { Steps, StepsRoot, Steps as Steps2, StepsRoot as Steps2Root } from "./Steps.js";
 export { Tooltip, TooltipRoot, Tooltip as Tooltip2, TooltipRoot as Tooltip2Root } from "./Tooltip.js";
-export { Popover, PopoverRoot, Popover as Popover2, PopoverRoot as Popover2Root } from "./Popover.js";
+export { Popover, PopoverRoot } from "./Popover.js";
 export { Pagination, PaginationRoot, Pagination as Pagination2, PaginationRoot as Pagination2Root } from "./Pagination.js";
 export { Carousel, CarouselRoot, Carousel as Carousel2, CarouselRoot as Carousel2Root } from "./Carousel.js";
 export { InputNumber, InputNumberRoot, InputNumber as NumberInput, InputNumberRoot as NumberInputRoot } from "./InputNumber.js";

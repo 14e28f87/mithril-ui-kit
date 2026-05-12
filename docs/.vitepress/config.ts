@@ -148,8 +148,8 @@ export default withMermaid(
       provider: "local"
     },
     footer: {
-      message: "Mithril UI Kit Documentation",
-      copyright: "Copyright 2026"
+      message: "Mithril UI Kit Documentation, Released under the MIT License.",
+      copyright: "Copyright 2026, K.Tsuru"
     }
   }
 })
