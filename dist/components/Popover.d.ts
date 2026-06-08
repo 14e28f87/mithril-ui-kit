@@ -59,6 +59,8 @@ export type PopoverRootAttrs = {
 };
 /** Popover.Trigger に渡せる属性 */
 export type PopoverTriggerAttrs = {
+    /** 子要素をそのままトリガーとして使用するか（デフォルト: false） */
+    asChild?: boolean;
     class?: string;
     style?: Record<string, string>;
 };
@@ -89,6 +91,8 @@ export type PopoverFooterAttrs = {
 };
 /** Popover.CloseTrigger に渡せる属性 */
 export type PopoverCloseTriggerAttrs = {
+    /** 子要素をそのままクローズトリガーとして使用するか（デフォルト: false） */
+    asChild?: boolean;
     class?: string;
     style?: Record<string, string>;
 };

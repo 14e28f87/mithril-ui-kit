@@ -1,0 +1,102 @@
+/* Popover.module.scss
+	 Mithril UI Kit 用 Popover スタイル（asChild 対応）
+	 汎用的なトリガークラスを用意し、button 固有スタイルは分離している
+*/
+
+:export {
+	root: "popover-root";
+	trigger: "popover-trigger";
+	triggerButton: "popover-trigger-button";
+	content: "popover-content";
+	arrow: "popover-arrow";
+	header: "popover-header";
+	body: "popover-body";
+	footer: "popover-footer";
+	open: "popover-open";
+}
+
+/* ルートラッパー */
+.popover-root {
+	position: relative;
+	display: inline-block;
+}
+
+/* トリガー（任意要素に付与しても破綻しない汎用スタイル） */
+.popover-trigger {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.25rem 0.5rem;
+	border-radius: 6px;
+	cursor: pointer;
+	user-select: none;
+	background: transparent;
+	color: inherit;
+	text-decoration: none;
+	border: none;
+	font: inherit;
+}
+
+/* ボタンとして使うときの追加スタイル（asChild=false のときに付与） */
+.popover-trigger-button {
+	background-color: var(--ui-bg, #fff);
+	border: 1px solid var(--ui-border, rgba(0,0,0,0.08));
+	padding: 0.375rem 0.75rem;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+/* コンテンツの基本 */
+.popover-content {
+	position: absolute;
+	z-index: 999;
+	min-width: 160px;
+	max-width: 320px;
+	background: var(--popover-bg, #fff);
+	color: var(--popover-color, #111);
+	border-radius: 8px;
+	box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+	padding: 0.5rem;
+	transform-origin: top center;
+}
+
+/* 矢印 */
+.popover-arrow {
+	width: 12px;
+	height: 8px;
+	position: absolute;
+	left: calc(50% - 6px);
+	top: -6px;
+	clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+	background: var(--popover-bg, #fff);
+	filter: drop-shadow(0 -1px 0 rgba(0,0,0,0.04));
+}
+
+/* ヘッダー・ボディ・フッター */
+.popover-header {
+	font-weight: 600;
+	margin-bottom: 0.25rem;
+}
+
+.popover-body {
+	font-size: 0.95rem;
+	margin-bottom: 0.5rem;
+}
+
+.popover-footer {
+	display: flex;
+	justify-content: flex-end;
+	gap: 0.5rem;
+}
+
+/* 開閉状態のユーティリティ（必要なら JS で付与） */
+.popover-open .popover-content {
+	display: block;
+}
+
+/* レスポンシブや微調整 */
+@media (max-width: 480px) {
+	.popover-content {
+		min-width: 140px;
+		max-width: 90vw;
+	}
+}

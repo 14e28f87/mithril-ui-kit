@@ -66,6 +66,8 @@ export type PopoverRootAttrs = {
 
 /** Popover.Trigger に渡せる属性 */
 export type PopoverTriggerAttrs = {
+	/** 子要素をそのままトリガーとして使用するか（デフォルト: false） */
+	asChild?: boolean;
 	class?: string;
 	style?: Record<string, string>;
 };
@@ -102,6 +104,8 @@ export type PopoverFooterAttrs = {
 
 /** Popover.CloseTrigger に渡せる属性 */
 export type PopoverCloseTriggerAttrs = {
+	/** 子要素をそのままクローズトリガーとして使用するか（デフォルト: false） */
+	asChild?: boolean;
 	class?: string;
 	style?: Record<string, string>;
 };
@@ -197,6 +201,31 @@ function injectCloseHandler(children: m.Children, closeFn: () => void): any[] {
 			};
 		}
 		return child;
+	});
+}
+
+/**
+ * asChild 用: 子 vnode の attrs に追加の属性をマージして返す。
+ * 既存の onclick があれば extraAttrs の onclick を先に実行し、元の onclick を後で実行する。
+ */
+function mergeChildAttrs(children: m.Children, extraAttrs: Record<string, any>): m.Children {
+	if (!children) return children;
+	const arr = Array.isArray(children) ? children : [children];
+	return arr.map((child) => {
+		if (!child || typeof child !== "object" || !("tag" in child)) return child;
+		const origOnclick = (child as any).attrs?.onclick;
+		const newOnclick = extraAttrs.onclick;
+		const mergedAttrs: Record<string, any> = {
+			...(child as any).attrs,
+			...extraAttrs,
+		};
+		if (newOnclick || origOnclick) {
+			mergedAttrs.onclick = (e: MouseEvent) => {
+				if (typeof newOnclick === "function") newOnclick(e);
+				if (typeof origOnclick === "function") origOnclick(e);
+			};
+		}
+		return { ...(child as any), attrs: mergedAttrs };
 	});
 }
 
@@ -340,6 +369,12 @@ export class PopoverRoot implements m.Component<PopoverRootAttrs> {
 						{injectCloseHandler(v.children, closeFn).map((fc: any, fi: number) => {
 							if (isVnodeLike(fc) && getRole(fc) === "close-trigger") {
 								const cv = fc as m.Vnode<PopoverCloseTriggerAttrs & { __closeFn?: () => void }>;
+								if (cv.attrs.asChild && cv.children) {
+									return mergeChildAttrs(cv.children, {
+										"data-part": "close-trigger",
+										onclick: () => closeFn(),
+									});
+								}
 								return (
 									<button
 										key={`ct-${fi}`}
@@ -360,6 +395,12 @@ export class PopoverRoot implements m.Component<PopoverRootAttrs> {
 			}
 			if (role === "close-trigger") {
 				const v = child as m.Vnode<PopoverCloseTriggerAttrs>;
+				if (v.attrs.asChild && v.children) {
+					return mergeChildAttrs(v.children, {
+						"data-part": "close-trigger",
+						onclick: () => closeFn(),
+					});
+				}
 				return (
 					<button
 						key={`ct-${i}`}
@@ -398,18 +439,29 @@ export class PopoverRoot implements m.Component<PopoverRootAttrs> {
 				data-part="root"
 			>
 				{/* トリガー */}
-				<button
-					type="button"
-					class={classNames(styles.trigger, triggerVNode?.attrs.class)}
-					style={triggerVNode?.attrs.style}
-					data-part="trigger"
-					aria-haspopup="dialog"
-					aria-expanded={open ? "true" : "false"}
-					aria-controls={open ? this.uid : undefined}
-					onclick={(e: Event) => { e.stopPropagation(); this.toggle(attrs); }}
-				>
-					{triggerVNode?.children}
-				</button>
+				{triggerVNode?.attrs.asChild && triggerVNode.children
+					? mergeChildAttrs(triggerVNode.children, {
+						"data-part": "trigger",
+						"aria-haspopup": "dialog",
+						"aria-expanded": open ? "true" : "false",
+						"aria-controls": open ? this.uid : undefined,
+						onclick: (e: Event) => { e.stopPropagation(); this.toggle(attrs); },
+					})
+					: (
+						<button
+							type="button"
+							class={classNames(styles.trigger, triggerVNode?.attrs.class)}
+							style={triggerVNode?.attrs.style}
+							data-part="trigger"
+							aria-haspopup="dialog"
+							aria-expanded={open ? "true" : "false"}
+							aria-controls={open ? this.uid : undefined}
+							onclick={(e: Event) => { e.stopPropagation(); this.toggle(attrs); }}
+						>
+							{triggerVNode?.children}
+						</button>
+					)
+				}
 
 				{/* コンテンツ */}
 				{open && contentVNode ? (

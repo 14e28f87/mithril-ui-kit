@@ -103,6 +103,34 @@ function injectCloseHandler(children, closeFn) {
     });
 }
 /**
+ * asChild 用: 子 vnode の attrs に追加の属性をマージして返す。
+ * 既存の onclick があれば extraAttrs の onclick を先に実行し、元の onclick を後で実行する。
+ */
+function mergeChildAttrs(children, extraAttrs) {
+    if (!children)
+        return children;
+    const arr = Array.isArray(children) ? children : [children];
+    return arr.map((child) => {
+        if (!child || typeof child !== "object" || !("tag" in child))
+            return child;
+        const origOnclick = child.attrs?.onclick;
+        const newOnclick = extraAttrs.onclick;
+        const mergedAttrs = {
+            ...child.attrs,
+            ...extraAttrs,
+        };
+        if (newOnclick || origOnclick) {
+            mergedAttrs.onclick = (e) => {
+                if (typeof newOnclick === "function")
+                    newOnclick(e);
+                if (typeof origOnclick === "function")
+                    origOnclick(e);
+            };
+        }
+        return { ...child, attrs: mergedAttrs };
+    });
+}
+/**
  * @class PopoverRoot
  * @description
  * ポップオーバーのルートコンポーネント。
@@ -224,6 +252,12 @@ export class PopoverRoot {
                 return (m("div", { key: `f-${i}`, class: classNames(styles.footer, v.attrs.class), style: v.attrs.style, "data-part": "footer" }, injectCloseHandler(v.children, closeFn).map((fc, fi) => {
                     if (isVnodeLike(fc) && getRole(fc) === "close-trigger") {
                         const cv = fc;
+                        if (cv.attrs.asChild && cv.children) {
+                            return mergeChildAttrs(cv.children, {
+                                "data-part": "close-trigger",
+                                onclick: () => closeFn(),
+                            });
+                        }
                         return (m("button", { key: `ct-${fi}`, type: "button", class: classNames(styles.closeTrigger, cv.attrs.class), style: cv.attrs.style, "data-part": "close-trigger", onclick: () => closeFn() }, cv.children));
                     }
                     return fc;
@@ -231,6 +265,12 @@ export class PopoverRoot {
             }
             if (role === "close-trigger") {
                 const v = child;
+                if (v.attrs.asChild && v.children) {
+                    return mergeChildAttrs(v.children, {
+                        "data-part": "close-trigger",
+                        onclick: () => closeFn(),
+                    });
+                }
                 return (m("button", { key: `ct-${i}`, type: "button", class: classNames(styles.closeTrigger, v.attrs.class), style: v.attrs.style, "data-part": "close-trigger", onclick: () => closeFn() }, v.children));
             }
             if (role === "arrow") {
@@ -249,7 +289,15 @@ export class PopoverRoot {
         const placement = attrs.placement ?? "bottom";
         const size = attrs.size ?? "md";
         return (m("span", { class: classNames(styles.root, attrs.class), style: attrs.style, "data-scope": "popover", "data-part": "root" },
-            m("button", { type: "button", class: classNames(styles.trigger, triggerVNode?.attrs.class), style: triggerVNode?.attrs.style, "data-part": "trigger", "aria-haspopup": "dialog", "aria-expanded": open ? "true" : "false", "aria-controls": open ? this.uid : undefined, onclick: (e) => { e.stopPropagation(); this.toggle(attrs); } }, triggerVNode?.children),
+            triggerVNode?.attrs.asChild && triggerVNode.children
+                ? mergeChildAttrs(triggerVNode.children, {
+                    "data-part": "trigger",
+                    "aria-haspopup": "dialog",
+                    "aria-expanded": open ? "true" : "false",
+                    "aria-controls": open ? this.uid : undefined,
+                    onclick: (e) => { e.stopPropagation(); this.toggle(attrs); },
+                })
+                : (m("button", { type: "button", class: classNames(styles.trigger, triggerVNode?.attrs.class), style: triggerVNode?.attrs.style, "data-part": "trigger", "aria-haspopup": "dialog", "aria-expanded": open ? "true" : "false", "aria-controls": open ? this.uid : undefined, onclick: (e) => { e.stopPropagation(); this.toggle(attrs); } }, triggerVNode?.children)),
             open && contentVNode ? (m("div", { id: this.uid, class: classNames(styles.positioner, styles[`placement${capitalize(placement)}`], styles[`size${capitalize(size)}`], contentVNode.attrs.class), style: contentVNode.attrs.style, "data-part": "content", role: "dialog" }, this.renderContentInner(contentVNode, attrs))) : null));
     }
 }
