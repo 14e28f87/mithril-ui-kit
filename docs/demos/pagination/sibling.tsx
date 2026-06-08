@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Pagination2 } from "mithril-ui-kit";
+import { Pagination } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let page = 5;
@@ -9,7 +9,7 @@ export function setup(el: HTMLElement): void {
     view() {
       return (
         <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-          <Pagination2.Root
+          <Pagination.Root
             count={500}
             pageSize={10}
             page={page}
@@ -20,10 +20,10 @@ export function setup(el: HTMLElement): void {
               m.redraw();
             }}
           >
-            <Pagination2.PrevTrigger>←</Pagination2.PrevTrigger>
-            <Pagination2.Items />
-            <Pagination2.NextTrigger>→</Pagination2.NextTrigger>
-          </Pagination2.Root>
+            <Pagination.PrevTrigger>←</Pagination.PrevTrigger>
+            <Pagination.Items />
+            <Pagination.NextTrigger>→</Pagination.NextTrigger>
+          </Pagination.Root>
           <div style={{ fontSize: "12px", color: "#666" }}>{`siblingCount=2, 現在のページ: ${page}`}</div>
         </div>
       );

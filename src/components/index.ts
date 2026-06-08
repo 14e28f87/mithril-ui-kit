@@ -302,7 +302,7 @@ export type {
 	PopoverOpenChangeDetails,
 } from "./Popover.js";
 
-export { Pagination, PaginationRoot, Pagination as Pagination2, PaginationRoot as Pagination2Root } from "./Pagination.js";
+export { Pagination, PaginationRoot } from "./Pagination.js";
 export type {
 	PaginationRootAttrs,
 	PaginationPrevTriggerAttrs,
@@ -312,14 +312,6 @@ export type {
 	PaginationSize,
 	PaginationVariant,
 	PaginationPageChangeDetails,
-	PaginationRootAttrs as Pagination2RootAttrs,
-	PaginationPrevTriggerAttrs as Pagination2PrevTriggerAttrs,
-	PaginationNextTriggerAttrs as Pagination2NextTriggerAttrs,
-	PaginationItemsAttrs as Pagination2ItemsAttrs,
-	PaginationPageTextAttrs as Pagination2PageTextAttrs,
-	PaginationSize as Pagination2Size,
-	PaginationVariant as Pagination2Variant,
-	PaginationPageChangeDetails as Pagination2PageChangeDetails,
 } from "./Pagination.js";
 
 export { Carousel, CarouselRoot, Carousel as Carousel2, CarouselRoot as Carousel2Root } from "./Carousel.js";
