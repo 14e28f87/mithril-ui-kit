@@ -1,7 +1,7 @@
 # Mithril UI Kit とは?
 
 Mithril UI Kit は Mithril.js 向けの UI コンポーネントライブラリです。
-このリポジトリは standalone 版の正本で、正式なパッケージ名は `mithril-ui-kit` です。
+正式なパッケージ名は `mithril-ui-kit` です。
 
 Bootstrap 5 と相性のよい API を持ちつつ、Mithril らしい軽量な実装を目指しています。
 
