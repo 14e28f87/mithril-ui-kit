@@ -168,6 +168,9 @@ export declare class ColorPickerRoot implements m.Component<ColorPickerRootAttrs
     private dragging;
     private rootEl;
     private boundDocClick;
+    private triggerEl;
+    private controlEl;
+    private cleanupAutoUpdate;
     oninit(vnode: m.Vnode<ColorPickerRootAttrs>): void;
     oncreate(vnode: m.VnodeDOM<ColorPickerRootAttrs>): void;
     onremove(): void;

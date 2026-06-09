@@ -172,6 +172,8 @@ export declare class PopoverRoot implements m.Component<PopoverRootAttrs> {
     private outsideClickHandler;
     private escapeHandler;
     private rootDom;
+    private triggerDom;
+    private cleanupAutoUpdate;
     oninit(vnode: m.Vnode<PopoverRootAttrs>): void;
     oncreate(vnode: m.VnodeDOM<PopoverRootAttrs>): void;
     onupdate(vnode: m.VnodeDOM<PopoverRootAttrs>): void;

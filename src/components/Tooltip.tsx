@@ -20,6 +20,8 @@
 import m from "mithril";
 import classNames from "classnames";
 import styles from "./Tooltip.module.scss";
+import { startFloating } from "../utils/floating";
+import type { FloatingPlacement } from "../utils/floating";
 
 /** ツールチップの配置方向 */
 export type TooltipPlacement = "top" | "bottom" | "left" | "right";
@@ -137,6 +139,8 @@ export class TooltipRoot implements m.Component<TooltipRootAttrs> {
 	private closeTimer: ReturnType<typeof setTimeout> | null = null;
 	private readonly uid = `muk-tooltip-${TooltipRoot.seed++}`;
 	private static seed = 1;
+	private triggerDom: HTMLElement | null = null;
+	private cleanupAutoUpdate: (() => void) | null = null;
 
 	public oninit(vnode: m.Vnode<TooltipRootAttrs>) {
 		this.isOpen = vnode.attrs.defaultOpen ?? false;
@@ -144,6 +148,8 @@ export class TooltipRoot implements m.Component<TooltipRootAttrs> {
 
 	public onremove() {
 		this.clearTimers();
+		this.cleanupAutoUpdate?.();
+		this.cleanupAutoUpdate = null;
 	}
 
 	private clearTimers() {
@@ -205,6 +211,7 @@ export class TooltipRoot implements m.Component<TooltipRootAttrs> {
 					onfocusin={() => this.show(attrs)}
 					onfocusout={() => this.hide(attrs)}
 					tabindex={0}
+					oncreate={(vn: m.VnodeDOM) => { this.triggerDom = vn.dom as HTMLElement; }}
 				>
 					{triggerVNode?.children}
 				</span>
@@ -213,11 +220,25 @@ export class TooltipRoot implements m.Component<TooltipRootAttrs> {
 				{open && contentVNode ? (
 					<div
 						id={this.uid}
-						class={classNames(styles.positioner, styles[`placement${placement.charAt(0).toUpperCase() + placement.slice(1)}`])}
+						class={classNames(styles.positioner)}
 						data-part="positioner"
 						role="tooltip"
 						onmouseenter={() => { if (attrs.interactive) { this.clearTimers(); } }}
 						onmouseleave={() => { if (attrs.interactive) { this.hide(attrs); } }}
+						oncreate={(vn: m.VnodeDOM) => {
+							this.cleanupAutoUpdate?.();
+							if (this.triggerDom) {
+								this.cleanupAutoUpdate = startFloating(
+									this.triggerDom,
+									vn.dom as HTMLElement,
+									{ placement: placement as FloatingPlacement },
+								);
+							}
+						}}
+						onremove={() => {
+							this.cleanupAutoUpdate?.();
+							this.cleanupAutoUpdate = null;
+						}}
 					>
 						{showArrow && <div class={styles.arrow} data-part="arrow" />}
 						<div

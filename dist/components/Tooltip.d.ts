@@ -108,6 +108,8 @@ export declare class TooltipRoot implements m.Component<TooltipRootAttrs> {
     private closeTimer;
     private readonly uid;
     private static seed;
+    private triggerDom;
+    private cleanupAutoUpdate;
     oninit(vnode: m.Vnode<TooltipRootAttrs>): void;
     onremove(): void;
     private clearTimers;

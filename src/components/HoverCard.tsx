@@ -2,6 +2,8 @@
 import m from "mithril";
 import classNames from "classnames";
 import styles from "./HoverCard.module.scss";
+import { startFloating } from "../utils/floating";
+import type { FloatingPlacement } from "../utils/floating";
 
 /**
  * HoverCard サイズ
@@ -54,10 +56,14 @@ class HoverCardRoot implements m.ClassComponent<HoverCardRootAttrs> {
 	private isOpen = false;
 	private openTimer: ReturnType<typeof setTimeout> | null = null;
 	private closeTimer: ReturnType<typeof setTimeout> | null = null;
+	private triggerDom: HTMLElement | null = null;
+	private cleanupAutoUpdate: (() => void) | null = null;
 
 	onremove() {
 		if (this.openTimer) clearTimeout(this.openTimer);
 		if (this.closeTimer) clearTimeout(this.closeTimer);
+		this.cleanupAutoUpdate?.();
+		this.cleanupAutoUpdate = null;
 	}
 
 	view(vnode: m.Vnode<HoverCardRootAttrs>) {
@@ -96,16 +102,32 @@ class HoverCardRoot implements m.ClassComponent<HoverCardRootAttrs> {
 				onmouseenter={() => this.startOpen(openDelay)}
 				onmouseleave={() => this.startClose(closeDelay)}
 			>
-				<div class={styles.trigger}>{triggerContent}</div>
+				<div
+					class={styles.trigger}
+					oncreate={(vn: m.VnodeDOM) => { this.triggerDom = vn.dom as HTMLElement; }}
+				>{triggerContent}</div>
 				{this.isOpen && (
 					<div
 						class={classNames(
 							styles.content,
 							(styles as any)[`size${capitalize(size)}`],
-							(styles as any)[`placement${capitalize(placement)}`]
 						)}
 						onmouseenter={() => this.cancelClose()}
 						onmouseleave={() => this.startClose(closeDelay)}
+						oncreate={(vn: m.VnodeDOM) => {
+							this.cleanupAutoUpdate?.();
+							if (this.triggerDom) {
+								this.cleanupAutoUpdate = startFloating(
+									this.triggerDom,
+									vn.dom as HTMLElement,
+									{ placement: placement as FloatingPlacement },
+								);
+							}
+						}}
+						onremove={() => {
+							this.cleanupAutoUpdate?.();
+							this.cleanupAutoUpdate = null;
+						}}
 					>
 						{cardContent}
 					</div>

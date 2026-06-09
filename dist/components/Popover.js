@@ -26,6 +26,7 @@
 import m from "mithril";
 import classNames from "classnames";
 import styles from "./Popover.module.scss";
+import { startFloating } from "../utils/floating";
 // --- マーカークラス ---
 /** @class PopoverTriggerMarker */
 export class PopoverTriggerMarker {
@@ -160,6 +161,8 @@ export class PopoverRoot {
         this.outsideClickHandler = null;
         this.escapeHandler = null;
         this.rootDom = null;
+        this.triggerDom = null;
+        this.cleanupAutoUpdate = null;
     }
     oninit(vnode) {
         this.isOpen = vnode.attrs.defaultOpen ?? false;
@@ -180,6 +183,8 @@ export class PopoverRoot {
     }
     onremove() {
         this.unregisterGlobalHandlers();
+        this.cleanupAutoUpdate?.();
+        this.cleanupAutoUpdate = null;
     }
     resolveOpen(attrs) {
         return attrs.open !== undefined ? attrs.open : this.isOpen;
@@ -296,9 +301,18 @@ export class PopoverRoot {
                     "aria-expanded": open ? "true" : "false",
                     "aria-controls": open ? this.uid : undefined,
                     onclick: (e) => { e.stopPropagation(); this.toggle(attrs); },
+                    oncreate: (vn) => { this.triggerDom = vn.dom; },
                 })
-                : (m("button", { type: "button", class: classNames(styles.trigger, triggerVNode?.attrs.class), style: triggerVNode?.attrs.style, "data-part": "trigger", "aria-haspopup": "dialog", "aria-expanded": open ? "true" : "false", "aria-controls": open ? this.uid : undefined, onclick: (e) => { e.stopPropagation(); this.toggle(attrs); } }, triggerVNode?.children)),
-            open && contentVNode ? (m("div", { id: this.uid, class: classNames(styles.positioner, styles[`placement${capitalize(placement)}`], styles[`size${capitalize(size)}`], contentVNode.attrs.class), style: contentVNode.attrs.style, "data-part": "content", role: "dialog" }, this.renderContentInner(contentVNode, attrs))) : null));
+                : (m("button", { type: "button", class: classNames(styles.trigger, triggerVNode?.attrs.class), style: triggerVNode?.attrs.style, "data-part": "trigger", "aria-haspopup": "dialog", "aria-expanded": open ? "true" : "false", "aria-controls": open ? this.uid : undefined, onclick: (e) => { e.stopPropagation(); this.toggle(attrs); }, oncreate: (vn) => { this.triggerDom = vn.dom; } }, triggerVNode?.children)),
+            open && contentVNode ? (m("div", { id: this.uid, class: classNames(styles.positioner, styles[`size${capitalize(size)}`], contentVNode.attrs.class), style: contentVNode.attrs.style, "data-part": "content", role: "dialog", oncreate: (vn) => {
+                    this.cleanupAutoUpdate?.();
+                    if (this.triggerDom) {
+                        this.cleanupAutoUpdate = startFloating(this.triggerDom, vn.dom, { placement: placement });
+                    }
+                }, onremove: () => {
+                    this.cleanupAutoUpdate?.();
+                    this.cleanupAutoUpdate = null;
+                } }, this.renderContentInner(contentVNode, attrs))) : null));
     }
 }
 PopoverRoot.seed = 1;

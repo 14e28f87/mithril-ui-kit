@@ -55,6 +55,8 @@ declare class HoverCardRoot implements m.ClassComponent<HoverCardRootAttrs> {
     private isOpen;
     private openTimer;
     private closeTimer;
+    private triggerDom;
+    private cleanupAutoUpdate;
     onremove(): void;
     view(vnode: m.Vnode<HoverCardRootAttrs>): JSX.Element;
     private extractContent;

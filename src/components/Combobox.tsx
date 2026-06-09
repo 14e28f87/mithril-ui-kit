@@ -2,6 +2,7 @@
 import m from "mithril";
 import classNames from "classnames";
 import styles from "./Combobox.module.scss";
+import { startFloating } from "../utils/floating";
 
 /**
  * Combobox バリアント
@@ -71,9 +72,12 @@ class ComboboxRoot implements m.ClassComponent<ComboboxRootAttrs> {
 	private highlightIndex = -1;
 	private inputEl: HTMLInputElement | null = null;
 	private containerEl: HTMLElement | null = null;
+	private cleanupAutoUpdate: (() => void) | null = null;
 
 	onremove() {
 		document.removeEventListener("mousedown", this.handleOutsideClick);
+		this.cleanupAutoUpdate?.();
+		this.cleanupAutoUpdate = null;
 	}
 
 	private handleOutsideClick = (e: MouseEvent) => {
@@ -179,7 +183,23 @@ class ComboboxRoot implements m.ClassComponent<ComboboxRootAttrs> {
 					<span class={styles.triggerIcon} onclick={() => { if (!disabled) this.isOpen = !this.isOpen; }}>▾</span>
 				</div>
 				{this.isOpen && (
-					<div class={styles.content}>
+					<div
+						class={styles.content}
+						oncreate={(vn: m.VnodeDOM) => {
+							this.cleanupAutoUpdate?.();
+							if (this.containerEl) {
+								this.cleanupAutoUpdate = startFloating(
+									this.containerEl,
+									vn.dom as HTMLElement,
+									{ placement: "bottom-start", matchWidth: true, offsetValue: 4 },
+								);
+							}
+						}}
+						onremove={() => {
+							this.cleanupAutoUpdate?.();
+							this.cleanupAutoUpdate = null;
+						}}
+					>
 						{filtered.length === 0
 							? <div class={styles.empty}>結果なし</div>
 							: filtered.map((item, i) => (

@@ -20,6 +20,7 @@
 import m from "mithril";
 import classNames from "classnames";
 import styles from "./Tooltip.module.scss";
+import { startFloating } from "../utils/floating";
 /** @class TooltipTriggerMarker */
 export class TooltipTriggerMarker {
     view(vnode) { return m("span", null, vnode.children); }
@@ -77,12 +78,16 @@ export class TooltipRoot {
         this.openTimer = null;
         this.closeTimer = null;
         this.uid = `muk-tooltip-${TooltipRoot.seed++}`;
+        this.triggerDom = null;
+        this.cleanupAutoUpdate = null;
     }
     oninit(vnode) {
         this.isOpen = vnode.attrs.defaultOpen ?? false;
     }
     onremove() {
         this.clearTimers();
+        this.cleanupAutoUpdate?.();
+        this.cleanupAutoUpdate = null;
     }
     clearTimers() {
         if (this.openTimer) {
@@ -136,12 +141,20 @@ export class TooltipRoot {
         const placement = attrs.placement ?? "top";
         const showArrow = attrs.showArrow ?? false;
         return (m("span", { class: classNames(styles.root, attrs.class), style: attrs.style, "data-scope": "tooltip", "data-part": "root" },
-            m("span", { class: classNames(styles.trigger, triggerVNode?.attrs.class), style: triggerVNode?.attrs.style, "data-part": "trigger", "aria-describedby": open ? this.uid : undefined, onmouseenter: () => this.show(attrs), onmouseleave: () => this.hide(attrs), onfocusin: () => this.show(attrs), onfocusout: () => this.hide(attrs), tabindex: 0 }, triggerVNode?.children),
-            open && contentVNode ? (m("div", { id: this.uid, class: classNames(styles.positioner, styles[`placement${placement.charAt(0).toUpperCase() + placement.slice(1)}`]), "data-part": "positioner", role: "tooltip", onmouseenter: () => { if (attrs.interactive) {
+            m("span", { class: classNames(styles.trigger, triggerVNode?.attrs.class), style: triggerVNode?.attrs.style, "data-part": "trigger", "aria-describedby": open ? this.uid : undefined, onmouseenter: () => this.show(attrs), onmouseleave: () => this.hide(attrs), onfocusin: () => this.show(attrs), onfocusout: () => this.hide(attrs), tabindex: 0, oncreate: (vn) => { this.triggerDom = vn.dom; } }, triggerVNode?.children),
+            open && contentVNode ? (m("div", { id: this.uid, class: classNames(styles.positioner), "data-part": "positioner", role: "tooltip", onmouseenter: () => { if (attrs.interactive) {
                     this.clearTimers();
                 } }, onmouseleave: () => { if (attrs.interactive) {
                     this.hide(attrs);
-                } } },
+                } }, oncreate: (vn) => {
+                    this.cleanupAutoUpdate?.();
+                    if (this.triggerDom) {
+                        this.cleanupAutoUpdate = startFloating(this.triggerDom, vn.dom, { placement: placement });
+                    }
+                }, onremove: () => {
+                    this.cleanupAutoUpdate?.();
+                    this.cleanupAutoUpdate = null;
+                } },
                 showArrow && m("div", { class: styles.arrow, "data-part": "arrow" }),
                 m("div", { class: classNames(styles.content, contentVNode.attrs.class), style: contentVNode.attrs.style, "data-part": "content" }, contentVNode.children))) : null));
     }

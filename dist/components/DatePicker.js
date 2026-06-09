@@ -1,5 +1,6 @@
 /** @jsx m */
 import m from "mithril";
+import { startFloating } from "../utils/floating";
 import styles from "./DatePicker.module.scss";
 class DPLabelMarker {
     view(vnode) { return m("span", null, vnode.children); }
@@ -155,6 +156,9 @@ export class DatePickerRoot {
         this.inputText = "";
         this.rangeHoverDate = null;
         this.rootEl = null;
+        this.triggerEl = null;
+        this.controlEl = null;
+        this.cleanupAutoUpdate = null;
         // --- 外部クリック ---
         // Shadow DOM 内でクリックされた場合、document レベルのリスナーには e.target が
         // Shadow Host にリターゲティングされるため、composedPath() で実パスを確認する。
@@ -199,6 +203,8 @@ export class DatePickerRoot {
     }
     onremove() {
         document.removeEventListener("mousedown", this.handleOutsideClick);
+        this.cleanupAutoUpdate?.();
+        this.cleanupAutoUpdate = null;
         this.rootEl = null;
     }
     // --- 状態操作 ---
@@ -583,7 +589,7 @@ export class DatePickerRoot {
             case "label":
                 return m("span", { class: `${styles.label} ${childAttrs.class ?? ""}`, "data-part": "label" }, childChildren);
             case "control":
-                return (m("div", { class: `${styles.control} ${attrs.disabled ? styles.controlDisabled : ""} ${childAttrs.class ?? ""}`, "data-part": "control" }, this.renderChildren(childChildren, attrs)));
+                return (m("div", { class: `${styles.control} ${attrs.disabled ? styles.controlDisabled : ""} ${childAttrs.class ?? ""}`, "data-part": "control", oncreate: (vn) => { this.controlEl = vn.dom; } }, this.renderChildren(childChildren, attrs)));
             case "input": {
                 const isRange = (attrs.selectionMode ?? "single") === "range";
                 const placeholder = childAttrs.placeholder ?? attrs.placeholder ?? "日付を選択";
@@ -599,7 +605,7 @@ export class DatePickerRoot {
             case "indicatorGroup":
                 return m("span", { class: `${styles.indicatorGroup} ${childAttrs.class ?? ""}`, "data-part": "indicator-group" }, this.renderChildren(childChildren, attrs));
             case "trigger":
-                return (m("button", { type: "button", class: `${styles.trigger} ${childAttrs.class ?? ""}`, "data-part": "trigger", onclick: () => this.toggleOpen(attrs), disabled: attrs.disabled, "aria-label": "\u30AB\u30EC\u30F3\u30C0\u30FC\u3092\u958B\u304F" }, childChildren && childChildren.length > 0 ? childChildren : "📅"));
+                return (m("button", { type: "button", class: `${styles.trigger} ${childAttrs.class ?? ""}`, "data-part": "trigger", onclick: () => this.toggleOpen(attrs), disabled: attrs.disabled, "aria-label": "\u30AB\u30EC\u30F3\u30C0\u30FC\u3092\u958B\u304F", oncreate: (vn) => { this.triggerEl = vn.dom; } }, childChildren && childChildren.length > 0 ? childChildren : "📅"));
             case "clearTrigger":
                 if (this.selectedDates.length === 0)
                     return null;
@@ -611,7 +617,16 @@ export class DatePickerRoot {
                 }
                 if (!this.isOpen)
                     return null;
-                return (m("div", { class: `${styles.positioner} ${childAttrs.class ?? ""}`, "data-part": "positioner" }, this.renderChildren(childChildren, attrs)));
+                return (m("div", { class: `${styles.positioner} ${childAttrs.class ?? ""}`, "data-part": "positioner", oncreate: (vn) => {
+                        this.cleanupAutoUpdate?.();
+                        const ref = this.controlEl ?? this.rootEl;
+                        if (ref) {
+                            this.cleanupAutoUpdate = startFloating(ref, vn.dom, { placement: "bottom-start", matchWidth: true, offsetValue: 4 });
+                        }
+                    }, onremove: () => {
+                        this.cleanupAutoUpdate?.();
+                        this.cleanupAutoUpdate = null;
+                    } }, this.renderChildren(childChildren, attrs)));
             case "content": {
                 const isInline = attrs.inline ?? false;
                 const numMonths = attrs.numOfMonths ?? 1;

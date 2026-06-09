@@ -142,6 +142,8 @@ export declare class DropdownRoot implements m.Component<DropdownRootAttrs> {
     private contextY;
     /** コンテキストメニューモード（右クリックで開いた） */
     private isContextMenu;
+    private triggerDom;
+    private cleanupAutoUpdate;
     oninit(vnode: m.Vnode<DropdownRootAttrs>): void;
     onbeforeupdate(vnode: m.Vnode<DropdownRootAttrs>, old: m.VnodeDOM<DropdownRootAttrs>): void;
     oncreate(vnode: m.VnodeDOM<DropdownRootAttrs>): void;

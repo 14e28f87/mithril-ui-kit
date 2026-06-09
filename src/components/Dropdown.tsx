@@ -1,6 +1,8 @@
 /** @jsx m */
 import m from "mithril";
 import styles from "./Dropdown.module.scss";
+import { startFloating } from "../utils/floating";
+import type { FloatingPlacement } from "../utils/floating";
 
 // ============================================================
 // 型定義
@@ -168,8 +170,8 @@ export class DropdownRoot implements m.Component<DropdownRootAttrs> {
 	private contextX = 0;
 	private contextY = 0;
 	/** コンテキストメニューモード（右クリックで開いた） */
-	private isContextMenu = false;
-
+	private isContextMenu = false;	private triggerDom: HTMLElement | null = null;
+	private cleanupAutoUpdate: (() => void) | null = null;
 	oninit(vnode: m.Vnode<DropdownRootAttrs>) {
 		this.isOpen = vnode.attrs.open ?? vnode.attrs.defaultOpen ?? false;
 	}
@@ -187,6 +189,8 @@ export class DropdownRoot implements m.Component<DropdownRootAttrs> {
 
 	onremove() {
 		document.removeEventListener("mousedown", this.handleOutsideClick);
+		this.cleanupAutoUpdate?.();
+		this.cleanupAutoUpdate = null;
 		this.rootEl = null;
 	}
 
@@ -262,6 +266,7 @@ export class DropdownRoot implements m.Component<DropdownRootAttrs> {
 						onclick={() => this.toggleOpen(attrs)}
 						aria-expanded={this.isOpen}
 						aria-haspopup="menu"
+						oncreate={(vn: m.VnodeDOM) => { this.triggerDom = vn.dom as HTMLElement; }}
 					>
 						{cc}
 					</button>
@@ -271,19 +276,32 @@ export class DropdownRoot implements m.Component<DropdownRootAttrs> {
 				if (!this.isOpen) return null;
 				const isEnd = !this.isContextMenu && attrs.positioning === "end";
 				const isRight = !this.isContextMenu && attrs.positioning === "right";
+				// コンテキストメニューモード: カーソル坐標をそのまま使用
 				const posStyle = this.isContextMenu
 					? { position: "fixed" as const, top: `${this.contextY}px`, left: `${this.contextX}px`, paddingTop: "0" }
 					: undefined;
+				// @floating-ui に渡す placement
+				const floatingPlacement: FloatingPlacement = isRight ? "right-start" : isEnd ? "bottom-end" : "bottom-start";
 				return (
 					<div
-						class={[
-							styles.positioner,
-							isEnd ? styles.positionerEnd : "",
-							isRight ? styles.positionerRight : "",
-							ca.class ?? "",
-						].filter(Boolean).join(" ")}
+						class={[styles.positioner, ca.class ?? ""].filter(Boolean).join(" ")}
 						style={posStyle}
 						data-part="positioner"
+						oncreate={(vn: m.VnodeDOM) => {
+							if (this.isContextMenu) return; // コンテキストメニューはカーソル坐標で位置決め
+							this.cleanupAutoUpdate?.();
+							if (this.triggerDom) {
+								this.cleanupAutoUpdate = startFloating(
+									this.triggerDom,
+									vn.dom as HTMLElement,
+									{ placement: floatingPlacement },
+								);
+							}
+						}}
+						onremove={() => {
+							this.cleanupAutoUpdate?.();
+							this.cleanupAutoUpdate = null;
+						}}
 					>
 						{this.renderChildren(cc, attrs)}
 					</div>

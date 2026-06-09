@@ -59,6 +59,7 @@ declare class ComboboxRoot implements m.ClassComponent<ComboboxRootAttrs> {
     private highlightIndex;
     private inputEl;
     private containerEl;
+    private cleanupAutoUpdate;
     onremove(): void;
     private handleOutsideClick;
     view(vnode: m.Vnode<ComboboxRootAttrs>): JSX.Element;

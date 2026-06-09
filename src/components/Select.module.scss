@@ -112,20 +112,7 @@
 }
 
 .positioner {
-	position: absolute;
-	left: 0;
-	right: 0;
 	z-index: 1050;
-}
-
-.positionerBottom {
-	top: 100%;
-	margin-top: 0.25rem;
-}
-
-.positionerTop {
-	bottom: 100%;
-	margin-bottom: 0.25rem;
 }
 
 .content {

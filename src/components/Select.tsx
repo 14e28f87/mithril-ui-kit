@@ -2,6 +2,8 @@
 import m from "mithril";
 import classNames from "classnames";
 import styles from "./Select.module.scss";
+import { startFloating } from "../utils/floating";
+import type { FloatingPlacement } from "../utils/floating";
 
 /* ─── 型定義 ─── */
 
@@ -215,6 +217,8 @@ class SelectRoot implements m.ClassComponent<SelectRootAttrs> {
 	private highlightIndex = -1;
 	private containerEl?: HTMLElement;
 	private handleDocClick: (e: MouseEvent) => void;
+	private triggerEl: HTMLElement | null = null;
+	private cleanupAutoUpdate: (() => void) | null = null;
 
 	constructor() {
 		this.handleDocClick = (e: MouseEvent) => {
@@ -443,6 +447,8 @@ class SelectRoot implements m.ClassComponent<SelectRootAttrs> {
 					document.addEventListener("click", this.handleDocClick);
 				}}
 				onremove={() => {
+					this.cleanupAutoUpdate?.();
+					this.cleanupAutoUpdate = null;
 					document.removeEventListener("click", this.handleDocClick);
 					this.containerEl = undefined;
 					currentCtx = null;
@@ -588,6 +594,7 @@ class SelectRoot implements m.ClassComponent<SelectRootAttrs> {
 				aria-disabled={ctx.disabled || undefined}
 				disabled={ctx.disabled || undefined}
 				onclick={() => ctx.toggle()}
+				oncreate={(vn: m.VnodeDOM) => { this.triggerEl = vn.dom as HTMLElement; }}
 			>
 				{isMulti && selectedItems.length > 0 ? (
 					m.fragment({}, [
@@ -778,15 +785,26 @@ class SelectRoot implements m.ClassComponent<SelectRootAttrs> {
 		const pos = attrs.positioning ?? "bottom";
 		const posChildren = cv.children as any;
 		const rendered = this.renderPositionerChildren(posChildren, ctx, attrs);
+		const floatingPlacement: FloatingPlacement = pos === "top" ? "top-start" : "bottom-start";
 
 		return (
 			<div
 				{...(cv.attrs || {})}
-				class={classNames(
-					styles.positioner,
-					pos === "top" ? styles.positionerTop : styles.positionerBottom,
-					cv.attrs?.class,
-				)}
+				class={classNames(styles.positioner, cv.attrs?.class)}
+				oncreate={(vn: m.VnodeDOM) => {
+					this.cleanupAutoUpdate?.();
+					if (this.triggerEl) {
+						this.cleanupAutoUpdate = startFloating(
+							this.triggerEl,
+							vn.dom as HTMLElement,
+							{ placement: floatingPlacement, matchWidth: true, offsetValue: 4 },
+						);
+					}
+				}}
+				onremove={() => {
+					this.cleanupAutoUpdate?.();
+					this.cleanupAutoUpdate = null;
+				}}
 			>
 				{rendered}
 			</div>

@@ -16,39 +16,9 @@
 }
 
 .positioner {
-	position: absolute;
 	z-index: 1080;
 	pointer-events: none;
 	white-space: nowrap;
-}
-
-// 配置
-.placementTop {
-	bottom: 100%;
-	left: 50%;
-	transform: translateX(-50%);
-	margin-bottom: 0.5rem;
-}
-
-.placementBottom {
-	top: 100%;
-	left: 50%;
-	transform: translateX(-50%);
-	margin-top: 0.5rem;
-}
-
-.placementLeft {
-	right: 100%;
-	top: 50%;
-	transform: translateY(-50%);
-	margin-right: 0.5rem;
-}
-
-.placementRight {
-	left: 100%;
-	top: 50%;
-	transform: translateY(-50%);
-	margin-left: 0.5rem;
 }
 
 .content {
@@ -69,28 +39,4 @@
 	height: 0.5rem;
 	background: var(--tooltip-bg, var(--bs-dark, var(--muk-dark, #212529)));
 	transform: rotate(45deg);
-
-	.placementTop & {
-		bottom: -0.25rem;
-		left: 50%;
-		margin-left: -0.25rem;
-	}
-
-	.placementBottom & {
-		top: -0.25rem;
-		left: 50%;
-		margin-left: -0.25rem;
-	}
-
-	.placementLeft & {
-		right: -0.25rem;
-		top: 50%;
-		margin-top: -0.25rem;
-	}
-
-	.placementRight & {
-		left: -0.25rem;
-		top: 50%;
-		margin-top: -0.25rem;
-	}
 }

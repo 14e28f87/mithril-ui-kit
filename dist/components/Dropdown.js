@@ -1,6 +1,7 @@
 /** @jsx m */
 import m from "mithril";
 import styles from "./Dropdown.module.scss";
+import { startFloating } from "../utils/floating";
 class MnTriggerMarker {
     view(vnode) { return m("span", null, vnode.children); }
 }
@@ -67,6 +68,8 @@ export class DropdownRoot {
         this.contextY = 0;
         /** コンテキストメニューモード（右クリックで開いた） */
         this.isContextMenu = false;
+        this.triggerDom = null;
+        this.cleanupAutoUpdate = null;
         this.handleOutsideClick = (e) => {
             if (!this.isOpen || !this.rootEl)
                 return;
@@ -90,6 +93,8 @@ export class DropdownRoot {
     }
     onremove() {
         document.removeEventListener("mousedown", this.handleOutsideClick);
+        this.cleanupAutoUpdate?.();
+        this.cleanupAutoUpdate = null;
         this.rootEl = null;
     }
     setOpen(open, attrs) {
@@ -144,21 +149,29 @@ export class DropdownRoot {
         const cc = child.children;
         switch (role) {
             case "trigger":
-                return (m("button", { type: "button", class: `${styles.trigger} ${ca.class ?? ""}`, style: ca.style, "data-part": "trigger", onclick: () => this.toggleOpen(attrs), "aria-expanded": this.isOpen, "aria-haspopup": "menu" }, cc));
+                return (m("button", { type: "button", class: `${styles.trigger} ${ca.class ?? ""}`, style: ca.style, "data-part": "trigger", onclick: () => this.toggleOpen(attrs), "aria-expanded": this.isOpen, "aria-haspopup": "menu", oncreate: (vn) => { this.triggerDom = vn.dom; } }, cc));
             case "positioner": {
                 if (!this.isOpen)
                     return null;
                 const isEnd = !this.isContextMenu && attrs.positioning === "end";
                 const isRight = !this.isContextMenu && attrs.positioning === "right";
+                // コンテキストメニューモード: カーソル坐標をそのまま使用
                 const posStyle = this.isContextMenu
                     ? { position: "fixed", top: `${this.contextY}px`, left: `${this.contextX}px`, paddingTop: "0" }
                     : undefined;
-                return (m("div", { class: [
-                        styles.positioner,
-                        isEnd ? styles.positionerEnd : "",
-                        isRight ? styles.positionerRight : "",
-                        ca.class ?? "",
-                    ].filter(Boolean).join(" "), style: posStyle, "data-part": "positioner" }, this.renderChildren(cc, attrs)));
+                // @floating-ui に渡す placement
+                const floatingPlacement = isRight ? "right-start" : isEnd ? "bottom-end" : "bottom-start";
+                return (m("div", { class: [styles.positioner, ca.class ?? ""].filter(Boolean).join(" "), style: posStyle, "data-part": "positioner", oncreate: (vn) => {
+                        if (this.isContextMenu)
+                            return; // コンテキストメニューはカーソル坐標で位置決め
+                        this.cleanupAutoUpdate?.();
+                        if (this.triggerDom) {
+                            this.cleanupAutoUpdate = startFloating(this.triggerDom, vn.dom, { placement: floatingPlacement });
+                        }
+                    }, onremove: () => {
+                        this.cleanupAutoUpdate?.();
+                        this.cleanupAutoUpdate = null;
+                    } }, this.renderChildren(cc, attrs)));
             }
             case "content":
                 return (m("div", { class: `${styles.content} ${ca.class ?? ""}`, "data-part": "content", role: "menu" }, this.renderChildren(cc, attrs)));

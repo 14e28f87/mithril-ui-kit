@@ -141,6 +141,8 @@ declare class SelectRoot implements m.ClassComponent<SelectRootAttrs> {
     private highlightIndex;
     private containerEl?;
     private handleDocClick;
+    private triggerEl;
+    private cleanupAutoUpdate;
     constructor();
     oninit(vnode: m.Vnode<SelectRootAttrs>): void;
     onbeforeupdate(vnode: m.Vnode<SelectRootAttrs>, old: m.VnodeDOM<SelectRootAttrs>): void;

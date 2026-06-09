@@ -2,6 +2,7 @@
 import m from "mithril";
 import classNames from "classnames";
 import styles from "./HoverCard.module.scss";
+import { startFloating } from "../utils/floating";
 function capitalize(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
 }
@@ -44,12 +45,16 @@ class HoverCardRoot {
         this.isOpen = false;
         this.openTimer = null;
         this.closeTimer = null;
+        this.triggerDom = null;
+        this.cleanupAutoUpdate = null;
     }
     onremove() {
         if (this.openTimer)
             clearTimeout(this.openTimer);
         if (this.closeTimer)
             clearTimeout(this.closeTimer);
+        this.cleanupAutoUpdate?.();
+        this.cleanupAutoUpdate = null;
     }
     view(vnode) {
         const { openDelay = 600, closeDelay = 300, size = "md", placement = "bottom", class: className, ...rest } = vnode.attrs;
@@ -71,8 +76,16 @@ class HoverCardRoot {
             }
         }
         return (m("div", { ...rest, class: classNames(styles.root, className), onmouseenter: () => this.startOpen(openDelay), onmouseleave: () => this.startClose(closeDelay) },
-            m("div", { class: styles.trigger }, triggerContent),
-            this.isOpen && (m("div", { class: classNames(styles.content, styles[`size${capitalize(size)}`], styles[`placement${capitalize(placement)}`]), onmouseenter: () => this.cancelClose(), onmouseleave: () => this.startClose(closeDelay) }, cardContent))));
+            m("div", { class: styles.trigger, oncreate: (vn) => { this.triggerDom = vn.dom; } }, triggerContent),
+            this.isOpen && (m("div", { class: classNames(styles.content, styles[`size${capitalize(size)}`]), onmouseenter: () => this.cancelClose(), onmouseleave: () => this.startClose(closeDelay), oncreate: (vn) => {
+                    this.cleanupAutoUpdate?.();
+                    if (this.triggerDom) {
+                        this.cleanupAutoUpdate = startFloating(this.triggerDom, vn.dom, { placement: placement });
+                    }
+                }, onremove: () => {
+                    this.cleanupAutoUpdate?.();
+                    this.cleanupAutoUpdate = null;
+                } }, cardContent))));
     }
     extractContent(children) {
         const arr = (Array.isArray(children) ? children : [children]).flat(Infinity);

@@ -77,12 +77,7 @@
 }
 
 .content {
-	position: absolute;
-	top: 100%;
-	left: 0;
-	right: 0;
 	z-index: 1000;
-	margin-top: 0.25rem;
 	max-height: 15rem;
 	overflow-y: auto;
 	background-color: var(--bs-body-bg, var(--muk-body-bg, #fff));

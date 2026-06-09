@@ -230,6 +230,9 @@ export declare class DatePickerRoot implements m.Component<DatePickerRootAttrs> 
     private inputText;
     private rangeHoverDate;
     private rootEl;
+    private triggerEl;
+    private controlEl;
+    private cleanupAutoUpdate;
     oninit(vnode: m.Vnode<DatePickerRootAttrs>): void;
     onbeforeupdate(vnode: m.Vnode<DatePickerRootAttrs>, old: m.VnodeDOM<DatePickerRootAttrs>): void;
     oncreate(vnode: m.VnodeDOM<DatePickerRootAttrs>): void;

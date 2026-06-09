@@ -2,6 +2,7 @@
 import m from "mithril";
 import classNames from "classnames";
 import styles from "./ColorPicker.module.scss";
+import { startFloating } from "../utils/floating";
 // ===========================
 // マーカー
 // ===========================
@@ -205,6 +206,9 @@ export class ColorPickerRoot {
         this.dragging = false;
         this.rootEl = null;
         this.boundDocClick = null;
+        this.triggerEl = null;
+        this.controlEl = null;
+        this.cleanupAutoUpdate = null;
     }
     oninit(vnode) {
         const val = vnode.attrs.defaultValue ?? vnode.attrs.value ?? "#ff0000";
@@ -228,6 +232,8 @@ export class ColorPickerRoot {
             document.removeEventListener("mousedown", this.boundDocClick);
             this.boundDocClick = null;
         }
+        this.cleanupAutoUpdate?.();
+        this.cleanupAutoUpdate = null;
     }
     isControlled(attrs) {
         return attrs.value !== undefined;
@@ -344,7 +350,7 @@ export class ColorPickerRoot {
                 case "label":
                     return (m("span", { class: classNames(styles.label, child.attrs?.class), style: child.attrs?.style, "data-part": "label" }, child.children));
                 case "control":
-                    return (m("div", { class: classNames(styles.control, child.attrs?.class), style: child.attrs?.style, "data-part": "control" }, this.renderChildren(child.children, attrs, color, colorStr, hexStr, fmt)));
+                    return (m("div", { class: classNames(styles.control, child.attrs?.class), style: child.attrs?.style, "data-part": "control", oncreate: (vn) => { this.controlEl = vn.dom; } }, this.renderChildren(child.children, attrs, color, colorStr, hexStr, fmt)));
                 case "input":
                     return (m("input", { class: classNames(styles.input, child.attrs?.class), style: child.attrs?.style, type: "text", value: colorStr, "data-part": "input", oninput: (e) => {
                             const v = e.target.value;
@@ -362,11 +368,20 @@ export class ColorPickerRoot {
                             catch { }
                         } }));
                 case "trigger":
-                    return (m("button", { type: "button", class: classNames(styles.trigger, child.attrs?.class), style: { ...(child.attrs?.style ?? {}), "--cp-current-color": hexStr }, "data-part": "trigger", onclick: () => { this.isOpen = !this.isOpen; } }, child.children));
+                    return (m("button", { type: "button", class: classNames(styles.trigger, child.attrs?.class), style: { ...(child.attrs?.style ?? {}), "--cp-current-color": hexStr }, "data-part": "trigger", onclick: () => { this.isOpen = !this.isOpen; }, oncreate: (vn) => { this.triggerEl = vn.dom; } }, child.children));
                 case "positioner":
                     if (!this.isOpen)
                         return null;
-                    return (m("div", { class: classNames(styles.positioner, child.attrs?.class), "data-part": "positioner" }, this.renderChildren(child.children, attrs, color, colorStr, hexStr, fmt)));
+                    return (m("div", { class: classNames(styles.positioner, child.attrs?.class), "data-part": "positioner", oncreate: (vn) => {
+                            this.cleanupAutoUpdate?.();
+                            const ref = this.controlEl ?? this.rootEl;
+                            if (ref) {
+                                this.cleanupAutoUpdate = startFloating(ref, vn.dom, { placement: "bottom-start", offsetValue: 4 });
+                            }
+                        }, onremove: () => {
+                            this.cleanupAutoUpdate?.();
+                            this.cleanupAutoUpdate = null;
+                        } }, this.renderChildren(child.children, attrs, color, colorStr, hexStr, fmt)));
                 case "content":
                     return (m("div", { class: classNames(styles.content, child.attrs?.class), style: child.attrs?.style, "data-part": "content" }, this.renderChildren(child.children, attrs, color, colorStr, hexStr, fmt)));
                 case "area":

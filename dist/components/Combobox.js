@@ -2,6 +2,7 @@
 import m from "mithril";
 import classNames from "classnames";
 import styles from "./Combobox.module.scss";
+import { startFloating } from "../utils/floating";
 function capitalize(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
 }
@@ -25,6 +26,7 @@ class ComboboxRoot {
         this.highlightIndex = -1;
         this.inputEl = null;
         this.containerEl = null;
+        this.cleanupAutoUpdate = null;
         this.handleOutsideClick = (e) => {
             // Shadow DOM 内クリック時は e.target がリターゲティングされるため composedPath() で判定
             if (this.containerEl && !e.composedPath().includes(this.containerEl)) {
@@ -35,6 +37,8 @@ class ComboboxRoot {
     }
     onremove() {
         document.removeEventListener("mousedown", this.handleOutsideClick);
+        this.cleanupAutoUpdate?.();
+        this.cleanupAutoUpdate = null;
     }
     view(vnode) {
         const { variant = "outline", size = "md", items, value, onValueChange, multiple, openOnClick = true, placeholder = "検索...", disabled, class: className, ...rest } = vnode.attrs;
@@ -75,7 +79,15 @@ class ComboboxRoot {
                     } }, "\u2715")),
                 m("span", { class: styles.triggerIcon, onclick: () => { if (!disabled)
                         this.isOpen = !this.isOpen; } }, "\u25BE")),
-            this.isOpen && (m("div", { class: styles.content }, filtered.length === 0
+            this.isOpen && (m("div", { class: styles.content, oncreate: (vn) => {
+                    this.cleanupAutoUpdate?.();
+                    if (this.containerEl) {
+                        this.cleanupAutoUpdate = startFloating(this.containerEl, vn.dom, { placement: "bottom-start", matchWidth: true, offsetValue: 4 });
+                    }
+                }, onremove: () => {
+                    this.cleanupAutoUpdate?.();
+                    this.cleanupAutoUpdate = null;
+                } }, filtered.length === 0
                 ? m("div", { class: styles.empty }, "\u7D50\u679C\u306A\u3057")
                 : filtered.map((item, i) => (m("div", { key: item.value, class: classNames(styles.item, { [styles.itemHighlighted]: i === this.highlightIndex }, { [styles.itemSelected]: selectedValues.includes(item.value) }, { [styles.itemDisabled]: item.disabled }), onmouseenter: () => { this.highlightIndex = i; }, onclick: () => {
                         if (item.disabled)

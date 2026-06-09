@@ -28,41 +28,12 @@
 }
 
 .positioner {
-	position: absolute;
 	z-index: 1070;
 	background: var(--bs-body-bg, var(--muk-body-bg, #fff));
 	border: 1px solid var(--bs-border-color, var(--muk-border-color, #dee2e6));
 	border-radius: 0.5rem;
 	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 	overflow: hidden;
-}
-
-// 配置
-.placementTop {
-	bottom: 100%;
-	left: 50%;
-	transform: translateX(-50%);
-	margin-bottom: 0.5rem;
-}
-
-.placementBottom {
-	top: 100%;
-	left: 0;
-	margin-top: 0.5rem;
-}
-
-.placementLeft {
-	right: 100%;
-	top: 50%;
-	transform: translateY(-50%);
-	margin-right: 0.5rem;
-}
-
-.placementRight {
-	left: 100%;
-	top: 50%;
-	transform: translateY(-50%);
-	margin-left: 0.5rem;
 }
 
 .header {

@@ -1,5 +1,6 @@
 /** @jsx m */
 import m from "mithril";
+import { startFloating } from "../utils/floating";
 import styles from "./DatePicker.module.scss";
 
 // ============================================================
@@ -347,6 +348,9 @@ export class DatePickerRoot implements m.Component<DatePickerRootAttrs> {
 	private inputText = "";
 	private rangeHoverDate: Date | null = null;
 	private rootEl: HTMLElement | null = null;
+	private triggerEl: HTMLElement | null = null;
+	private controlEl: HTMLElement | null = null;
+	private cleanupAutoUpdate: (() => void) | null = null;
 
 	// --- ライフサイクル ---
 	oninit(vnode: m.Vnode<DatePickerRootAttrs>) {
@@ -383,6 +387,8 @@ export class DatePickerRoot implements m.Component<DatePickerRootAttrs> {
 
 	onremove() {
 		document.removeEventListener("mousedown", this.handleOutsideClick);
+		this.cleanupAutoUpdate?.();
+		this.cleanupAutoUpdate = null;
 		this.rootEl = null;
 	}
 
@@ -824,6 +830,7 @@ export class DatePickerRoot implements m.Component<DatePickerRootAttrs> {
 					<div
 						class={`${styles.control} ${attrs.disabled ? styles.controlDisabled : ""} ${childAttrs.class ?? ""}`}
 						data-part="control"
+						oncreate={(vn: m.VnodeDOM) => { this.controlEl = vn.dom as HTMLElement; }}
 					>
 						{this.renderChildren(childChildren, attrs)}
 					</div>
@@ -883,6 +890,7 @@ export class DatePickerRoot implements m.Component<DatePickerRootAttrs> {
 						onclick={() => this.toggleOpen(attrs)}
 						disabled={attrs.disabled}
 						aria-label="カレンダーを開く"
+						oncreate={(vn: m.VnodeDOM) => { this.triggerEl = vn.dom as HTMLElement; }}
 					>
 						{childChildren && (childChildren as any[]).length > 0 ? childChildren : "📅"}
 					</button>
@@ -909,7 +917,25 @@ export class DatePickerRoot implements m.Component<DatePickerRootAttrs> {
 				}
 				if (!this.isOpen) return null;
 				return (
-					<div class={`${styles.positioner} ${childAttrs.class ?? ""}`} data-part="positioner">
+					<div
+						class={`${styles.positioner} ${childAttrs.class ?? ""}`}
+						data-part="positioner"
+						oncreate={(vn: m.VnodeDOM) => {
+							this.cleanupAutoUpdate?.();
+							const ref = this.controlEl ?? this.rootEl;
+							if (ref) {
+								this.cleanupAutoUpdate = startFloating(
+									ref,
+									vn.dom as HTMLElement,
+									{ placement: "bottom-start", matchWidth: true, offsetValue: 4 },
+								);
+							}
+						}}
+						onremove={() => {
+							this.cleanupAutoUpdate?.();
+							this.cleanupAutoUpdate = null;
+						}}
+					>
 						{this.renderChildren(childChildren, attrs)}
 					</div>
 				);

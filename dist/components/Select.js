@@ -2,6 +2,7 @@
 import m from "mithril";
 import classNames from "classnames";
 import styles from "./Select.module.scss";
+import { startFloating } from "../utils/floating";
 /* ─── ユーティリティ ─── */
 function capitalize(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
@@ -67,6 +68,8 @@ class SelectRoot {
         this.internalOpen = false;
         this.internalValue = [];
         this.highlightIndex = -1;
+        this.triggerEl = null;
+        this.cleanupAutoUpdate = null;
         this.handleDocClick = (e) => {
             // Shadow DOM 内クリック時は e.target がリターゲティングされるため composedPath() で判定
             if (this.containerEl && e.composedPath().includes(this.containerEl))
@@ -263,6 +266,8 @@ class SelectRoot {
                 this.containerEl = dom.dom;
                 document.addEventListener("click", this.handleDocClick);
             }, onremove: () => {
+                this.cleanupAutoUpdate?.();
+                this.cleanupAutoUpdate = null;
                 document.removeEventListener("click", this.handleDocClick);
                 this.containerEl = undefined;
                 currentCtx = null;
@@ -352,7 +357,7 @@ class SelectRoot {
         const rendered = this.renderTriggerChildren(triggerChildren, ctx);
         const isMulti = ctx.multiple;
         const selectedItems = ctx.getSelectedItems();
-        return (m("button", { type: "button", ...(cv.attrs || {}), class: classNames(styles.trigger, { [styles.triggerMultiple]: isMulti && selectedItems.length > 0 }, cv.attrs?.class), role: "combobox", "aria-haspopup": "listbox", "aria-expanded": ctx.isOpen, "aria-disabled": ctx.disabled || undefined, disabled: ctx.disabled || undefined, onclick: () => ctx.toggle() }, isMulti && selectedItems.length > 0 ? (m.fragment({}, [
+        return (m("button", { type: "button", ...(cv.attrs || {}), class: classNames(styles.trigger, { [styles.triggerMultiple]: isMulti && selectedItems.length > 0 }, cv.attrs?.class), role: "combobox", "aria-haspopup": "listbox", "aria-expanded": ctx.isOpen, "aria-disabled": ctx.disabled || undefined, disabled: ctx.disabled || undefined, onclick: () => ctx.toggle(), oncreate: (vn) => { this.triggerEl = vn.dom; } }, isMulti && selectedItems.length > 0 ? (m.fragment({}, [
             ...selectedItems.map(item => (m("span", { class: styles.tag, key: item.value },
                 m("span", null, item.label),
                 m("button", { type: "button", class: styles.tagClose, onclick: (e) => {
@@ -472,7 +477,16 @@ class SelectRoot {
         const pos = attrs.positioning ?? "bottom";
         const posChildren = cv.children;
         const rendered = this.renderPositionerChildren(posChildren, ctx, attrs);
-        return (m("div", { ...(cv.attrs || {}), class: classNames(styles.positioner, pos === "top" ? styles.positionerTop : styles.positionerBottom, cv.attrs?.class) }, rendered));
+        const floatingPlacement = pos === "top" ? "top-start" : "bottom-start";
+        return (m("div", { ...(cv.attrs || {}), class: classNames(styles.positioner, cv.attrs?.class), oncreate: (vn) => {
+                this.cleanupAutoUpdate?.();
+                if (this.triggerEl) {
+                    this.cleanupAutoUpdate = startFloating(this.triggerEl, vn.dom, { placement: floatingPlacement, matchWidth: true, offsetValue: 4 });
+                }
+            }, onremove: () => {
+                this.cleanupAutoUpdate?.();
+                this.cleanupAutoUpdate = null;
+            } }, rendered));
     }
     renderPositionerChildren(children, ctx, attrs) {
         if (!children)

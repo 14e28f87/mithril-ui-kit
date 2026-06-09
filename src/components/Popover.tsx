@@ -26,6 +26,8 @@
 import m from "mithril";
 import classNames from "classnames";
 import styles from "./Popover.module.scss";
+import { startFloating } from "../utils/floating";
+import type { FloatingPlacement } from "../utils/floating";
 
 /** ポップオーバーの配置方向 */
 export type PopoverPlacement = "top" | "bottom" | "left" | "right";
@@ -259,6 +261,8 @@ export class PopoverRoot implements m.Component<PopoverRootAttrs> {
 	private outsideClickHandler: ((e: MouseEvent) => void) | null = null;
 	private escapeHandler: ((e: KeyboardEvent) => void) | null = null;
 	private rootDom: Element | null = null;
+	private triggerDom: HTMLElement | null = null;
+	private cleanupAutoUpdate: (() => void) | null = null;
 
 	public oninit(vnode: m.Vnode<PopoverRootAttrs>) {
 		this.isOpen = vnode.attrs.defaultOpen ?? false;
@@ -280,6 +284,8 @@ export class PopoverRoot implements m.Component<PopoverRootAttrs> {
 
 	public onremove() {
 		this.unregisterGlobalHandlers();
+		this.cleanupAutoUpdate?.();
+		this.cleanupAutoUpdate = null;
 	}
 
 	private resolveOpen(attrs: PopoverRootAttrs): boolean {
@@ -446,6 +452,7 @@ export class PopoverRoot implements m.Component<PopoverRootAttrs> {
 						"aria-expanded": open ? "true" : "false",
 						"aria-controls": open ? this.uid : undefined,
 						onclick: (e: Event) => { e.stopPropagation(); this.toggle(attrs); },
+						oncreate: (vn: m.VnodeDOM) => { this.triggerDom = vn.dom as HTMLElement; },
 					})
 					: (
 						<button
@@ -457,6 +464,7 @@ export class PopoverRoot implements m.Component<PopoverRootAttrs> {
 							aria-expanded={open ? "true" : "false"}
 							aria-controls={open ? this.uid : undefined}
 							onclick={(e: Event) => { e.stopPropagation(); this.toggle(attrs); }}
+							oncreate={(vn: m.VnodeDOM) => { this.triggerDom = vn.dom as HTMLElement; }}
 						>
 							{triggerVNode?.children}
 						</button>
@@ -469,13 +477,26 @@ export class PopoverRoot implements m.Component<PopoverRootAttrs> {
 						id={this.uid}
 						class={classNames(
 							styles.positioner,
-							styles[`placement${capitalize(placement)}`],
 							styles[`size${capitalize(size)}`],
 							contentVNode.attrs.class,
 						)}
 						style={contentVNode.attrs.style}
 						data-part="content"
 						role="dialog"
+						oncreate={(vn: m.VnodeDOM) => {
+							this.cleanupAutoUpdate?.();
+							if (this.triggerDom) {
+								this.cleanupAutoUpdate = startFloating(
+									this.triggerDom,
+									vn.dom as HTMLElement,
+									{ placement: placement as FloatingPlacement },
+								);
+							}
+						}}
+						onremove={() => {
+							this.cleanupAutoUpdate?.();
+							this.cleanupAutoUpdate = null;
+						}}
 					>
 						{this.renderContentInner(contentVNode, attrs)}
 					</div>

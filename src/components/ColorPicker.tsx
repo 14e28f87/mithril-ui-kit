@@ -2,6 +2,7 @@
 import m from "mithril";
 import classNames from "classnames";
 import styles from "./ColorPicker.module.scss";
+import { startFloating } from "../utils/floating";
 
 // ===========================
 // 型定義
@@ -286,6 +287,9 @@ export class ColorPickerRoot implements m.Component<ColorPickerRootAttrs> {
 	private dragging = false;
 	private rootEl: HTMLElement | null = null;
 	private boundDocClick: ((e: MouseEvent) => void) | null = null;
+	private triggerEl: HTMLElement | null = null;
+	private controlEl: HTMLElement | null = null;
+	private cleanupAutoUpdate: (() => void) | null = null;
 
 	oninit(vnode: m.Vnode<ColorPickerRootAttrs>) {
 		const val = vnode.attrs.defaultValue ?? vnode.attrs.value ?? "#ff0000";
@@ -310,6 +314,8 @@ export class ColorPickerRoot implements m.Component<ColorPickerRootAttrs> {
 			document.removeEventListener("mousedown", this.boundDocClick);
 			this.boundDocClick = null;
 		}
+		this.cleanupAutoUpdate?.();
+		this.cleanupAutoUpdate = null;
 	}
 
 	private isControlled(attrs: ColorPickerRootAttrs): boolean {
@@ -474,6 +480,7 @@ export class ColorPickerRoot implements m.Component<ColorPickerRootAttrs> {
 							class={classNames(styles.control, child.attrs?.class)}
 							style={child.attrs?.style}
 							data-part="control"
+							oncreate={(vn: m.VnodeDOM) => { this.controlEl = vn.dom as HTMLElement; }}
 						>
 							{this.renderChildren(child.children, attrs, color, colorStr, hexStr, fmt)}
 						</div>
@@ -512,6 +519,7 @@ export class ColorPickerRoot implements m.Component<ColorPickerRootAttrs> {
 							style={{ ...(child.attrs?.style ?? {}), "--cp-current-color": hexStr } as any}
 							data-part="trigger"
 							onclick={() => { this.isOpen = !this.isOpen; }}
+							oncreate={(vn: m.VnodeDOM) => { this.triggerEl = vn.dom as HTMLElement; }}
 						>
 							{child.children}
 						</button>
@@ -523,6 +531,21 @@ export class ColorPickerRoot implements m.Component<ColorPickerRootAttrs> {
 						<div
 							class={classNames(styles.positioner, child.attrs?.class)}
 							data-part="positioner"
+							oncreate={(vn: m.VnodeDOM) => {
+								this.cleanupAutoUpdate?.();
+								const ref = this.controlEl ?? this.rootEl;
+								if (ref) {
+									this.cleanupAutoUpdate = startFloating(
+										ref,
+										vn.dom as HTMLElement,
+										{ placement: "bottom-start", offsetValue: 4 },
+									);
+								}
+							}}
+							onremove={() => {
+								this.cleanupAutoUpdate?.();
+								this.cleanupAutoUpdate = null;
+							}}
 						>
 							{this.renderChildren(child.children, attrs, color, colorStr, hexStr, fmt)}
 						</div>
