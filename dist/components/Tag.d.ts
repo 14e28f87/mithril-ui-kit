@@ -1,5 +1,6 @@
 /** @jsx m */
 import m from "mithril";
+import type { ThemeColor } from "../types.js";
 /**
  * Tag バリアント
  */
@@ -14,8 +15,8 @@ export interface TagRootAttrs {
     variant?: TagVariant;
     /** サイズ */
     size?: TagSize;
-    /** カラーパレット */
-    colorPalette?: string;
+    /** カラー（Bootstrap テーマカラー） */
+    color?: ThemeColor;
     /** 閉じ可能 */
     closable?: boolean;
     /** 閉じるボタン押下時 */
@@ -45,7 +46,7 @@ declare class TagCloseTriggerMarker {
  *
  * @example
  * ```tsx
- * <Tag.Root variant="solid" colorPalette="blue">
+ * <Tag.Root variant="solid" color="primary">
  *   <Tag.Label>TypeScript</Tag.Label>
  * </Tag.Root>
  * <Tag.Root closable onClose={() => console.log("closed")}>

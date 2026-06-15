@@ -2,6 +2,7 @@
 import m from "mithril";
 import classNames from "classnames";
 import styles from "./Tag.module.scss";
+import type { ThemeColor } from "../types.js";
 
 /**
  * Tag バリアント
@@ -22,8 +23,8 @@ export interface TagRootAttrs {
 	variant?: TagVariant;
 	/** サイズ */
 	size?: TagSize;
-	/** カラーパレット */
-	colorPalette?: string;
+	/** カラー（Bootstrap テーマカラー） */
+	color?: ThemeColor;
 	/** 閉じ可能 */
 	closable?: boolean;
 	/** 閉じるボタン押下時 */
@@ -48,7 +49,7 @@ class TagCloseTriggerMarker { static __tagRole: TagRole = "closeTrigger"; view()
  *
  * @example
  * ```tsx
- * <Tag.Root variant="solid" colorPalette="blue">
+ * <Tag.Root variant="solid" color="primary">
  *   <Tag.Label>TypeScript</Tag.Label>
  * </Tag.Root>
  * <Tag.Root closable onClose={() => console.log("closed")}>
@@ -61,7 +62,7 @@ class TagRoot implements m.ClassComponent<TagRootAttrs> {
 		const {
 			variant = "subtle",
 			size = "md",
-			colorPalette = "gray",
+			color = "secondary",
 			closable,
 			onClose,
 			class: className,
@@ -133,7 +134,7 @@ class TagRoot implements m.ClassComponent<TagRootAttrs> {
 					styles.root,
 					(styles as any)[`variant${capitalize(variant)}`],
 					(styles as any)[`size${capitalize(size)}`],
-					(styles as any)[`color${capitalize(colorPalette)}`],
+					(styles as any)[`color${capitalize(color)}`],
 					className
 				)}
 			>

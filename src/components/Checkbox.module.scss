@@ -125,3 +125,11 @@
 		height: 1.5rem;
 	}
 }
+/* ─── カラーパレット（Bootstrap テーマカラー準拠） ─── */
+/* color="primary" | "secondary" | "success" | "warning" | "danger" | "info" */
+.colorPrimary   { --checkbox-color: var(--bs-primary, var(--muk-primary, #0d6efd)); }
+.colorSecondary { --checkbox-color: var(--bs-secondary, var(--muk-secondary, #6c757d)); }
+.colorSuccess   { --checkbox-color: var(--bs-success, var(--muk-success, #198754)); }
+.colorWarning   { --checkbox-color: var(--bs-warning, var(--muk-warning, #ffc107)); }
+.colorDanger    { --checkbox-color: var(--bs-danger, var(--muk-danger, #dc3545)); }
+.colorInfo      { --checkbox-color: var(--bs-info, var(--muk-info, #0dcaf0)); }

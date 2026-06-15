@@ -35,7 +35,7 @@ ProgressCircleValueTextMarker.__pcRole = "valueText";
  *
  * @example
  * ```tsx
- * <ProgressCircle.Root value={75} size="lg" colorPalette="green">
+ * <ProgressCircle.Root value={75} size="lg" color="success">
  *   <ProgressCircle.Circle>
  *     <ProgressCircle.Track />
  *     <ProgressCircle.Range />
@@ -46,14 +46,14 @@ ProgressCircleValueTextMarker.__pcRole = "valueText";
  */
 class ProgressCircleRoot {
     view(vnode) {
-        const { value, min = 0, max = 100, size = "md", colorPalette = "blue", class: className, ...rest } = vnode.attrs;
+        const { value, min = 0, max = 100, size = "md", color = "primary", class: className, ...rest } = vnode.attrs;
         const indeterminate = value === null || value === undefined;
         const percent = indeterminate ? 0 : Math.min(100, Math.max(0, ((value - min) / (max - min)) * 100));
         const dim = SIZE_MAP[size] || SIZE_MAP.md;
         const radius = (dim.size - dim.stroke) / 2;
         const circumference = 2 * Math.PI * radius;
         const dashOffset = indeterminate ? circumference * 0.25 : circumference * (1 - percent / 100);
-        return (m("div", { ...rest, class: classNames(styles.root, styles[`color${capitalize(colorPalette)}`], { [styles.indeterminate]: indeterminate }, className), role: "progressbar", "aria-valuenow": indeterminate ? undefined : value, "aria-valuemin": min, "aria-valuemax": max, style: { width: `${dim.size}px`, height: `${dim.size}px` } },
+        return (m("div", { ...rest, class: classNames(styles.root, styles[`color${capitalize(color)}`], { [styles.indeterminate]: indeterminate }, className), role: "progressbar", "aria-valuenow": indeterminate ? undefined : value, "aria-valuemin": min, "aria-valuemax": max, style: { width: `${dim.size}px`, height: `${dim.size}px` } },
             m("svg", { class: styles.svg, viewBox: `0 0 ${dim.size} ${dim.size}` },
                 m("circle", { class: styles.track, cx: dim.size / 2, cy: dim.size / 2, r: radius, fill: "none", "stroke-width": dim.stroke }),
                 m("circle", { class: styles.range, cx: dim.size / 2, cy: dim.size / 2, r: radius, fill: "none", "stroke-width": dim.stroke, "stroke-dasharray": circumference, "stroke-dashoffset": dashOffset, "stroke-linecap": "round", transform: `rotate(-90 ${dim.size / 2} ${dim.size / 2})` })),

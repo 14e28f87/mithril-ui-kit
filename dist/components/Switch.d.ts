@@ -1,5 +1,6 @@
 /** @jsx m */
 import m from "mithril";
+import type { ThemeColor } from "../types.js";
 /** Switch のサイズ */
 export type SwitchSize = "xs" | "sm" | "md" | "lg";
 /** Switch の外観バリアント */
@@ -28,8 +29,8 @@ export type SwitchRootAttrs = {
     size?: SwitchSize;
     /** 外観（デフォルト: "solid"） */
     variant?: SwitchVariant;
-    /** カラー（CSS変数 --switch-color で反映） */
-    colorPalette?: string;
+    /** カラー（Bootstrap テーマカラー） */
+    color?: ThemeColor;
     /** フォーム送信用の値 */
     value?: string;
     /** フォーム送信用の名前 */

@@ -1,5 +1,6 @@
 /** @jsx m */
 import m from "mithril";
+import type { ThemeColor } from "../types.js";
 /**
  * Progress バリアント
  */
@@ -20,8 +21,8 @@ export interface ProgressRootAttrs {
     variant?: ProgressVariant;
     /** サイズ */
     size?: ProgressSize;
-    /** カラーパレット */
-    colorPalette?: string;
+    /** カラー（Bootstrap テーマカラー） */
+    color?: ThemeColor;
     /** ストライプ */
     striped?: boolean;
     /** アニメーション (ストライプが動く) */
@@ -51,7 +52,7 @@ declare class ProgressValueTextMarker {
  *
  * @example
  * ```tsx
- * <Progress.Root value={60} size="md" colorPalette="green">
+ * <Progress.Root value={60} size="md" color="success">
  *   <Progress.Label>アップロード中</Progress.Label>
  *   <Progress.ValueText />
  *   <Progress.Track>

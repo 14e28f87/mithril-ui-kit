@@ -23,5 +23,5 @@ import basicCode from './demos/badge/basic.tsx?raw'
 | --- | --- | --- | --- |
 | `variant` | `"solid" \| "subtle" \| "outline" \| "surface" \| "plain"` | `"subtle"` | 見た目のバリエーションです |
 | `size` | `"xs" \| "sm" \| "md" \| "lg"` | `"sm"` | ラベルのサイズです |
-| `colorPalette` | `string` | — | カラー CSS 変数へ反映する色です |
+| `color` | `"primary" \| "secondary" \| "success" \| "warning" \| "danger" \| "info"` | — | Bootstrap テーマカラーを指定します |
 | `class` | `string` | — | 追加クラスです |

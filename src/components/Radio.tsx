@@ -2,6 +2,7 @@
 import m from "mithril";
 import classNames from "classnames";
 import styles from "./Radio.module.scss";
+import type { ThemeColor } from "../types.js";
 
 // ===========================
 // 型定義
@@ -24,8 +25,8 @@ export interface RadioRootAttrs {
 	variant?: RadioVariant;
 	/** サイズ（デフォルト: "md"） */
 	size?: RadioSize;
-	/** カラー（CSS変数 --radio-color で反映） */
-	colorPalette?: string;
+	/** カラー（Bootstrap テーマカラー） */
+	color?: ThemeColor;
 	/** 選択中の値（制御モード） */
 	value?: string;
 	/** 初期値（非制御モード） */
@@ -103,7 +104,7 @@ class RadioRoot implements m.ClassComponent<RadioRootAttrs> {
 
 	view(vnode: m.Vnode<RadioRootAttrs>) {
 		const {
-			variant = "outline", size = "md", colorPalette,
+			variant = "outline", size = "md", color,
 			value, defaultValue, onValueChange, name, disabled, readOnly,
 			orientation = "vertical", class: className, style,
 		} = vnode.attrs;
@@ -118,11 +119,8 @@ class RadioRoot implements m.ClassComponent<RadioRootAttrs> {
 			onValueChange?.({ value: val });
 		};
 
-		// カラーパレット → CSS 変数
+		// カラークラス
 		const rootStyle: Record<string, string> = { ...(style ?? {}) };
-		if (colorPalette) {
-			rootStyle["--radio-color"] = colorPalette;
-		}
 
 		const children = this.processChildren(vnode.children, {
 			variant, size, currentValue, groupName: this.groupName,
@@ -136,6 +134,7 @@ class RadioRoot implements m.ClassComponent<RadioRootAttrs> {
 				class={classNames(
 					styles.root,
 					orientation === "horizontal" ? styles.horizontal : styles.vertical,
+					color && (styles as any)[`color${capitalize(color)}`],
 					className,
 				)}
 				style={rootStyle}

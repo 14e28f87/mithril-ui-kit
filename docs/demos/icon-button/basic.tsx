@@ -10,10 +10,10 @@ export function setup(el: HTMLElement): void {
 					<IconButton aria-label="Search" variant="outline">
 						<i class="bi bi-search" />
 					</IconButton>
-					<IconButton aria-label="Settings" colorPalette="blue">
+					<IconButton aria-label="Settings" color="primary">
 						<i class="bi bi-gear" />
 					</IconButton>
-					<IconButton aria-label="Delete" variant="subtle" colorPalette="red">
+					<IconButton aria-label="Delete" variant="subtle" color="danger">
 						<i class="bi bi-trash" />
 					</IconButton>
 				</div>

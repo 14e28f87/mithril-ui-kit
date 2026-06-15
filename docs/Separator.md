@@ -26,5 +26,5 @@ import basicCode from './demos/separator/basic.tsx?raw'
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | 区切りの方向です |
 | `label` | `string` | — | 中央に表示するラベルです |
 | `labelPlacement` | `"start" \| "center" \| "end"` | `"center"` | ラベル位置です |
-| `colorPalette` | `string` | — | カラー CSS 変数へ反映する色です |
+| `color` | `"primary" \| "secondary" \| "success" \| "warning" \| "danger" \| "info"` | — | Bootstrap テーマカラーを指定します |
 | `class` | `string` | — | 追加クラスです |

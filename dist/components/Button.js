@@ -12,19 +12,19 @@ function capitalize(s) {
  * Chakra UI の Button に相当する。
  *
  * @example
- * <Button variant="solid" colorPalette="blue">クリック</Button>
- * <Button variant="outline" size="lg" loading>保存中...</Button>
+ * <Button variant="solid" color="primary">クリック</Button>
+ * <Button variant="outline" color="danger" size="lg" loading>保存中...</Button>
  */
 class ButtonComponent {
     view(vnode) {
-        const { variant = "solid", size = "md", colorPalette, disabled, loading, loadingText, spinnerPlacement = "start", rounded, as: tag = "button", class: className, ...rest } = vnode.attrs;
+        const { variant = "solid", size = "md", color, disabled, loading, loadingText, spinnerPlacement = "start", rounded, as: tag = "button", class: className, ...rest } = vnode.attrs;
         const isDisabled = disabled || loading;
         return m(tag, {
             ...rest,
             type: tag === "button" ? (rest.type || "button") : undefined,
             disabled: isDisabled,
             "data-loading": loading || undefined,
-            class: classNames(styles.button, styles[`variant${capitalize(variant)}`], styles[`size${capitalize(size)}`], colorPalette && styles[`color${capitalize(colorPalette)}`], rounded && styles[`rounded${capitalize(rounded)}`], loading && styles.loading, className),
+            class: classNames(styles.button, styles[`variant${capitalize(variant)}`], styles[`size${capitalize(size)}`], color && styles[`color${capitalize(color)}`], rounded && styles[`rounded${capitalize(rounded)}`], loading && styles.loading, className),
         }, [
             loading && spinnerPlacement === "start" && (m("span", { class: styles.spinner },
                 m("span", { class: styles.spinnerIcon }))),

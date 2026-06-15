@@ -1,5 +1,6 @@
 /** @jsx m */
 import m from "mithril";
+import type { ThemeColor } from "../types.js";
 /** Button のバリアント */
 export type ButtonVariant = "solid" | "subtle" | "surface" | "outline" | "ghost" | "plain";
 /** Button のサイズ */
@@ -12,8 +13,8 @@ export interface ButtonAttrs {
     variant?: ButtonVariant;
     /** サイズ */
     size?: ButtonSize;
-    /** カラーパレット */
-    colorPalette?: string;
+    /** カラー（Bootstrap テーマカラー） */
+    color?: ThemeColor;
     /** 無効状態 */
     disabled?: boolean;
     /** ローディング状態 */
@@ -39,8 +40,8 @@ export interface ButtonAttrs {
  * Chakra UI の Button に相当する。
  *
  * @example
- * <Button variant="solid" colorPalette="blue">クリック</Button>
- * <Button variant="outline" size="lg" loading>保存中...</Button>
+ * <Button variant="solid" color="primary">クリック</Button>
+ * <Button variant="outline" color="danger" size="lg" loading>保存中...</Button>
  */
 declare class ButtonComponent implements m.ClassComponent<ButtonAttrs> {
     view(vnode: m.Vnode<ButtonAttrs>): m.Vnode<any, any>;

@@ -1,6 +1,7 @@
 /** @jsx m */
 import m from "mithril";
 import classNames from "classnames";
+import type { ThemeColor } from "../types.js";
 import styles from "./Rating.module.scss";
 
 /**
@@ -12,8 +13,8 @@ export type RatingSize = "xs" | "sm" | "md" | "lg";
 export interface RatingRootAttrs {
 	/** サイズ */
 	size?: RatingSize;
-	/** カラーパレット */
-	colorPalette?: string;
+	/** カラー（Bootstrap テーマカラー） */
+	color?: ThemeColor;
 	/** アイテム数 */
 	count?: number;
 	/** 現在値 */
@@ -57,7 +58,7 @@ class RatingRoot implements m.ClassComponent<RatingRootAttrs> {
 	view(vnode: m.Vnode<RatingRootAttrs>) {
 		const {
 			size = "md",
-			colorPalette = "orange",
+			color = "warning",
 			count = 5,
 			value,
 			defaultValue,
@@ -132,7 +133,7 @@ class RatingRoot implements m.ClassComponent<RatingRootAttrs> {
 				class={classNames(
 					styles.root,
 					(styles as any)[`size${capitalize(size)}`],
-					(styles as any)[`color${capitalize(colorPalette)}`],
+					(styles as any)[`color${capitalize(color)}`],
 					{ [styles.readOnly]: readOnly },
 					className
 				)}

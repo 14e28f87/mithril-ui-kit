@@ -6,7 +6,7 @@ export function setup(el: HTMLElement): void {
 	m.mount(el, {
 		view() {
 			return (
-				<Progress.Root value={68} colorPalette="green" striped={true}>
+				<Progress.Root value={68} color="success" striped={true}>
 					<Progress.Label>Firing progress</Progress.Label>
 					<Progress.ValueText />
 					<Progress.Track>

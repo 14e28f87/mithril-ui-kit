@@ -201,3 +201,11 @@
 		height: 1.5rem;
 	}
 }
+/* ─── カラーパレット（Bootstrap テーマカラー準拠） ─── */
+/* color="primary" | "secondary" | "success" | "warning" | "danger" | "info" */
+.colorPrimary   { --radio-color: var(--bs-primary, var(--muk-primary, #0d6efd)); }
+.colorSecondary { --radio-color: var(--bs-secondary, var(--muk-secondary, #6c757d)); }
+.colorSuccess   { --radio-color: var(--bs-success, var(--muk-success, #198754)); }
+.colorWarning   { --radio-color: var(--bs-warning, var(--muk-warning, #ffc107)); }
+.colorDanger    { --radio-color: var(--bs-danger, var(--muk-danger, #dc3545)); }
+.colorInfo      { --radio-color: var(--bs-info, var(--muk-info, #0dcaf0)); }

@@ -56,46 +56,14 @@
 	border-width: 4px;
 }
 
-/* ─── カラーパレット ─── */
-.colorGray {
-	--spinner-color: var(--bs-secondary, var(--muk-gray, #6c757d));
-}
-
-.colorRed {
-	--spinner-color: var(--bs-danger, var(--muk-danger, #dc3545));
-}
-
-.colorGreen {
-	--spinner-color: var(--bs-success, var(--muk-success, #198754));
-}
-
-.colorBlue {
-	--spinner-color: var(--bs-primary, var(--muk-primary, #0d6efd));
-}
-
-.colorOrange {
-	--spinner-color: var(--bs-warning, var(--muk-warning, #ffc107));
-}
-
-.colorTeal {
-	--spinner-color: #20c997;
-}
-
-.colorPurple {
-	--spinner-color: #6f42c1;
-}
-
-.colorPink {
-	--spinner-color: #d63384;
-}
-
-.colorCyan {
-	--spinner-color: var(--bs-info, var(--muk-info, #0dcaf0));
-}
-
-.colorYellow {
-	--spinner-color: #ffc107;
-}
+/* ─── カラーパレット（Bootstrap テーマカラー準拠） ─── */
+/* color="primary" | "secondary" | "success" | "warning" | "danger" | "info" */
+.colorPrimary   { --spinner-color: var(--bs-primary, var(--muk-primary, #0d6efd)); }
+.colorSecondary { --spinner-color: var(--bs-secondary, var(--muk-secondary, #6c757d)); }
+.colorSuccess   { --spinner-color: var(--bs-success, var(--muk-success, #198754)); }
+.colorWarning   { --spinner-color: var(--bs-warning, var(--muk-warning, #ffc107)); }
+.colorDanger    { --spinner-color: var(--bs-danger, var(--muk-danger, #dc3545)); }
+.colorInfo      { --spinner-color: var(--bs-info, var(--muk-info, #0dcaf0)); }
 
 /* ─── スクリーンリーダー用 ─── */
 .srOnly {

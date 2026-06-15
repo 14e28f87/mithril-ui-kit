@@ -23,7 +23,7 @@ class RatingRoot {
         this.internalValue = vnode.attrs.defaultValue ?? 0;
     }
     view(vnode) {
-        const { size = "md", colorPalette = "orange", count = 5, value, defaultValue, onValueChange, allowHalf, readOnly, disabled, class: className, ...rest } = vnode.attrs;
+        const { size = "md", color = "warning", count = 5, value, defaultValue, onValueChange, allowHalf, readOnly, disabled, class: className, ...rest } = vnode.attrs;
         const currentValue = value !== undefined ? value : this.internalValue;
         const displayValue = this.hoverValue >= 0 ? this.hoverValue : currentValue;
         const items = [];
@@ -47,7 +47,7 @@ class RatingRoot {
                     } }, "\u2605"));
             }
         }
-        return (m("div", { ...rest, role: "radiogroup", "aria-label": "Rating", class: classNames(styles.root, styles[`size${capitalize(size)}`], styles[`color${capitalize(colorPalette)}`], { [styles.readOnly]: readOnly }, className) }, items));
+        return (m("div", { ...rest, role: "radiogroup", "aria-label": "Rating", class: classNames(styles.root, styles[`size${capitalize(size)}`], styles[`color${capitalize(color)}`], { [styles.readOnly]: readOnly }, className) }, items));
     }
 }
 /**

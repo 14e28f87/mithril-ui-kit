@@ -23,7 +23,7 @@ import basicCode from './demos/tag/basic.tsx?raw'
 | --- | --- | --- | --- |
 | `variant` | `"subtle" \| "solid" \| "outline" \| "surface"` | `"subtle"` | 見た目のバリエーションです |
 | `size` | `"sm" \| "md" \| "lg" \| "xl"` | `"md"` | タグのサイズです |
-| `colorPalette` | `string` | `"gray"` | カラー CSS 変数へ反映する色です |
+| `color` | `"primary" \| "secondary" \| "success" \| "warning" \| "danger" \| "info"` | `"secondary"` | Bootstrap テーマカラーを指定します |
 | `closable` | `boolean` | `false` | 既定の閉じるトリガーを自動表示します |
 | `onClose` | `() => void` | — | 閉じる操作時に呼ばれます |
 | `class` | `string` | — | 追加クラスです |

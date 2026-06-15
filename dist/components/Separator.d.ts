@@ -1,5 +1,6 @@
 /** @jsx m */
 import m from "mithril";
+import type { ThemeColor } from "../types.js";
 /** Separator のバリアント */
 export type SeparatorVariant = "solid" | "dashed" | "dotted";
 /** Separator のサイズ */
@@ -18,8 +19,8 @@ export interface SeparatorAttrs {
     label?: string;
     /** ラベル位置 */
     labelPlacement?: "start" | "center" | "end";
-    /** カラーパレット */
-    colorPalette?: string;
+    /** カラー（Bootstrap テーマカラー） */
+    color?: ThemeColor;
     /** 追加クラス */
     class?: string;
     [key: string]: any;

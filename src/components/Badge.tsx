@@ -2,6 +2,7 @@
 import m from "mithril";
 import classNames from "classnames";
 import styles from "./Badge.module.scss";
+import type { ThemeColor } from "../types.js";
 
 /**
  * Badge バリアント
@@ -21,8 +22,8 @@ export interface BadgeAttrs {
 	variant?: BadgeVariant;
 	/** サイズ */
 	size?: BadgeSize;
-	/** カラーパレット */
-	colorPalette?: string;
+	/** カラー（Bootstrap テーマカラー） */
+	color?: ThemeColor;
 	/** 追加クラス */
 	class?: string;
 	[key: string]: any;
@@ -37,7 +38,7 @@ function capitalize(s: string): string {
  *
  * @example
  * ```tsx
- * <Badge variant="solid" colorPalette="green">New</Badge>
+ * <Badge variant="solid" color="success">New</Badge>
  * <Badge variant="outline" size="lg">Status</Badge>
  * ```
  */
@@ -46,7 +47,7 @@ class BadgeComponent implements m.ClassComponent<BadgeAttrs> {
 		const {
 			variant = "subtle",
 			size = "sm",
-			colorPalette,
+			color,
 			class: className,
 			...rest
 		} = vnode.attrs;
@@ -58,7 +59,7 @@ class BadgeComponent implements m.ClassComponent<BadgeAttrs> {
 					styles.badge,
 					(styles as any)[`variant${capitalize(variant)}`],
 					(styles as any)[`size${capitalize(size)}`],
-					colorPalette && (styles as any)[`color${capitalize(colorPalette)}`],
+					color && (styles as any)[`color${capitalize(color)}`],
 					className
 				)}
 			>

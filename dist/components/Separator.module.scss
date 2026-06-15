@@ -79,3 +79,12 @@
 .labelCenter {
 	// 両方のラインが表示される（デフォルト動作）
 }
+
+/* ─── カラーパレット（Bootstrap テーマカラー準拠） ─── */
+/* color="primary" | "secondary" | "success" | "warning" | "danger" | "info" */
+.colorPrimary   { --separator-color: var(--bs-primary, var(--muk-primary, #0d6efd)); }
+.colorSecondary { --separator-color: var(--bs-secondary, var(--muk-secondary, #6c757d)); }
+.colorSuccess   { --separator-color: var(--bs-success, var(--muk-success, #198754)); }
+.colorWarning   { --separator-color: var(--bs-warning, var(--muk-warning, #ffc107)); }
+.colorDanger    { --separator-color: var(--bs-danger, var(--muk-danger, #dc3545)); }
+.colorInfo      { --separator-color: var(--bs-info, var(--muk-info, #0dcaf0)); }

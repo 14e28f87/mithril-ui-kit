@@ -7,11 +7,11 @@ export function setup(el: HTMLElement): void {
 		view() {
 			return (
 				<div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-					<Tag.Root variant="solid" colorPalette="blue">
+					<Tag.Root variant="solid" color="primary">
 						<Tag.StartElement>🏷️</Tag.StartElement>
 						<Tag.Label>Recipe A</Tag.Label>
 					</Tag.Root>
-					<Tag.Root variant="subtle" colorPalette="green" closable={true}>
+					<Tag.Root variant="subtle" color="success" closable={true}>
 						<Tag.Label>Completed</Tag.Label>
 					</Tag.Root>
 				</div>

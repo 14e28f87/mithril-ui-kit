@@ -8,8 +8,8 @@ export function setup(el: HTMLElement): void {
 			return (
 				<div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
 					<Spinner size="sm" />
-					<Spinner size="md" colorPalette="blue" />
-					<Spinner size="lg" colorPalette="green" />
+					<Spinner size="md" color="primary" />
+					<Spinner size="lg" color="success" />
 					<span style={{ color: "#475569" }}>処理状態のフィードバックに使います。</span>
 				</div>
 			);

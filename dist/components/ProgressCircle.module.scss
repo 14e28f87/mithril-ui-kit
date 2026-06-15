@@ -36,14 +36,11 @@
 	to { transform: rotate(360deg); }
 }
 
-/* ─── カラーパレット ─── */
-.colorGray   { --pc-accent: var(--bs-secondary, var(--muk-secondary, #6c757d)); }
-.colorRed    { --pc-accent: var(--bs-danger, var(--muk-danger, #dc3545)); }
-.colorGreen  { --pc-accent: var(--bs-success, var(--muk-success, #198754)); }
-.colorBlue   { --pc-accent: var(--bs-primary, var(--muk-primary, #0d6efd)); }
-.colorOrange { --pc-accent: var(--bs-warning, var(--muk-warning, #fd7e14)); }
-.colorTeal   { --pc-accent: var(--muk-teal, #20c997); }
-.colorPurple { --pc-accent: var(--muk-purple, #6f42c1); }
-.colorPink   { --pc-accent: var(--muk-pink, #d63384); }
-.colorCyan   { --pc-accent: var(--bs-info, var(--muk-info, #0dcaf0)); }
-.colorYellow { --pc-accent: var(--muk-yellow, #ffc107); }
+/* ─── カラーパレット（Bootstrap テーマカラー準拠） ─── */
+/* color="primary" | "secondary" | "success" | "warning" | "danger" | "info" */
+.colorPrimary   { --pc-accent: var(--bs-primary, var(--muk-primary, #0d6efd)); }
+.colorSecondary { --pc-accent: var(--bs-secondary, var(--muk-secondary, #6c757d)); }
+.colorSuccess   { --pc-accent: var(--bs-success, var(--muk-success, #198754)); }
+.colorWarning   { --pc-accent: var(--bs-warning, var(--muk-warning, #ffc107)); }
+.colorDanger    { --pc-accent: var(--bs-danger, var(--muk-danger, #dc3545)); }
+.colorInfo      { --pc-accent: var(--bs-info, var(--muk-info, #0dcaf0)); }

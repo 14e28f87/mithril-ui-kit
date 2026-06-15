@@ -18,9 +18,9 @@ function capitalize(s) {
  */
 class IconButtonComponent {
     view(vnode) {
-        const { variant = "solid", size = "md", colorPalette, disabled, loading, rounded, class: className, ...rest } = vnode.attrs;
+        const { variant = "solid", size = "md", color, disabled, loading, rounded, class: className, ...rest } = vnode.attrs;
         const isDisabled = disabled || loading;
-        return (m("button", { ...rest, type: rest.type || "button", disabled: isDisabled, "data-loading": loading || undefined, class: classNames(styles.button, styles.iconButton, styles[`variant${capitalize(variant)}`], styles[`iconSize${capitalize(size)}`], colorPalette && styles[`color${capitalize(colorPalette)}`], rounded && styles[`rounded${capitalize(rounded)}`], loading && styles.loading, className) }, loading
+        return (m("button", { ...rest, type: rest.type || "button", disabled: isDisabled, "data-loading": loading || undefined, class: classNames(styles.button, styles.iconButton, styles[`variant${capitalize(variant)}`], styles[`iconSize${capitalize(size)}`], color && styles[`color${capitalize(color)}`], rounded && styles[`rounded${capitalize(rounded)}`], loading && styles.loading, className) }, loading
             ? m("span", { class: styles.spinnerIcon })
             : vnode.children));
     }

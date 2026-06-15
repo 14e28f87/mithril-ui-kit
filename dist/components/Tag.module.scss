@@ -85,14 +85,11 @@
 	color: var(--bs-body-color, var(--muk-body-color, #212529));
 }
 
-/* ─── カラーパレット ─── */
-.colorGray   { --tag-accent: var(--bs-secondary, var(--muk-secondary, #6c757d)); }
-.colorRed    { --tag-accent: var(--bs-danger, var(--muk-danger, #dc3545)); }
-.colorGreen  { --tag-accent: var(--bs-success, var(--muk-success, #198754)); }
-.colorBlue   { --tag-accent: var(--bs-primary, var(--muk-primary, #0d6efd)); }
-.colorOrange { --tag-accent: var(--bs-warning, var(--muk-warning, #fd7e14)); }
-.colorTeal   { --tag-accent: var(--muk-teal, #20c997); }
-.colorPurple { --tag-accent: var(--muk-purple, #6f42c1); }
-.colorPink   { --tag-accent: var(--muk-pink, #d63384); }
-.colorCyan   { --tag-accent: var(--bs-info, var(--muk-info, #0dcaf0)); }
-.colorYellow { --tag-accent: var(--muk-yellow, #ffc107); }
+/* ─── カラーパレット（Bootstrap テーマカラー準拠） ─── */
+/* color="primary" | "secondary" | "success" | "warning" | "danger" | "info" */
+.colorPrimary   { --tag-accent: var(--bs-primary, var(--muk-primary, #0d6efd)); }
+.colorSecondary { --tag-accent: var(--bs-secondary, var(--muk-secondary, #6c757d)); }
+.colorSuccess   { --tag-accent: var(--bs-success, var(--muk-success, #198754)); }
+.colorWarning   { --tag-accent: var(--bs-warning, var(--muk-warning, #ffc107)); }
+.colorDanger    { --tag-accent: var(--bs-danger, var(--muk-danger, #dc3545)); }
+.colorInfo      { --tag-accent: var(--bs-info, var(--muk-info, #0dcaf0)); }

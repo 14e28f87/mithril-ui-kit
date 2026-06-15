@@ -1,6 +1,7 @@
 /** @jsx m */
 import m from "mithril";
 import classNames from "classnames";
+import type { ThemeColor } from "../types.js";
 import styles from "./Progress.module.scss";
 
 /**
@@ -28,8 +29,8 @@ export interface ProgressRootAttrs {
 	variant?: ProgressVariant;
 	/** サイズ */
 	size?: ProgressSize;
-	/** カラーパレット */
-	colorPalette?: string;
+	/** カラー（Bootstrap テーマカラー） */
+	color?: ThemeColor;
 	/** ストライプ */
 	striped?: boolean;
 	/** アニメーション (ストライプが動く) */
@@ -54,7 +55,7 @@ class ProgressValueTextMarker { static __progressRole: ProgressRole = "valueText
  *
  * @example
  * ```tsx
- * <Progress.Root value={60} size="md" colorPalette="green">
+ * <Progress.Root value={60} size="md" color="success">
  *   <Progress.Label>アップロード中</Progress.Label>
  *   <Progress.ValueText />
  *   <Progress.Track>
@@ -71,7 +72,7 @@ class ProgressRoot implements m.ClassComponent<ProgressRootAttrs> {
 			max = 100,
 			variant = "outline",
 			size = "md",
-			colorPalette = "blue",
+			color = "primary",
 			striped,
 			animated,
 			class: className,
@@ -130,7 +131,7 @@ class ProgressRoot implements m.ClassComponent<ProgressRootAttrs> {
 					styles.root,
 					(styles as any)[`variant${capitalize(variant)}`],
 					(styles as any)[`size${capitalize(size)}`],
-					(styles as any)[`color${capitalize(colorPalette)}`],
+					(styles as any)[`color${capitalize(color)}`],
 					className
 				)}
 			>

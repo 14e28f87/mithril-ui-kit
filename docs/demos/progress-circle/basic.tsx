@@ -7,7 +7,7 @@ export function setup(el: HTMLElement): void {
 		view() {
 			return (
 				<div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
-					<ProgressCircle.Root value={82} size="lg" colorPalette="green">
+					<ProgressCircle.Root value={82} size="lg" color="success">
 						<ProgressCircle.Circle>
 							<ProgressCircle.Track />
 							<ProgressCircle.Range />

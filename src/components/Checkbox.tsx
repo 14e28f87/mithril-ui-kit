@@ -2,6 +2,7 @@
 import m from "mithril";
 import classNames from "classnames";
 import styles from "./Checkbox.module.scss";
+import type { ThemeColor } from "../types.js";
 
 // ===========================
 // 型定義
@@ -43,8 +44,8 @@ export type CheckboxRootAttrs = {
 	size?: CheckboxSize;
 	/** バリアント（デフォルト: "solid"） */
 	variant?: CheckboxVariant;
-	/** カラー（CSS変数 --checkbox-color で反映） */
-	colorPalette?: string;
+	/** カラー（Bootstrap テーマカラー） */
+	color?: ThemeColor;
 	/** formRef（Mithril UI Kit の Form 連携） */
 	formRef?: any;
 	/** 追加クラス */
@@ -179,7 +180,7 @@ function IndeterminateIcon() {
  * 主な機能:
  * - solid / outline / subtle バリアント
  * - xs / sm / md / lg サイズ
- * - colorPalette によるカスタムカラー
+ * - color によるカスタムカラー
  * - formRef による Mithril UI Kit Form 連携
  * - indeterminate 状態
  *
@@ -232,11 +233,8 @@ export class CheckboxRoot implements m.Component<CheckboxRootAttrs> {
 		const indicatorVnode = markers.get("indicator");
 		const labelVnode = markers.get("label");
 
-		// カラーパレット
+		// カラークラス
 		const rootStyle: Record<string, string> = { ...(attrs.style ?? {}) };
-		if (attrs.colorPalette) {
-			rootStyle["--checkbox-color"] = attrs.colorPalette;
-		}
 
 		return (
 			<label
@@ -244,6 +242,7 @@ export class CheckboxRoot implements m.Component<CheckboxRootAttrs> {
 					styles.root,
 					(styles as any)[`size${capitalize(size)}`],
 					(styles as any)[`variant${capitalize(variant)}`],
+					attrs.color && (styles as any)[`color${capitalize(attrs.color)}`],
 					{
 						[styles.disabled]: attrs.disabled,
 						[styles.readOnly]: attrs.readOnly,

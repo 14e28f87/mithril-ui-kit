@@ -2,6 +2,7 @@
 import m from "mithril";
 import classNames from "classnames";
 import styles from "./Switch.module.scss";
+import type { ThemeColor } from "../types.js";
 
 // ===========================
 // 型定義
@@ -38,8 +39,8 @@ export type SwitchRootAttrs = {
 	size?: SwitchSize;
 	/** 外観（デフォルト: "solid"） */
 	variant?: SwitchVariant;
-	/** カラー（CSS変数 --switch-color で反映） */
-	colorPalette?: string;
+	/** カラー（Bootstrap テーマカラー） */
+	color?: ThemeColor;
 	/** フォーム送信用の値 */
 	value?: string;
 	/** フォーム送信用の名前 */
@@ -239,11 +240,8 @@ export class SwitchRoot implements m.Component<SwitchRootAttrs> {
 		const thumbIndicatorVnode = markers.get("thumbIndicator");
 		const indicatorVnode = markers.get("indicator");
 
-		// カラーパレット
+		// カラークラス
 		const rootStyle: Record<string, string> = { ...(attrs.style ?? {}) };
-		if (attrs.colorPalette) {
-			rootStyle["--switch-color"] = attrs.colorPalette;
-		}
 
 		return (
 			<label
@@ -251,6 +249,7 @@ export class SwitchRoot implements m.Component<SwitchRootAttrs> {
 					styles.root,
 					(styles as any)[`size${capitalize(size)}`],
 					(styles as any)[`variant${capitalize(variant)}`],
+					attrs.color && (styles as any)[`color${capitalize(attrs.color)}`],
 					{
 						[styles.disabled]: attrs.disabled,
 						[styles.readOnly]: attrs.readOnly,

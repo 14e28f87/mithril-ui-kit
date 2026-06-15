@@ -1,5 +1,6 @@
 /** @jsx m */
 import m from "mithril";
+import type { ThemeColor } from "../types.js";
 /**
  * Rating サイズ
  */
@@ -7,8 +8,8 @@ export type RatingSize = "xs" | "sm" | "md" | "lg";
 export interface RatingRootAttrs {
     /** サイズ */
     size?: RatingSize;
-    /** カラーパレット */
-    colorPalette?: string;
+    /** カラー（Bootstrap テーマカラー） */
+    color?: ThemeColor;
     /** アイテム数 */
     count?: number;
     /** 現在値 */

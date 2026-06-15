@@ -22,6 +22,6 @@ import basicCode from './demos/spinner/basic.tsx?raw'
 | Props | Type | Default | Description |
 | --- | --- | --- | --- |
 | `size` | `"inherit" \| "xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"` | スピナーサイズです |
-| `colorPalette` | `string` | — | カラー CSS 変数へ反映する色です |
+| `color` | `"primary" \| "secondary" \| "success" \| "warning" \| "danger" \| "info"` | — | Bootstrap テーマカラーを指定します |
 | `label` | `string` | `"読み込み中"` | スクリーンリーダー向けラベルです |
 | `class` | `string` | — | 追加クラスです |

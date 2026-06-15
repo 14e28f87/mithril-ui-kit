@@ -22,7 +22,7 @@ import basicCode from './demos/radio/basic.tsx?raw'
 | --- | --- | --- | --- |
 | `variant` | `"solid" \| "outline" \| "subtle"` | `"outline"` | インジケーターの見た目です |
 | `size` | `"xs" \| "sm" \| "md" \| "lg"` | `"md"` | 項目サイズです |
-| `colorPalette` | `string` | — | カラー CSS 変数へ反映する色です |
+| `color` | `"primary" \| "secondary" \| "success" \| "warning" \| "danger" \| "info"` | — | Bootstrap テーマカラーを指定します |
 | `value` | `string` | — | 制御モード時の現在値です |
 | `defaultValue` | `string` | — | 非制御モード時の初期値です |
 | `onValueChange` | `(detail: { value: string }) => void` | — | 値変更時に呼ばれます |

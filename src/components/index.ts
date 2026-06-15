@@ -5,7 +5,7 @@
  * Chakra UI 風の compound component API を基本とした Mithril.js UI ライブラリ。
  * レガシー / 実験的なコンポーネントはこの公開 export から分離して管理する。
  */
-
+export type { ThemeColor } from "../types.js";
 export { Input } from "./Input.js";
 export type { InputAttrs } from "./Input.js";
 

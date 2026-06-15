@@ -2,6 +2,7 @@
 import m from "mithril";
 import classNames from "classnames";
 import styles from "./Separator.module.scss";
+import type { ThemeColor } from "../types.js";
 
 /** Separator のバリアント */
 export type SeparatorVariant = "solid" | "dashed" | "dotted";
@@ -22,8 +23,8 @@ export interface SeparatorAttrs {
 	label?: string;
 	/** ラベル位置 */
 	labelPlacement?: "start" | "center" | "end";
-	/** カラーパレット */
-	colorPalette?: string;
+	/** カラー（Bootstrap テーマカラー） */
+	color?: ThemeColor;
 	/** 追加クラス */
 	class?: string;
 	[key: string]: any;
@@ -48,7 +49,7 @@ class SeparatorComponent implements m.ClassComponent<SeparatorAttrs> {
 	view(vnode: m.Vnode<SeparatorAttrs>) {
 		const {
 			variant = "solid", size = "sm", orientation = "horizontal",
-			label, labelPlacement = "center", colorPalette,
+			label, labelPlacement = "center", color,
 			class: className, ...rest
 		} = vnode.attrs;
 
@@ -64,7 +65,7 @@ class SeparatorComponent implements m.ClassComponent<SeparatorAttrs> {
 					isVertical ? styles.vertical : styles.horizontal,
 					(styles as any)[`variant${capitalize(variant)}`],
 					(styles as any)[`size${capitalize(size)}`],
-					colorPalette && (styles as any)[`color${capitalize(colorPalette)}`],
+					color && (styles as any)[`color${capitalize(color)}`],
 					label && styles.hasLabel,
 					label && (styles as any)[`label${capitalize(labelPlacement)}`],
 					className,

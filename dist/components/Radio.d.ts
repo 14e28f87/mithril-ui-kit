@@ -1,5 +1,6 @@
 /** @jsx m */
 import m from "mithril";
+import type { ThemeColor } from "../types.js";
 /** Radio のバリアント（Checkbox と統一） */
 export type RadioVariant = "solid" | "outline" | "subtle";
 /** Radio のサイズ（Checkbox と統一） */
@@ -16,8 +17,8 @@ export interface RadioRootAttrs {
     variant?: RadioVariant;
     /** サイズ（デフォルト: "md"） */
     size?: RadioSize;
-    /** カラー（CSS変数 --radio-color で反映） */
-    colorPalette?: string;
+    /** カラー（Bootstrap テーマカラー） */
+    color?: ThemeColor;
     /** 選択中の値（制御モード） */
     value?: string;
     /** 初期値（非制御モード） */

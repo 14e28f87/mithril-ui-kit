@@ -2,6 +2,7 @@
 import m from "mithril";
 import classNames from "classnames";
 import styles from "./Button.module.scss";
+import type { ThemeColor } from "../types.js";
 
 /** Button のバリアント */
 export type ButtonVariant = "solid" | "subtle" | "surface" | "outline" | "ghost" | "plain";
@@ -16,8 +17,8 @@ export interface ButtonAttrs {
 	variant?: ButtonVariant;
 	/** サイズ */
 	size?: ButtonSize;
-	/** カラーパレット */
-	colorPalette?: string;
+	/** カラー（Bootstrap テーマカラー） */
+	color?: ThemeColor;
 	/** 無効状態 */
 	disabled?: boolean;
 	/** ローディング状態 */
@@ -48,13 +49,13 @@ function capitalize(s: string): string {
  * Chakra UI の Button に相当する。
  *
  * @example
- * <Button variant="solid" colorPalette="blue">クリック</Button>
- * <Button variant="outline" size="lg" loading>保存中...</Button>
+ * <Button variant="solid" color="primary">クリック</Button>
+ * <Button variant="outline" color="danger" size="lg" loading>保存中...</Button>
  */
 class ButtonComponent implements m.ClassComponent<ButtonAttrs> {
 	view(vnode: m.Vnode<ButtonAttrs>) {
 		const {
-			variant = "solid", size = "md", colorPalette, disabled,
+			variant = "solid", size = "md", color, disabled,
 			loading, loadingText, spinnerPlacement = "start", rounded,
 			as: tag = "button", class: className,
 			...rest
@@ -71,7 +72,7 @@ class ButtonComponent implements m.ClassComponent<ButtonAttrs> {
 				styles.button,
 				(styles as any)[`variant${capitalize(variant)}`],
 				(styles as any)[`size${capitalize(size)}`],
-				colorPalette && (styles as any)[`color${capitalize(colorPalette)}`],
+				color && (styles as any)[`color${capitalize(color)}`],
 				rounded && (styles as any)[`rounded${capitalize(rounded)}`],
 				loading && styles.loading,
 				className,

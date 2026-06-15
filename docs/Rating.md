@@ -22,7 +22,7 @@ import basicCode from './demos/rating/basic.tsx?raw'
 | Props | Type | Default | Description |
 | --- | --- | --- | --- |
 | `size` | `"xs" \| "sm" \| "md" \| "lg"` | `"md"` | アイコンサイズです |
-| `colorPalette` | `string` | `"orange"` | カラー CSS 変数へ反映する色です |
+| `color` | `"primary" \| "secondary" \| "success" \| "warning" \| "danger" \| "info"` | `"warning"` | Bootstrap テーマカラーを指定します |
 | `count` | `number` | `5` | 星の数です |
 | `value` | `number` | — | 制御モード時の現在値です |
 | `defaultValue` | `number` | `0` | 非制御モード時の初期値です |

@@ -1,10 +1,3 @@
-/**
- * @fileoverview
- * Mithril UI Kit — 公開コンポーネント一覧
- *
- * Chakra UI 風の compound component API を基本とした Mithril.js UI ライブラリ。
- * レガシー / 実験的なコンポーネントはこの公開 export から分離して管理する。
- */
 export { Input } from "./Input.js";
 export { Form } from "./Form.js";
 export { FormItem } from "./FormItem.js";

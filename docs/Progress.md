@@ -26,7 +26,7 @@ import basicCode from './demos/progress/basic.tsx?raw'
 | `max` | `number` | `100` | 最大値です |
 | `variant` | `"outline" \| "subtle"` | `"outline"` | 見た目のバリエーションです |
 | `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"` | バーの高さです |
-| `colorPalette` | `string` | `"blue"` | カラー CSS 変数へ反映する色です |
+| `color` | `"primary" \| "secondary" \| "success" \| "warning" \| "danger" \| "info"` | `"primary"` | Bootstrap テーマカラーを指定します |
 | `striped` | `boolean` | `false` | ストライプ模様を表示します |
 | `animated` | `boolean` | `false` | ストライプをアニメーションさせます |
 | `class` | `string` | — | 追加クラスです |

@@ -23,7 +23,7 @@ import basicCode from './demos/icon-button/basic.tsx?raw'
 | --- | --- | --- | --- |
 | `variant` | `ButtonVariant` | `"solid"` | ボタンの見た目です |
 | `size` | `ButtonSize` | `"md"` | ボタンサイズです |
-| `colorPalette` | `string` | — | カラー CSS 変数へ反映する色です |
+| `color` | `"primary" \| "secondary" \| "success" \| "warning" \| "danger" \| "info"` | — | Bootstrap テーマカラーを指定します |
 | `disabled` | `boolean` | `false` | 無効化します |
 | `loading` | `boolean` | `false` | ローディング状態にします |
 | `rounded` | `"sm" \| "md" \| "lg" \| "xl" \| "2xl" \| "full"` | — | 角丸を上書きします |

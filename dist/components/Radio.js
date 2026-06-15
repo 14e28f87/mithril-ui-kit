@@ -39,7 +39,7 @@ class RadioRoot {
         this.groupName = vnode.attrs.name || `radio-${Math.random().toString(36).slice(2, 9)}`;
     }
     view(vnode) {
-        const { variant = "outline", size = "md", colorPalette, value, defaultValue, onValueChange, name, disabled, readOnly, orientation = "vertical", class: className, style, } = vnode.attrs;
+        const { variant = "outline", size = "md", color, value, defaultValue, onValueChange, name, disabled, readOnly, orientation = "vertical", class: className, style, } = vnode.attrs;
         const currentValue = value !== undefined ? value : this.internalValue;
         const handleChange = (val) => {
             if (disabled || readOnly)
@@ -49,16 +49,13 @@ class RadioRoot {
             }
             onValueChange?.({ value: val });
         };
-        // カラーパレット → CSS 変数
+        // カラークラス
         const rootStyle = { ...(style ?? {}) };
-        if (colorPalette) {
-            rootStyle["--radio-color"] = colorPalette;
-        }
         const children = this.processChildren(vnode.children, {
             variant, size, currentValue, groupName: this.groupName,
             disabled, readOnly, handleChange,
         });
-        return (m("div", { role: "radiogroup", "aria-orientation": orientation, class: classNames(styles.root, orientation === "horizontal" ? styles.horizontal : styles.vertical, className), style: rootStyle, "data-scope": "radio-group", "data-part": "root" }, children));
+        return (m("div", { role: "radiogroup", "aria-orientation": orientation, class: classNames(styles.root, orientation === "horizontal" ? styles.horizontal : styles.vertical, color && styles[`color${capitalize(color)}`], className), style: rootStyle, "data-scope": "radio-group", "data-part": "root" }, children));
     }
     isControlled(attrs) {
         return attrs.value !== undefined;

@@ -23,7 +23,7 @@ import basicCode from './demos/button/basic.tsx?raw'
 | --- | --- | --- | --- |
 | `variant` | `"solid" \| "subtle" \| "surface" \| "outline" \| "ghost" \| "plain"` | `"solid"` | ボタンの見た目です |
 | `size` | `"2xs" \| "xs" \| "sm" \| "md" \| "lg" \| "xl" \| "2xl"` | `"md"` | ボタンサイズです |
-| `colorPalette` | `string` | — | カラー CSS 変数へ反映する色です |
+| `color` | `"primary" \| "secondary" \| "success" \| "warning" \| "danger" \| "info"` | — | Bootstrap テーマカラーを指定します |
 | `disabled` | `boolean` | `false` | 無効化します |
 | `loading` | `boolean` | `false` | ローディング状態にします |
 | `loadingText` | `string` | — | ローディング中に表示するテキストです |

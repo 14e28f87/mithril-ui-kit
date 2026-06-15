@@ -53,7 +53,7 @@ import basicCode from './demos/switch/basic.tsx?raw'
 | `invalid` | `boolean` | `false` | バリデーションエラー状態 |
 | `size` | `"xs" \| "sm" \| "md" \| "lg"` | `"md"` | サイズ |
 | `variant` | `"solid" \| "raised"` | `"solid"` | 外観バリアント |
-| `colorPalette` | `string` | — | カスタムカラー（CSS カラー値） |
+| `color` | `"primary" \| "secondary" \| "success" \| "warning" \| "danger" \| "info"` | — | Bootstrap テーマカラーを指定します |
 | `name` | `string` | — | フォーム送信用の名前 |
 | `value` | `string` | `"on"` | フォーム送信用の値 |
 
@@ -66,7 +66,7 @@ import basicCode from './demos/switch/basic.tsx?raw'
 ## カスタムカラー
 
 ```tsx
-<Switch.Root defaultChecked={true} colorPalette="#10b981">
+<Switch.Root defaultChecked={true} color="success">
   <Switch.Control>
     <Switch.Thumb />
   </Switch.Control>

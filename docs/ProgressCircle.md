@@ -25,7 +25,7 @@ import basicCode from './demos/progress-circle/basic.tsx?raw'
 | `min` | `number` | `0` | 最小値です |
 | `max` | `number` | `100` | 最大値です |
 | `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"` | 円のサイズです |
-| `colorPalette` | `string` | `"blue"` | カラー CSS 変数へ反映する色です |
+| `color` | `"primary" \| "secondary" \| "success" \| "warning" \| "danger" \| "info"` | `"primary"` | Bootstrap テーマカラーを指定します |
 | `class` | `string` | — | 追加クラスです |
 
 ### Subcomponents

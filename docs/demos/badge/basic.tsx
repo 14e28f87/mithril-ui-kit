@@ -7,10 +7,10 @@ export function setup(el: HTMLElement): void {
 		view() {
 			return (
 				<div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-					<Badge variant="solid" colorPalette="green">Online</Badge>
-					<Badge variant="subtle" colorPalette="blue">Draft</Badge>
-					<Badge variant="outline" colorPalette="orange">Pending</Badge>
-					<Badge variant="surface" colorPalette="red">Alarm</Badge>
+					<Badge variant="solid" color="success">Online</Badge>
+					<Badge variant="subtle" color="primary">Draft</Badge>
+					<Badge variant="outline" color="warning">Pending</Badge>
+					<Badge variant="surface" color="danger">Alarm</Badge>
 				</div>
 			);
 		},

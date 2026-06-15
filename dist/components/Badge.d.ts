@@ -1,5 +1,6 @@
 /** @jsx m */
 import m from "mithril";
+import type { ThemeColor } from "../types.js";
 /**
  * Badge バリアント
  */
@@ -16,8 +17,8 @@ export interface BadgeAttrs {
     variant?: BadgeVariant;
     /** サイズ */
     size?: BadgeSize;
-    /** カラーパレット */
-    colorPalette?: string;
+    /** カラー（Bootstrap テーマカラー） */
+    color?: ThemeColor;
     /** 追加クラス */
     class?: string;
     [key: string]: any;
@@ -27,7 +28,7 @@ export interface BadgeAttrs {
  *
  * @example
  * ```tsx
- * <Badge variant="solid" colorPalette="green">New</Badge>
+ * <Badge variant="solid" color="success">New</Badge>
  * <Badge variant="outline" size="lg">Status</Badge>
  * ```
  */

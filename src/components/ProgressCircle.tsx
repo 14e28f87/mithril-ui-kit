@@ -1,6 +1,7 @@
 /** @jsx m */
 import m from "mithril";
 import classNames from "classnames";
+import type { ThemeColor } from "../types.js";
 import styles from "./ProgressCircle.module.scss";
 
 /**
@@ -21,8 +22,8 @@ export interface ProgressCircleRootAttrs {
 	max?: number;
 	/** サイズ */
 	size?: ProgressCircleSize;
-	/** カラーパレット */
-	colorPalette?: string;
+	/** カラー（Bootstrap テーマカラー） */
+	color?: ThemeColor;
 	/** 追加クラス */
 	class?: string;
 	[key: string]: any;
@@ -52,7 +53,7 @@ class ProgressCircleValueTextMarker { static __pcRole: ProgressCircleRole = "val
  *
  * @example
  * ```tsx
- * <ProgressCircle.Root value={75} size="lg" colorPalette="green">
+ * <ProgressCircle.Root value={75} size="lg" color="success">
  *   <ProgressCircle.Circle>
  *     <ProgressCircle.Track />
  *     <ProgressCircle.Range />
@@ -68,7 +69,7 @@ class ProgressCircleRoot implements m.ClassComponent<ProgressCircleRootAttrs> {
 			min = 0,
 			max = 100,
 			size = "md",
-			colorPalette = "blue",
+			color = "primary",
 			class: className,
 			...rest
 		} = vnode.attrs;
@@ -86,7 +87,7 @@ class ProgressCircleRoot implements m.ClassComponent<ProgressCircleRootAttrs> {
 				{...rest}
 				class={classNames(
 					styles.root,
-					(styles as any)[`color${capitalize(colorPalette)}`],
+					(styles as any)[`color${capitalize(color)}`],
 					{ [styles.indeterminate]: indeterminate },
 					className
 				)}

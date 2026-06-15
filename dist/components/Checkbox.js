@@ -82,7 +82,7 @@ function IndeterminateIcon() {
  * 主な機能:
  * - solid / outline / subtle バリアント
  * - xs / sm / md / lg サイズ
- * - colorPalette によるカスタムカラー
+ * - color によるカスタムカラー
  * - formRef による Mithril UI Kit Form 連携
  * - indeterminate 状態
  *
@@ -131,12 +131,9 @@ export class CheckboxRoot {
         const controlVnode = markers.get("control");
         const indicatorVnode = markers.get("indicator");
         const labelVnode = markers.get("label");
-        // カラーパレット
+        // カラークラス
         const rootStyle = { ...(attrs.style ?? {}) };
-        if (attrs.colorPalette) {
-            rootStyle["--checkbox-color"] = attrs.colorPalette;
-        }
-        return (m("label", { class: classNames(styles.root, styles[`size${capitalize(size)}`], styles[`variant${capitalize(variant)}`], {
+        return (m("label", { class: classNames(styles.root, styles[`size${capitalize(size)}`], styles[`variant${capitalize(variant)}`], attrs.color && styles[`color${capitalize(attrs.color)}`], {
                 [styles.disabled]: attrs.disabled,
                 [styles.readOnly]: attrs.readOnly,
                 [styles.invalid]: attrs.invalid,

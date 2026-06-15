@@ -128,12 +128,9 @@ export class SwitchRoot {
         const thumbVnode = markers.get("thumb");
         const thumbIndicatorVnode = markers.get("thumbIndicator");
         const indicatorVnode = markers.get("indicator");
-        // カラーパレット
+        // カラークラス
         const rootStyle = { ...(attrs.style ?? {}) };
-        if (attrs.colorPalette) {
-            rootStyle["--switch-color"] = attrs.colorPalette;
-        }
-        return (m("label", { class: classNames(styles.root, styles[`size${capitalize(size)}`], styles[`variant${capitalize(variant)}`], {
+        return (m("label", { class: classNames(styles.root, styles[`size${capitalize(size)}`], styles[`variant${capitalize(variant)}`], attrs.color && styles[`color${capitalize(attrs.color)}`], {
                 [styles.disabled]: attrs.disabled,
                 [styles.readOnly]: attrs.readOnly,
                 [styles.invalid]: attrs.invalid,

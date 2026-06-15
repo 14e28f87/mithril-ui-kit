@@ -3,6 +3,7 @@ import m from "mithril";
 import classNames from "classnames";
 import styles from "./Button.module.scss";
 import type { ButtonVariant, ButtonSize } from "./Button.js";
+import type { ThemeColor } from "../types.js";
 
 /**
  * IconButton の属性
@@ -12,8 +13,8 @@ export interface IconButtonAttrs {
 	variant?: ButtonVariant;
 	/** サイズ */
 	size?: ButtonSize;
-	/** カラーパレット */
-	colorPalette?: string;
+	/** カラー（Bootstrap テーマカラー） */
+	color?: ThemeColor;
 	/** 無効状態 */
 	disabled?: boolean;
 	/** ローディング状態 */
@@ -47,7 +48,7 @@ function capitalize(s: string): string {
 class IconButtonComponent implements m.ClassComponent<IconButtonAttrs> {
 	view(vnode: m.Vnode<IconButtonAttrs>) {
 		const {
-			variant = "solid", size = "md", colorPalette, disabled,
+			variant = "solid", size = "md", color, disabled,
 			loading, rounded, class: className,
 			...rest
 		} = vnode.attrs;
@@ -65,7 +66,7 @@ class IconButtonComponent implements m.ClassComponent<IconButtonAttrs> {
 					styles.iconButton,
 					(styles as any)[`variant${capitalize(variant)}`],
 					(styles as any)[`iconSize${capitalize(size)}`],
-					colorPalette && (styles as any)[`color${capitalize(colorPalette)}`],
+					color && (styles as any)[`color${capitalize(color)}`],
 					rounded && (styles as any)[`rounded${capitalize(rounded)}`],
 					loading && styles.loading,
 					className,

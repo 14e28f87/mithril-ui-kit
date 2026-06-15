@@ -1,6 +1,7 @@
 /** @jsx m */
 import m from "mithril";
 import type { ButtonVariant, ButtonSize } from "./Button.js";
+import type { ThemeColor } from "../types.js";
 /**
  * IconButton の属性
  */
@@ -9,8 +10,8 @@ export interface IconButtonAttrs {
     variant?: ButtonVariant;
     /** サイズ */
     size?: ButtonSize;
-    /** カラーパレット */
-    colorPalette?: string;
+    /** カラー（Bootstrap テーマカラー） */
+    color?: ThemeColor;
     /** 無効状態 */
     disabled?: boolean;
     /** ローディング状態 */

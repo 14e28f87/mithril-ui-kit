@@ -27,7 +27,7 @@ TagCloseTriggerMarker.__tagRole = "closeTrigger";
  *
  * @example
  * ```tsx
- * <Tag.Root variant="solid" colorPalette="blue">
+ * <Tag.Root variant="solid" color="primary">
  *   <Tag.Label>TypeScript</Tag.Label>
  * </Tag.Root>
  * <Tag.Root closable onClose={() => console.log("closed")}>
@@ -37,7 +37,7 @@ TagCloseTriggerMarker.__tagRole = "closeTrigger";
  */
 class TagRoot {
     view(vnode) {
-        const { variant = "subtle", size = "md", colorPalette = "gray", closable, onClose, class: className, ...rest } = vnode.attrs;
+        const { variant = "subtle", size = "md", color = "secondary", closable, onClose, class: className, ...rest } = vnode.attrs;
         const children = (Array.isArray(vnode.children) ? vnode.children : [vnode.children]).flat(Infinity);
         const rendered = [];
         for (const child of children) {
@@ -73,7 +73,7 @@ class TagRoot {
                     onClose?.();
                 }, "aria-label": "\u9589\u3058\u308B" }, "\u2715"));
         }
-        return (m("span", { ...rest, class: classNames(styles.root, styles[`variant${capitalize(variant)}`], styles[`size${capitalize(size)}`], styles[`color${capitalize(colorPalette)}`], className) }, rendered));
+        return (m("span", { ...rest, class: classNames(styles.root, styles[`variant${capitalize(variant)}`], styles[`size${capitalize(size)}`], styles[`color${capitalize(color)}`], className) }, rendered));
     }
 }
 /**

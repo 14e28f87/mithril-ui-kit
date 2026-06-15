@@ -1,5 +1,6 @@
 /** @jsx m */
 import m from "mithril";
+import type { ThemeColor } from "../types.js";
 /**
  * Spinner サイズ
  */
@@ -10,8 +11,8 @@ export type SpinnerSize = "inherit" | "xs" | "sm" | "md" | "lg" | "xl";
 export interface SpinnerAttrs {
     /** サイズ */
     size?: SpinnerSize;
-    /** カラーパレット */
-    colorPalette?: string;
+    /** カラー（Bootstrap テーマカラー） */
+    color?: ThemeColor;
     /** ラベル（アクセシビリティ用） */
     label?: string;
     /** 追加クラス */
@@ -24,7 +25,7 @@ export interface SpinnerAttrs {
  * @example
  * ```tsx
  * <Spinner size="md" />
- * <Spinner size="lg" colorPalette="blue" />
+ * <Spinner size="lg" color="primary" />
  * ```
  */
 declare class SpinnerComponent implements m.ClassComponent<SpinnerAttrs> {

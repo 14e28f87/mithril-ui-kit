@@ -1,5 +1,6 @@
 /** @jsx m */
 import m from "mithril";
+import type { ThemeColor } from "../types.js";
 /**
  * ProgressCircle サイズ
  */
@@ -14,8 +15,8 @@ export interface ProgressCircleRootAttrs {
     max?: number;
     /** サイズ */
     size?: ProgressCircleSize;
-    /** カラーパレット */
-    colorPalette?: string;
+    /** カラー（Bootstrap テーマカラー） */
+    color?: ThemeColor;
     /** 追加クラス */
     class?: string;
     [key: string]: any;
@@ -41,7 +42,7 @@ declare class ProgressCircleValueTextMarker {
  *
  * @example
  * ```tsx
- * <ProgressCircle.Root value={75} size="lg" colorPalette="green">
+ * <ProgressCircle.Root value={75} size="lg" color="success">
  *   <ProgressCircle.Circle>
  *     <ProgressCircle.Track />
  *     <ProgressCircle.Range />

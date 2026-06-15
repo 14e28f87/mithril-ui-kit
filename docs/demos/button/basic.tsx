@@ -8,9 +8,10 @@ export function setup(el: HTMLElement): void {
 			return (
 				<div style={{ display: "grid", gap: "16px" }}>
 					<div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-						<Button variant="solid" colorPalette="blue">Save</Button>
-						<Button variant="outline">Preview</Button>
-						<Button variant="subtle" colorPalette="green">Run</Button>
+					<Button variant="solid" colorPalette="primary">Save</Button>
+					<Button variant="outline">Preview</Button>
+					<Button variant="subtle" colorPalette="success">Run</Button>
+					<Button variant="solid" colorPalette="danger">Delete</Button>
 						<Button loading={true} loadingText="Sending">Submit</Button>
 					</div>
 					<ButtonGroup attached={true}>

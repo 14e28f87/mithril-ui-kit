@@ -11,13 +11,13 @@ function capitalize(s) {
  * @example
  * ```tsx
  * <Spinner size="md" />
- * <Spinner size="lg" colorPalette="blue" />
+ * <Spinner size="lg" color="primary" />
  * ```
  */
 class SpinnerComponent {
     view(vnode) {
-        const { size = "md", colorPalette, label = "読み込み中", class: className, ...rest } = vnode.attrs;
-        return (m("span", { ...rest, role: "status", class: classNames(styles.spinner, styles[`size${capitalize(size)}`], colorPalette && styles[`color${capitalize(colorPalette)}`], className) },
+        const { size = "md", color, label = "読み込み中", class: className, ...rest } = vnode.attrs;
+        return (m("span", { ...rest, role: "status", class: classNames(styles.spinner, styles[`size${capitalize(size)}`], color && styles[`color${capitalize(color)}`], className) },
             m("span", { class: styles.srOnly }, label)));
     }
 }

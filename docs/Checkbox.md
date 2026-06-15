@@ -38,7 +38,7 @@ import groupCode from './demos/checkbox/group.tsx?raw'
 | `name` | `string` | — | フォーム送信用の name 属性です |
 | `size` | `"xs" \| "sm" \| "md" \| "lg"` | `"md"` | サイズを指定します |
 | `variant` | `"solid" \| "outline" \| "subtle"` | `"solid"` | 見た目のバリアントです |
-| `colorPalette` | `string` | — | カラー CSS 変数へ反映する色です |
+| `color` | `"primary" \| "secondary" \| "success" \| "warning" \| "danger" \| "info"` | — | Bootstrap テーマカラーを指定します |
 | `class` | `string` | — | ルート要素の追加クラスです |
 | `style` | `Record<string, string>` | — | ルート要素のインラインスタイルです |
 

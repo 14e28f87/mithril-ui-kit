@@ -18,9 +18,9 @@ function capitalize(s) {
  */
 class SeparatorComponent {
     view(vnode) {
-        const { variant = "solid", size = "sm", orientation = "horizontal", label, labelPlacement = "center", colorPalette, class: className, ...rest } = vnode.attrs;
+        const { variant = "solid", size = "sm", orientation = "horizontal", label, labelPlacement = "center", color, class: className, ...rest } = vnode.attrs;
         const isVertical = orientation === "vertical";
-        return (m("div", { ...rest, role: "separator", "aria-orientation": orientation, class: classNames(styles.separator, isVertical ? styles.vertical : styles.horizontal, styles[`variant${capitalize(variant)}`], styles[`size${capitalize(size)}`], colorPalette && styles[`color${capitalize(colorPalette)}`], label && styles.hasLabel, label && styles[`label${capitalize(labelPlacement)}`], className) }, label && m("span", { class: styles.label }, label)));
+        return (m("div", { ...rest, role: "separator", "aria-orientation": orientation, class: classNames(styles.separator, isVertical ? styles.vertical : styles.horizontal, styles[`variant${capitalize(variant)}`], styles[`size${capitalize(size)}`], color && styles[`color${capitalize(color)}`], label && styles.hasLabel, label && styles[`label${capitalize(labelPlacement)}`], className) }, label && m("span", { class: styles.label }, label)));
     }
 }
 export { SeparatorComponent as Separator };
