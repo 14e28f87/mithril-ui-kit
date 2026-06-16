@@ -21,7 +21,7 @@ export function setup(el: HTMLElement): void {
             <ColorPicker.Label>プリセット色</ColorPicker.Label>
             <ColorPicker.Control>
               <ColorPicker.Input />
-              <ColorPicker.Trigger>選択</ColorPicker.Trigger>
+              <ColorPicker.Trigger></ColorPicker.Trigger>
             </ColorPicker.Control>
             <ColorPicker.Positioner>
               <ColorPicker.Content>

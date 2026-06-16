@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Carousel } from "mithril-ui-kit";
+import { Carousel, Button } from "mithril-ui-kit";
 import type { CarouselPageChangeDetails } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
@@ -13,9 +13,9 @@ export function setup(el: HTMLElement): void {
         <div style={{ display: "grid", gap: "12px", maxWidth: "520px" }}>
           <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
             {slides.map((label, index) => (
-              <button type="button" class="vp-button" onclick={() => { page = index; m.redraw(); }}>
+              <Button onclick={() => { page = index; m.redraw(); }}>
                 {label}
-              </button>
+              </Button>
             ))}
           </div>
 

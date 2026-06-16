@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Tooltip } from "mithril-ui-kit";
+import { Tooltip, Button } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   m.mount(el, {
@@ -9,7 +9,7 @@ export function setup(el: HTMLElement): void {
         <div style={{ display: "flex", gap: "16px", alignItems: "center", padding: "8px" }}>
           <Tooltip.Root placement="top" showArrow={true}>
             <Tooltip.Trigger>
-              <button class="vp-button">Hover me</button>
+              <Button>Hover me</Button>
             </Tooltip.Trigger>
             <Tooltip.Content>上側に表示されるツールチップです。</Tooltip.Content>
           </Tooltip.Root>

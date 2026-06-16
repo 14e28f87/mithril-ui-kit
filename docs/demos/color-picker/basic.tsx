@@ -20,7 +20,7 @@ export function setup(el: HTMLElement): void {
             <ColorPicker.Label>テーマカラー</ColorPicker.Label>
             <ColorPicker.Control>
               <ColorPicker.Input />
-              <ColorPicker.Trigger>開く</ColorPicker.Trigger>
+              <ColorPicker.Trigger></ColorPicker.Trigger>
             </ColorPicker.Control>
             <ColorPicker.Positioner>
               <ColorPicker.Content>

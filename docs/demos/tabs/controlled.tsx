@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Tabs } from "mithril-ui-kit";
+import { Tabs, Button } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let value = "trend";
@@ -10,9 +10,9 @@ export function setup(el: HTMLElement): void {
       return (
         <div style={{ display: "grid", gap: "12px" }}>
           <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-            <button type="button" class="vp-button" onclick={() => { value = "trend"; m.redraw(); }}>Trend</button>
-            <button type="button" class="vp-button" onclick={() => { value = "events"; m.redraw(); }}>Events</button>
-            <button type="button" class="vp-button" onclick={() => { value = "notes"; m.redraw(); }}>Notes</button>
+            <Button onclick={() => { value = "trend"; m.redraw(); }}>Trend</Button>
+            <Button onclick={() => { value = "events"; m.redraw(); }}>Events</Button>
+            <Button onclick={() => { value = "notes"; m.redraw(); }}>Notes</Button>
           </div>
 
           <Tabs.Root

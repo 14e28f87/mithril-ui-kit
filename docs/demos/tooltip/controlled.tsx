@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Tooltip } from "mithril-ui-kit";
+import { Tooltip, Button } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let open = false;
@@ -9,9 +9,9 @@ export function setup(el: HTMLElement): void {
     view() {
       return (
         <div style={{ display: "grid", gap: "12px", alignItems: "start" }}>
-          <button type="button" class="vp-button" onclick={() => { open = !open; m.redraw(); }}>
+          <Button onclick={() => { open = !open; m.redraw(); }}>
             {open ? "固定表示を解除" : "固定表示する"}
-          </button>
+          </Button>
 
           <Tooltip.Root open={open} onOpenChange={(details) => { open = details.open; m.redraw(); }} placement="bottom" showArrow={true}>
             <Tooltip.Trigger>

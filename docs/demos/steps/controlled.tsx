@@ -1,6 +1,6 @@
 /** @jsx m */
 import m from "mithril";
-import { Steps } from "mithril-ui-kit";
+import { Steps, Button } from "mithril-ui-kit";
 
 export function setup(el: HTMLElement): void {
   let step = 1;
@@ -12,11 +12,11 @@ export function setup(el: HTMLElement): void {
         <div style={{ display: "grid", gap: "14px" }}>
           <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
             {[0, 1, 2].map((index) => (
-              <button type="button" class="vp-button" onclick={() => { step = index; completed = false; m.redraw(); }}>
+              <Button onclick={() => { step = index; completed = false; m.redraw(); }}>
                 Step {index + 1}
-              </button>
+              </Button>
             ))}
-            <button type="button" class="vp-button" onclick={() => { step = 0; completed = false; m.redraw(); }}>Reset</button>
+            <Button onclick={() => { step = 0; completed = false; m.redraw(); }}>Reset</Button>
           </div>
 
           <Steps.Root
@@ -24,7 +24,7 @@ export function setup(el: HTMLElement): void {
             step={step}
             linear={false}
             variant="subtle"
-            onStepChange={(details) => {
+            onStepChange={(details:any) => {
               step = details.step;
               completed = details.step >= 3;
               m.redraw();
