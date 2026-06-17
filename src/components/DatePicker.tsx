@@ -951,7 +951,7 @@ export class DatePickerRoot implements m.Component<DatePickerRootAttrs> {
 							<div class={styles.multiMonth}>
 								{Array.from({ length: numMonths }, (_, i) => (
 									<div>
-										{i === 0 ? this.renderHeader(attrs) : this.renderMonthHeader(attrs, i)}
+										{this.renderMonthHeader(attrs, i, i === 0, i === numMonths - 1)}
 										{this.renderDayTable(attrs, i)}
 									</div>
 								))}
@@ -1009,18 +1009,30 @@ export class DatePickerRoot implements m.Component<DatePickerRootAttrs> {
 		}
 	}
 
-	/** マルチ月表示用のサブヘッダー */
-	private renderMonthHeader(attrs: DatePickerRootAttrs, monthOffset: number): m.Children {
+	/**
+	 * マルチ月表示用のサブヘッダー。
+	 *
+	 * 先頭の月には「前の月」ボタン、末尾の月には「次の月」ボタンを配置する。
+	 * ボタンを表示しない側には同サイズの不可視スペーサーを置き、タイトルを常に中央寄せにする。
+	 */
+	private renderMonthHeader(attrs: DatePickerRootAttrs, monthOffset: number, showPrev: boolean, showNext: boolean): m.Children {
 		let month = this.focusedMonth + monthOffset;
 		let year = this.focusedYear;
-		if (month > 11) { month -= 12; year++; }
+		while (month > 11) { month -= 12; year++; }
+		while (month < 0) { month += 12; year--; }
 		const name = new Date(year, month).toLocaleDateString(
 			attrs.locale ?? "ja-JP",
 			{ year: "numeric", month: "long" }
 		);
 		return (
 			<div class={styles.header} data-part="header">
+				{showPrev
+					? <button type="button" class={styles.headerNavBtn} onclick={() => this.prevMonth()} aria-label="前の月">‹</button>
+					: <span class={styles.headerNavBtn} style={{ visibility: "hidden" }} aria-hidden="true" />}
 				<span class={styles.headerTitle}>{name}</span>
+				{showNext
+					? <button type="button" class={styles.headerNavBtn} onclick={() => this.nextMonth()} aria-label="次の月">›</button>
+					: <span class={styles.headerNavBtn} style={{ visibility: "hidden" }} aria-hidden="true" />}
 			</div>
 		);
 	}

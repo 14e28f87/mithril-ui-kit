@@ -265,7 +265,12 @@ export declare class DatePickerRoot implements m.Component<DatePickerRootAttrs> 
     private renderYearTable;
     private renderChildren;
     private renderChild;
-    /** マルチ月表示用のサブヘッダー */
+    /**
+     * マルチ月表示用のサブヘッダー。
+     *
+     * 先頭の月には「前の月」ボタン、末尾の月には「次の月」ボタンを配置する。
+     * ボタンを表示しない側には同サイズの不可視スペーサーを置き、タイトルを常に中央寄せにする。
+     */
     private renderMonthHeader;
     view(vnode: m.Vnode<DatePickerRootAttrs>): JSX.Element;
 }

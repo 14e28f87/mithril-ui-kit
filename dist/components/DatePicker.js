@@ -634,7 +634,7 @@ export class DatePickerRoot {
                 if (numMonths > 1 && this.currentView === "day") {
                     return (m("div", { class: contentClass, "data-part": "content" },
                         m("div", { class: styles.multiMonth }, Array.from({ length: numMonths }, (_, i) => (m("div", null,
-                            i === 0 ? this.renderHeader(attrs) : this.renderMonthHeader(attrs, i),
+                            this.renderMonthHeader(attrs, i, i === 0, i === numMonths - 1),
                             this.renderDayTable(attrs, i)))))));
                 }
                 return (m("div", { class: contentClass, "data-part": "content" }, this.renderChildren(childChildren, attrs)));
@@ -661,17 +661,32 @@ export class DatePickerRoot {
                 return child;
         }
     }
-    /** マルチ月表示用のサブヘッダー */
-    renderMonthHeader(attrs, monthOffset) {
+    /**
+     * マルチ月表示用のサブヘッダー。
+     *
+     * 先頭の月には「前の月」ボタン、末尾の月には「次の月」ボタンを配置する。
+     * ボタンを表示しない側には同サイズの不可視スペーサーを置き、タイトルを常に中央寄せにする。
+     */
+    renderMonthHeader(attrs, monthOffset, showPrev, showNext) {
         let month = this.focusedMonth + monthOffset;
         let year = this.focusedYear;
-        if (month > 11) {
+        while (month > 11) {
             month -= 12;
             year++;
         }
+        while (month < 0) {
+            month += 12;
+            year--;
+        }
         const name = new Date(year, month).toLocaleDateString(attrs.locale ?? "ja-JP", { year: "numeric", month: "long" });
         return (m("div", { class: styles.header, "data-part": "header" },
-            m("span", { class: styles.headerTitle }, name)));
+            showPrev
+                ? m("button", { type: "button", class: styles.headerNavBtn, onclick: () => this.prevMonth(), "aria-label": "\u524D\u306E\u6708" }, "\u2039")
+                : m("span", { class: styles.headerNavBtn, style: { visibility: "hidden" }, "aria-hidden": "true" }),
+            m("span", { class: styles.headerTitle }, name),
+            showNext
+                ? m("button", { type: "button", class: styles.headerNavBtn, onclick: () => this.nextMonth(), "aria-label": "\u6B21\u306E\u6708" }, "\u203A")
+                : m("span", { class: styles.headerNavBtn, style: { visibility: "hidden" }, "aria-hidden": "true" })));
     }
     // --- view() ---
     view(vnode) {
