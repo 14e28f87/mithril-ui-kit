@@ -96,24 +96,25 @@ export class FormItem {
                     console.log(`FormItem injectedOnInput - setFieldValue ${name}:`, e.target.value);
                     return;
                 }
+                // 非イベント値（NumberInput 等が渡す number | null）: 先に値を反映し、その後バリデーション
+                formRef.setFieldValue(name, e);
+                console.log(`FormItem injectedOnInput - setFieldValue ${name}:`, e);
                 await this.validate(name, rules ?? [], formRef, {
                     candidateValue: e,
                     useCandidateValue: true,
-                    rethrow: true,
                 });
-                formRef.setFieldValue(name, e);
-                console.log(`FormItem injectedOnInput - setFieldValue ${name}:`, e);
             };
             const injectedOnBlur = async () => {
                 await this.validate(name, rules ?? [], formRef);
             };
+            // Bug fix: compound component（NumberInput.Root 等）のために child.children も渡す
             childNode = m(child.tag, {
                 ...(child.attrs || {}),
                 value: formRef.getFieldValue(name),
                 oninput: injectedOnInput,
                 onblur: injectedOnBlur,
                 class: classNames(child.attrs?.class, { "is-invalid": error }),
-            });
+            }, child.children);
         }
         return (m("div", { class: classNames("mb-3", customClass) },
             label && m("label", { class: "form-label" }, label),
