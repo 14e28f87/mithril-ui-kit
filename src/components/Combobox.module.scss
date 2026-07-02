@@ -173,3 +173,56 @@
 .sizeMd .input { font-size: 1rem; }
 .sizeLg .control { font-size: 1.125rem; }
 .sizeLg .input { font-size: 1.125rem; }
+
+/* ─── Invalid 状態 ─── */
+.invalid.variantOutline .control {
+	border-color: var(--bs-danger, var(--muk-danger, #dc3545));
+
+	&:focus-within {
+		border-color: var(--bs-danger, var(--muk-danger, #dc3545));
+		box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+	}
+}
+
+.invalid.variantSubtle .control {
+	border-color: var(--bs-danger, var(--muk-danger, #dc3545));
+
+	&:focus-within {
+		border-color: var(--bs-danger, var(--muk-danger, #dc3545));
+	}
+}
+
+.invalid.variantFlushed .control {
+	border-bottom-color: var(--bs-danger, var(--muk-danger, #dc3545));
+
+	&:focus-within {
+		border-bottom-color: var(--bs-danger, var(--muk-danger, #dc3545));
+	}
+}
+
+/* ─── グループラベル ─── */
+.itemGroupLabel {
+	padding: 0.5rem 0.75rem 0.25rem;
+	font-size: 0.6875rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: var(--bs-secondary-color, var(--muk-secondary-color, #6c757d));
+	border-top: 1px solid var(--bs-border-color, var(--muk-border-color, #dee2e6));
+	margin-top: 0.25rem;
+
+	&:first-child {
+		border-top: none;
+		margin-top: 0;
+	}
+}
+
+/* ─── Creatable ─── */
+.creatableItem {
+	color: var(--bs-primary, var(--muk-primary, #0d6efd));
+}
+
+.creatableIcon {
+	font-size: 0.9em;
+	flex-shrink: 0;
+}

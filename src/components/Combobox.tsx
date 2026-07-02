@@ -44,6 +44,14 @@ export interface ComboboxRootAttrs {
 	placeholder?: string;
 	/** 無効状態 */
 	disabled?: boolean;
+	/** エラー状態 */
+	invalid?: boolean;
+	/** 新規値の作成を許可 */
+	creatable?: boolean;
+	/** 新規値作成時コールバック */
+	onCreateItem?: (value: string) => void;
+	/** ドロップダウンを開く最小入力文字数（0 = 制限なし） */
+	minChars?: number;
 	/** 追加クラス */
 	class?: string;
 	[key: string]: any;
@@ -99,6 +107,10 @@ class ComboboxRoot implements m.ClassComponent<ComboboxRootAttrs> {
 			openOnClick = true,
 			placeholder = "検索...",
 			disabled,
+			invalid,
+			creatable,
+			onCreateItem,
+			minChars = 0,
 			class: className,
 			...rest
 		} = vnode.attrs;
@@ -115,6 +127,8 @@ class ComboboxRoot implements m.ClassComponent<ComboboxRootAttrs> {
 			.filter(it => selectedValues.includes(it.value))
 			.map(it => it.label);
 
+		const creatableActive = !!(creatable && this.query);
+
 		return (
 			<div
 				{...rest}
@@ -123,6 +137,7 @@ class ComboboxRoot implements m.ClassComponent<ComboboxRootAttrs> {
 					(styles as any)[`variant${capitalize(variant)}`],
 					(styles as any)[`size${capitalize(size)}`],
 					{ [styles.disabled]: disabled },
+					{ [styles.invalid]: invalid },
 					className
 				)}
 				oncreate={(vn: m.VnodeDOM) => {
@@ -160,13 +175,15 @@ class ComboboxRoot implements m.ClassComponent<ComboboxRootAttrs> {
 						value={this.query}
 						oninput={(e: Event) => {
 							this.query = (e.target as HTMLInputElement).value;
-							this.isOpen = true;
+							this.isOpen = !minChars || this.query.length >= minChars;
 							this.highlightIndex = 0;
 						}}
 						onfocus={() => {
-							if (openOnClick) this.isOpen = true;
+							if (openOnClick && (!minChars || this.query.length >= minChars)) this.isOpen = true;
 						}}
-						onkeydown={(e: KeyboardEvent) => this.handleKeydown(e, filtered, selectedValues, multiple, onValueChange)}
+						onkeydown={(e: KeyboardEvent) =>
+							this.handleKeydown(e, filtered, selectedValues, multiple, onValueChange, creatableActive, onCreateItem)
+						}
 						oncreate={(vn: m.VnodeDOM) => { this.inputEl = vn.dom as HTMLInputElement; }}
 					/>
 					{selectedValues.length > 0 && !multiple && (
@@ -200,60 +217,138 @@ class ComboboxRoot implements m.ClassComponent<ComboboxRootAttrs> {
 							this.cleanupAutoUpdate = null;
 						}}
 					>
-						{filtered.length === 0
-							? <div class={styles.empty}>結果なし</div>
-							: filtered.map((item, i) => (
-								<div
-									key={item.value}
-									class={classNames(
-										styles.item,
-										{ [styles.itemHighlighted]: i === this.highlightIndex },
-										{ [styles.itemSelected]: selectedValues.includes(item.value) },
-										{ [styles.itemDisabled]: item.disabled }
-									)}
-									onmouseenter={() => { this.highlightIndex = i; }}
-									onclick={() => {
-										if (item.disabled) return;
-										if (multiple) {
-											const newVal = selectedValues.includes(item.value)
-												? selectedValues.filter(v => v !== item.value)
-												: [...selectedValues, item.value];
-											onValueChange?.(newVal);
-										} else {
-											onValueChange?.(item.value);
-											this.isOpen = false;
-											this.query = "";
-										}
-									}}
-								>
-									{multiple && (
-										<span class={styles.itemCheck}>
-											{selectedValues.includes(item.value) ? "✓" : ""}
-										</span>
-									)}
-									{item.label}
-								</div>
-							))
-						}
+						{this.renderContent(filtered, selectedValues, multiple, onValueChange, creatableActive, onCreateItem)}
 					</div>
 				)}
 			</div>
 		);
 	}
 
+	private renderContent(
+		filtered: ComboboxItem[],
+		selectedValues: string[],
+		multiple: boolean | undefined,
+		onValueChange: ((v: string | string[]) => void) | undefined,
+		creatableActive: boolean,
+		onCreateItem: ((v: string) => void) | undefined,
+	): m.Children {
+		const renderItem = (item: ComboboxItem, i: number): m.Vnode => (
+			<div
+				key={item.value}
+				class={classNames(
+					styles.item,
+					{ [styles.itemHighlighted]: i === this.highlightIndex },
+					{ [styles.itemSelected]: selectedValues.includes(item.value) },
+					{ [styles.itemDisabled]: item.disabled }
+				)}
+				onmouseenter={() => { this.highlightIndex = i; }}
+				onclick={() => {
+					if (item.disabled) return;
+					if (multiple) {
+						const newVal = selectedValues.includes(item.value)
+							? selectedValues.filter(v => v !== item.value)
+							: [...selectedValues, item.value];
+						onValueChange?.(newVal);
+					} else {
+						onValueChange?.(item.value);
+						this.isOpen = false;
+						this.query = "";
+					}
+				}}
+			>
+				{multiple && (
+					<span class={styles.itemCheck}>
+						{selectedValues.includes(item.value) ? "✓" : ""}
+					</span>
+				)}
+				{item.label}
+			</div>
+		);
+
+		if (filtered.length === 0 && !creatableActive) {
+			return <div class={styles.empty}>結果なし</div>;
+		}
+
+		const nodes: m.Vnode[] = [];
+		const hasGroups = filtered.some(item => item.group);
+
+		if (hasGroups) {
+			// グループごとにまとめて表示
+			const groups = new Map<string, { item: ComboboxItem; idx: number }[]>();
+			filtered.forEach((item, idx) => {
+				const g = item.group ?? "";
+				if (!groups.has(g)) groups.set(g, []);
+				groups.get(g)!.push({ item, idx });
+			});
+			// グループなしのアイテムを先頭に
+			if (groups.has("")) {
+				for (const { item, idx } of groups.get("")!) {
+					nodes.push(renderItem(item, idx));
+				}
+			}
+			// グループありのアイテム
+			for (const [groupName, groupItems] of groups) {
+				if (groupName === "") continue;
+				nodes.push(
+					<div key={`grp-${groupName}`} class={styles.itemGroupLabel}>{groupName}</div>
+				);
+				for (const { item, idx } of groupItems) {
+					nodes.push(renderItem(item, idx));
+				}
+			}
+		} else {
+			filtered.forEach((item, i) => nodes.push(renderItem(item, i)));
+		}
+
+		// Creatable オプション（候補にない新規値の追加）
+		if (creatableActive) {
+			const ci = filtered.length;
+			nodes.push(
+				<div
+					key="__creatable__"
+					class={classNames(styles.item, styles.creatableItem, {
+						[styles.itemHighlighted]: this.highlightIndex === ci,
+					})}
+					onmouseenter={() => { this.highlightIndex = ci; }}
+					onclick={() => {
+						onCreateItem?.(this.query);
+						this.isOpen = false;
+						this.query = "";
+					}}
+				>
+					<span class={styles.creatableIcon}>＋</span>
+					「{this.query}」を追加
+				</div>
+			);
+		}
+
+		return nodes as m.Children;
+	}
+
 	private handleKeydown(
-		e: KeyboardEvent, filtered: ComboboxItem[],
-		selectedValues: string[], multiple?: boolean,
-		onValueChange?: (v: string | string[]) => void
+		e: KeyboardEvent,
+		filtered: ComboboxItem[],
+		selectedValues: string[],
+		multiple?: boolean,
+		onValueChange?: (v: string | string[]) => void,
+		creatableActive?: boolean,
+		onCreateItem?: (v: string) => void,
 	) {
+		const maxIndex = creatableActive ? filtered.length : filtered.length - 1;
 		if (e.key === "ArrowDown") {
 			e.preventDefault();
-			this.highlightIndex = Math.min(this.highlightIndex + 1, filtered.length - 1);
+			this.highlightIndex = Math.min(this.highlightIndex + 1, maxIndex);
 		} else if (e.key === "ArrowUp") {
 			e.preventDefault();
 			this.highlightIndex = Math.max(this.highlightIndex - 1, 0);
 		} else if (e.key === "Enter") {
 			e.preventDefault();
+			if (creatableActive && this.highlightIndex === filtered.length) {
+				onCreateItem?.(this.query);
+				this.isOpen = false;
+				this.query = "";
+				return;
+			}
 			const item = filtered[this.highlightIndex];
 			if (item && !item.disabled) {
 				if (multiple) {

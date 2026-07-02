@@ -36,6 +36,14 @@ export interface ComboboxRootAttrs {
     placeholder?: string;
     /** 無効状態 */
     disabled?: boolean;
+    /** エラー状態 */
+    invalid?: boolean;
+    /** 新規値の作成を許可 */
+    creatable?: boolean;
+    /** 新規値作成時コールバック */
+    onCreateItem?: (value: string) => void;
+    /** ドロップダウンを開く最小入力文字数（0 = 制限なし） */
+    minChars?: number;
     /** 追加クラス */
     class?: string;
     [key: string]: any;
@@ -63,6 +71,7 @@ declare class ComboboxRoot implements m.ClassComponent<ComboboxRootAttrs> {
     onremove(): void;
     private handleOutsideClick;
     view(vnode: m.Vnode<ComboboxRootAttrs>): JSX.Element;
+    private renderContent;
     private handleKeydown;
 }
 /**
