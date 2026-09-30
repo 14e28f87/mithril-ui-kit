@@ -152,9 +152,13 @@ export declare class DropdownRoot implements m.Component<DropdownRootAttrs> {
     private setOpen;
     private toggleOpen;
     private selectItem;
+    /**
+     * Menu の子要素をマーカーコンポーネントから実描画へ変換する。
+     * 三項演算子の分岐が配列を返す場合などネストした配列も深さ制限なく再帰処理する。
+     */
     private renderChildren;
     private renderChild;
-    /** RadioItemGroup 内の RadioItem を描画 */
+    /** RadioItemGroup 内の RadioItem を描画。ネストした配列も深さ制限なく再帰処理する。 */
     private renderRadioItems;
     view(vnode: m.Vnode<DropdownRootAttrs>): JSX.Element;
 }

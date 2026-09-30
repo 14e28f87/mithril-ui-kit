@@ -224,17 +224,18 @@ export class DropdownRoot implements m.Component<DropdownRootAttrs> {
 	}
 
 	// --- 再帰描画 ---
+	/**
+	 * Menu の子要素をマーカーコンポーネントから実描画へ変換する。
+	 * 三項演算子の分岐が配列を返す場合などネストした配列も深さ制限なく再帰処理する。
+	 */
 	private renderChildren(children: m.Children, attrs: DropdownRootAttrs): m.Children {
-		if (!Array.isArray(children)) {
-			if (children && typeof children === "object" && "tag" in children) {
-				return this.renderChild(children as m.Vnode, attrs);
-			}
-			return children;
+		if (Array.isArray(children)) {
+			return children.map(child => this.renderChildren(child as m.Children, attrs));
 		}
-		return children.map(child => {
-			if (!child || typeof child !== "object" || !("tag" in child)) return child;
-			return this.renderChild(child as m.Vnode, attrs);
-		});
+		if (children && typeof children === "object" && "tag" in children) {
+			return this.renderChild(children as m.Vnode, attrs);
+		}
+		return children;
 	}
 
 	private renderChild(child: m.Vnode, attrs: DropdownRootAttrs): m.Children {
@@ -424,45 +425,47 @@ export class DropdownRoot implements m.Component<DropdownRootAttrs> {
 		}
 	}
 
-	/** RadioItemGroup 内の RadioItem を描画 */
+	/** RadioItemGroup 内の RadioItem を描画。ネストした配列も深さ制限なく再帰処理する。 */
 	private renderRadioItems(children: m.Children, attrs: DropdownRootAttrs, groupAttrs: DropdownRadioItemGroupAttrs): m.Children {
-		if (!Array.isArray(children)) return children;
-		return children.map(child => {
-			if (!child || typeof child !== "object" || !("tag" in child)) return child;
-			const tag = (child as m.Vnode).tag as any;
-			if (tag?.__mnRole === "radioItem") {
-				const ca = ((child as m.Vnode).attrs ?? {}) as DropdownRadioItemAttrs;
-				const cc = (child as m.Vnode).children as m.Children;
-				const checked = groupAttrs.value === ca.value;
-				const disabled = ca.disabled ?? false;
-				const cls = [
-					styles.radioItem,
-					disabled ? styles.itemDisabled : "",
-					ca.class ?? "",
-				].filter(Boolean).join(" ");
-				return (
-					<button
-						type="button"
-						class={cls}
-						data-part="radio-item"
-						role="menuitemradio"
-						aria-checked={checked}
-						disabled={disabled}
-						onclick={() => {
-							if (!disabled) {
-								groupAttrs.onValueChange?.(ca.value);
-								this.setOpen(false, attrs);
-							}
-						}}
-					>
-						{checked && <span class={styles.itemIndicator}>●</span>}
-						{cc}
-					</button>
-				);
-			}
-			return child;
-		});
+		if (Array.isArray(children)) {
+			return children.map(child => this.renderRadioItems(child as m.Children, attrs, groupAttrs));
+		}
+		const child = children;
+		if (!child || typeof child !== "object" || !("tag" in child)) return child;
+		const tag = (child as m.Vnode).tag as any;
+		if (tag?.__mnRole === "radioItem") {
+			const ca = ((child as m.Vnode).attrs ?? {}) as DropdownRadioItemAttrs;
+			const cc = (child as m.Vnode).children as m.Children;
+			const checked = groupAttrs.value === ca.value;
+			const disabled = ca.disabled ?? false;
+			const cls = [
+				styles.radioItem,
+				disabled ? styles.itemDisabled : "",
+				ca.class ?? "",
+			].filter(Boolean).join(" ");
+			return (
+				<button
+					type="button"
+					class={cls}
+					data-part="radio-item"
+					role="menuitemradio"
+					aria-checked={checked}
+					disabled={disabled}
+					onclick={() => {
+						if (!disabled) {
+							groupAttrs.onValueChange?.(ca.value);
+							this.setOpen(false, attrs);
+						}
+					}}
+				>
+					{checked && <span class={styles.itemIndicator}>●</span>}
+					{cc}
+				</button>
+			);
+		}
+		return child;
 	}
+
 
 	// --- view() ---
 	view(vnode: m.Vnode<DropdownRootAttrs>) {

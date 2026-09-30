@@ -118,18 +118,18 @@ export class DropdownRoot {
         }
     }
     // --- 再帰描画 ---
+    /**
+     * Menu の子要素をマーカーコンポーネントから実描画へ変換する。
+     * 三項演算子の分岐が配列を返す場合などネストした配列も深さ制限なく再帰処理する。
+     */
     renderChildren(children, attrs) {
-        if (!Array.isArray(children)) {
-            if (children && typeof children === "object" && "tag" in children) {
-                return this.renderChild(children, attrs);
-            }
-            return children;
+        if (Array.isArray(children)) {
+            return children.map(child => this.renderChildren(child, attrs));
         }
-        return children.map(child => {
-            if (!child || typeof child !== "object" || !("tag" in child))
-                return child;
-            return this.renderChild(child, attrs);
-        });
+        if (children && typeof children === "object" && "tag" in children) {
+            return this.renderChild(children, attrs);
+        }
+        return children;
     }
     renderChild(child, attrs) {
         const tag = child.tag;
@@ -237,35 +237,35 @@ export class DropdownRoot {
                 return child;
         }
     }
-    /** RadioItemGroup 内の RadioItem を描画 */
+    /** RadioItemGroup 内の RadioItem を描画。ネストした配列も深さ制限なく再帰処理する。 */
     renderRadioItems(children, attrs, groupAttrs) {
-        if (!Array.isArray(children))
-            return children;
-        return children.map(child => {
-            if (!child || typeof child !== "object" || !("tag" in child))
-                return child;
-            const tag = child.tag;
-            if (tag?.__mnRole === "radioItem") {
-                const ca = (child.attrs ?? {});
-                const cc = child.children;
-                const checked = groupAttrs.value === ca.value;
-                const disabled = ca.disabled ?? false;
-                const cls = [
-                    styles.radioItem,
-                    disabled ? styles.itemDisabled : "",
-                    ca.class ?? "",
-                ].filter(Boolean).join(" ");
-                return (m("button", { type: "button", class: cls, "data-part": "radio-item", role: "menuitemradio", "aria-checked": checked, disabled: disabled, onclick: () => {
-                        if (!disabled) {
-                            groupAttrs.onValueChange?.(ca.value);
-                            this.setOpen(false, attrs);
-                        }
-                    } },
-                    checked && m("span", { class: styles.itemIndicator }, "\u25CF"),
-                    cc));
-            }
+        if (Array.isArray(children)) {
+            return children.map(child => this.renderRadioItems(child, attrs, groupAttrs));
+        }
+        const child = children;
+        if (!child || typeof child !== "object" || !("tag" in child))
             return child;
-        });
+        const tag = child.tag;
+        if (tag?.__mnRole === "radioItem") {
+            const ca = (child.attrs ?? {});
+            const cc = child.children;
+            const checked = groupAttrs.value === ca.value;
+            const disabled = ca.disabled ?? false;
+            const cls = [
+                styles.radioItem,
+                disabled ? styles.itemDisabled : "",
+                ca.class ?? "",
+            ].filter(Boolean).join(" ");
+            return (m("button", { type: "button", class: cls, "data-part": "radio-item", role: "menuitemradio", "aria-checked": checked, disabled: disabled, onclick: () => {
+                    if (!disabled) {
+                        groupAttrs.onValueChange?.(ca.value);
+                        this.setOpen(false, attrs);
+                    }
+                } },
+                checked && m("span", { class: styles.itemIndicator }, "\u25CF"),
+                cc));
+        }
+        return child;
     }
     // --- view() ---
     view(vnode) {
